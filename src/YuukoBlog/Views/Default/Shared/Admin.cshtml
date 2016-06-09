@@ -1,0 +1,18 @@
+﻿@if (Html.IsAdmin())
+{
+    <div class="sidebar-module sidebar-catalogs">
+        <h3>MANAGE</h3>
+        <div class="sidebar-body">
+            <ul class="sidebar-list">
+                <li class="sidebar-item"><a yuuko-static href="/admin/index">@SR["Settings"]</a></li>
+                <li class="sidebar-item"><a yuuko-static href="javascript:$('#frmNewPost').submit();">@SR["New Post"]</a></li>
+                <li class="sidebar-item"><a href="/admin/catalog">@SR["Manage Catalogs"]</a></li>
+                <li class="sidebar-item"><a yuuko-static href="javascript:$('#frmLogout').submit();">@SR["Sign Out"]</a></li>
+            </ul>
+        </div>
+        <form asp-action="PostNew" asp-controller="Admin" method="post" id="frmNewPost">
+        </form>
+        <form asp-action="Logout" asp-controller="Admin" method="post" id="frmLogout">
+        </form>
+    </div>
+}

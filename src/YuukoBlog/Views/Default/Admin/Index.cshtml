@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = SR["Admin Panel"];
+}
+@if (Html.IsRaw())
+{
+    @(new HtmlString("<div>"))
+    <div id="raw_info">
+        <div class="role-title">@ViewBag.Title</div>
+        <div class="role-body-class">home</div>
+        <div class="role-category">home</div>
+        <div class="role-head-title">
+            <h1>@ViewBag.Title</h1>
+        </div>
+    </div>
+}
+<div class="cont-wrap">
+    <div class="grid_9">
+        <div class="post">
+            <div class="post-body">
+                <form asp-action="Index" asp-controller="Admin" method="post" id="frmConfig">
+                    <p>
+                        @SR["Site name"]: <br />
+                        <input type="text" name="site" value="@ViewBag.Site" />
+                    </p>
+                    <p>
+                        @SR["Description"]: <br />
+                        <input type="text" name="description" value="@ViewBag.Description" />
+                    </p>
+                    <p>
+                        @SR["Avatar URL"]: <br />
+                        <input type="text" name="avatarUrl" value="@ViewBag.AvatarUrl" />
+                    </p>
+                    <p>
+                        Disqus: <br />
+                        <input type="text" name="disqus" value="@ViewBag.Disqus" />
+                    </p>
+                    <p>
+                        @SR["About-me URL"]: <br />
+                        <input type="text" name="aboutUrl" value="@ViewBag.AboutUrl" />
+                    </p>
+                    <p>
+                        @SR["User Name"]: <br />
+                        <input type="text" name="Account" value="@ViewBag.Account" />
+                    </p>
+                    <p>
+                        @SR["Password"]: <br />
+                        <input type="password" name="password" value="" />
+                    </p>
+                    <p>
+                        <input type="button" value="@SR["Save"]" onclick="saveConfig()" />
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("Sidebar");
+</div>
+@if (Html.IsRaw())
+{
+    @(new HtmlString("</div>"))
+}

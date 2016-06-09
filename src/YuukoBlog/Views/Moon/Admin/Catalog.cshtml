@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Catalog>
+@{
+    ViewBag.Title = "管理后台";
+}
+<div class="article">
+    <div class="header">
+        <div class="title">站点信息</div>
+    </div>
+    <div class="section entry">
+        <p>
+            <a yuuko-static href="javascript:$('#frmNewCatalog').submit();">新建分类</a>
+        </p>
+        <form asp-action="CatalogDelete" asp-controller="Admin" method="post" id="frmDeleteCatalog"></form>
+        <form asp-action="CatalogEdit" asp-controller="Admin" method="post" id="frmEditCatalog"></form>
+        <form asp-action="CatalogNew" asp-controller="Admin" method="post" id="frmNewCatalog"></form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>标题</th>
+                    <th>英文标题</th>
+                    <th>排序</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in Model)
+                {
+                    <tr data-catalog="@x.Url">
+                        <td class="display d-title-zh">@x.Title</td>
+                        <td class="display d-title">@x.Url</td>
+                        <td class="display d-order">@x.PRI</td>
+                        <td class="editing"><input class="title-zh" type="text" value="@x.Title" /></td>
+                        <td class="editing"><input class="title" type="text" value="@x.Url" /></td>
+                        <td class="editing"><input class="order" type="text" value="@x.PRI" /></td>
+                        <td>
+                            <a class="display" href="javascript:editCatalog('@x.Url');">编辑</a>
+                            <a class="display" href="javascript:deleteCatalog('@x.Url');">删除</a>
+                            <a class="editing" href="javascript:saveCatalog('@x.Url');">保存</a>
+                            <a class="editing" href="javascript:cancelEditCatalog();">取消</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

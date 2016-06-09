@@ -1,0 +1,45 @@
+﻿@if (Model != null && Model.GetType() == typeof(Post) && (Context.Session.GetString("Admin") == "true" || !Model.IsPage))
+{
+    <div class="sidebar-module sidebar-postinfo">
+        <h3>THIS POST</h3>
+        <div class="sidebar-body">
+            @if (!Model.IsPage)
+            {
+                <div class="sidebar-post-time sidebar-item"><span class="icon-time icon"></span> @Model.Time.ToString()</div>
+                @if (Model.Tags.Count > 0)
+                {
+                    <div class="sidebar-post-tags sidebar-item">
+                        <span class="icon-tag icon"></span>
+                        @foreach (PostTag x in Model.Tags)
+                        {
+                            <div class="sidebar-post-tag-item"><a href="/tag/@x.Tag">@x.Tag</a></div>
+                        }
+                        <div class="clear"></div>
+                    </div>
+                }
+            }
+            @if (Model.CatalogId != null)
+            {
+                <div class="sidebar-post-category sidebar-item"><span class="icon-category icon"></span> <div class="sidebar-post-catalog-item sidebar-post-catalog-item-@Model.Catalog.Url.ToLower()"><a href="/catalog/@Model.Catalog.Url.ToLower()">@Model.Catalog.Url.ToUpper()</a></div><div class="clear"></div></div>
+            }
+            @if (Html.IsAdmin())
+                {
+                <div class="sidebar-post-category sidebar-item">
+                    <div class="sidebar-post-tag-item">
+                        <a href="javascript:DropEnable();$('.post-body').slideUp();$('.post-edit').slideDown();" yuuko-static>@SR["Edit this post"]</a>
+                    </div>
+                    <div class="sidebar-post-tag-item">
+                        <a href="javascript:$('#frmDeletePost').submit();" yuuko-static>@SR["Remove this post"]</a>
+                    </div>
+                    <form id="frmDeletePost" asp-action="PostDelete" asp-controller="Admin" method="post" asp-route-id="@Model.Url">
+                    </form>
+                    <div class="clear"></div>
+                </div>
+            }
+        </div>
+    </div>
+}
+@if (Html.IsAdmin())
+{
+    <form asp-action="PostEdit" asp-controller="Admin" method="post" id="frmSavePost"></form>
+}

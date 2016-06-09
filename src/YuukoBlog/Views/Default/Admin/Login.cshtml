@@ -1,0 +1,33 @@
+﻿@{ 
+    ViewBag.Title = SR["Admin Panel"];
+}
+@if (Html.IsRaw())
+{
+    @(new HtmlString("<div>"))
+    <div id="raw_info">
+        <div class="role-title">@ViewBag.Title</div>
+        <div class="role-body-class">home</div>
+        <div class="role-category">home</div>
+        <div class="role-head-title">
+            <h1>@ViewBag.Title</h1>
+        </div>
+    </div>
+}
+    <div class="cont-wrap">
+        <div class="grid_9">
+            <div class="post">
+                <div class="post-body">
+                    <form asp-action="Login" asp-controller="Admin" method="post">
+                        <p><input type="text" name="Username" placeholder="@SR["User Name"]" /></p>
+                        <p><input type="password" name="Password" placeholder="@SR["Password"]" /></p>
+                        <input type="submit" value="Log in" />
+                    </form>
+                </div>
+            </div>
+        </div>
+        @Html.Partial("Sidebar");
+    </div>
+@if (Html.IsRaw())
+{
+    @(new HtmlString("</div>"))
+}

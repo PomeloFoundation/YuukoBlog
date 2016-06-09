@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Catalog>
+@{
+    ViewBag.Title = SR["Admin Panel"];
+}
+@if (Html.IsRaw())
+{
+    @(new HtmlString("<div>"))
+    <div id="raw_info">
+        <div class="role-title">@ViewBag.Title</div>
+        <div class="role-body-class">home</div>
+        <div class="role-category">home</div>
+        <div class="role-head-title">
+            <h1>@ViewBag.Title</h1>
+        </div>
+    </div>
+}
+<div class="cont-wrap">
+    <div class="grid_9">
+        <div class="post">
+            <div class="post-body">
+                <p>
+                    <a yuuko-static href="javascript:$('#frmNewCatalog').submit();">@SR["New Catalog"]</a>
+                </p>
+                <form asp-action="CatalogDelete" asp-controller="Admin" method="post" id="frmDeleteCatalog"></form>
+                <form asp-action="CatalogEdit" asp-controller="Admin" method="post" id="frmEditCatalog"></form>
+                <form asp-action="CatalogNew" asp-controller="Admin" method="post" id="frmNewCatalog"></form>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>@SR["Title"]</th>
+                            <th>@SR["Sub Title"]</th>
+                            <th>@SR["Order"]</th>
+                            <th>@SR["Control"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var x in Model)
+                        { 
+                            <tr data-catalog="@x.Url">
+                                <td class="display d-title-zh">@x.Title</td>
+                                <td class="display d-title">@x.Url</td>
+                                <td class="display d-order">@x.PRI</td>
+                                <td class="editing"><input class="title-zh" type="text" value="@x.Title" /></td>
+                                <td class="editing"><input class="title" type="text" value="@x.Url" /></td>
+                                <td class="editing"><input class="order" type="text" value="@x.PRI" /></td>
+                                <td>
+                                    <a class="display" href="javascript:editCatalog('@x.Url');">@SR["Edit"]</a>
+                                    <a class="display" href="javascript:deleteCatalog('@x.Url');">@SR["Remove"]</a>
+                                    <a class="editing" href="javascript:saveCatalog('@x.Url');">@SR["Save"]</a>
+                                    <a class="editing" href="javascript:cancelEditCatalog();">@SR["Cancel"]</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("Sidebar");
+</div>
+@if (Html.IsRaw())
+{
+    @(new HtmlString("</div>"))
+}

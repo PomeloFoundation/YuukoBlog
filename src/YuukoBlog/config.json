@@ -1,0 +1,11 @@
+﻿{
+  "AvatarUrl": "http://7vzqh7.com1.z0.glb.clouddn.com/avatar.jpg",
+  "AboutUrl": "/about",
+  "Account": "root",
+  "Password": "123456",
+  "Site": "あまみや ゆうこ",
+  "Description": "Amamiya Yuuko's ebullient future",
+  "Disqus": "yuuko",
+  "DefaultTemplate": "Default",
+  "DBFile": "Yuuko.db"
+}

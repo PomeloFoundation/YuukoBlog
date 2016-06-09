@@ -1,0 +1,11 @@
+﻿<div class="sidebar-module sidebar-catalogs">
+    <h3>TAGS</h3>
+    <div class="sidebar-body">
+        <ul class="sidebar-list">
+            @foreach (TagViewModel x in ViewBag.Tags)
+            {
+                <li class="sidebar-item"><a href="/tag/@x.Title/">@x.Title (@x.Count)</a></li>
+            }
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+﻿<div class="sidebar-module sidebar-catalogs">
+    <h3>CALENDAR</h3>
+    <div class="sidebar-body">
+        <ul class="sidebar-list">
+            @foreach (CalendarViewModel x in ViewBag.Calendars)
+            {
+                <li class="sidebar-item"><a href="/@x.Year/@x.Month">@(new DateTime(x.Year, x.Month, 1).ToString(SR["_DATE_FORMAT_STRING"])) (@x.Count)</a></li>
+            }
+        </ul>
+    </div>
+</div>

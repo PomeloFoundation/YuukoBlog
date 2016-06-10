@@ -31,8 +31,8 @@ namespace YuukoBlog.Controllers
                 .OrderByDescending(x => x.Time), 5, "Home");
         }
 
-        [Route("Catalog/{id}")]
-        public IActionResult Catalog(string id)
+        [Route("Catalog/{id}/{p:int?}")]
+        public IActionResult Catalog(string id, int p = 1)
         {
             var catalog = DB.Catalogs
                 .Where(x => x.Url == id)

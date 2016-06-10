@@ -1,16 +1,12 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Pomelo.AspNetCore.Extensions.Localization;
 using YuukoBlog.Models;
 
 namespace YuukoBlog.Controllers
 {
     public class BaseController : BaseController<BlogContext>
     {
-        [Inject]
-        public ILocalizationStringCollection SR { get; set; }
-
         public override void Prepare()
         {
             base.Prepare();

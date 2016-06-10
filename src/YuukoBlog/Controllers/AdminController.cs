@@ -69,13 +69,13 @@ namespace YuukoBlog.Controllers
                 .Where(x => x.Url == id)
                 .SingleOrDefault();
             if (post == null)
-                return Prompt(new Prompt
+                return Prompt(x =>
                 {
-                    StatusCode = 404,
-                    Title = SR["Not Found"],
-                    Details = SR["The resources have not been found, please check your request."],
-                    RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" }),
-                    RedirectText = SR["Back to home"]
+                    x.StatusCode = 404;
+                    x.Title = SR["Not Found"];
+                    x.Details = SR["The resources have not been found, please check your request."];
+                    x.RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" });
+                    x.RedirectText = SR["Back to home"];
                 });
             var summary = "";
             var flag = false;
@@ -125,13 +125,13 @@ namespace YuukoBlog.Controllers
                 .Where(x => x.Url == id).SingleOrDefault();
             
             if (post == null)
-                return Prompt(new Prompt
+                return Prompt(x =>
                 {
-                    StatusCode = 404,
-                    Title = SR["Not Found"],
-                    Details = SR["The resources have not been found, please check your request."],
-                    RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" }),
-                    RedirectText = SR["Back to home"]
+                    x.StatusCode = 404;
+                    x.Title = SR["Not Found"];
+                    x.Details = SR["The resources have not been found, please check your request."];
+                    x.RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" });
+                    x.RedirectText = SR["Back to home"];
                 });
             foreach (var t in post.Tags)
                 DB.PostTags.Remove(t);
@@ -185,13 +185,13 @@ namespace YuukoBlog.Controllers
         {
             var catalog = DB.Catalogs.Where(x => x.Url == id).SingleOrDefault();
             if (catalog == null)
-                return Prompt(new Prompt
+                return Prompt(x =>
                 {
-                    StatusCode = 404,
-                    Title = SR["Not Found"],
-                    Details = SR["The resources have not been found, please check your request."],
-                    RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" }),
-                    RedirectText = SR["Back to home"]
+                    x.StatusCode = 404;
+                    x.Title = SR["Not Found"];
+                    x.Details = SR["The resources have not been found, please check your request."];
+                    x.RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" });
+                    x.RedirectText = SR["Back to home"];
                 });
             DB.Catalogs.Remove(catalog);
             DB.SaveChanges();
@@ -206,14 +206,15 @@ namespace YuukoBlog.Controllers
         {
             var catalog = DB.Catalogs.Where(x => x.Url == id).SingleOrDefault();
             if (catalog == null)
-                return Prompt(new Prompt
+                return Prompt(x =>
                 {
-                    StatusCode = 404,
-                    Title = SR["Not Found"],
-                    Details = SR["The resources have not been found, please check your request."],
-                    RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" }),
-                    RedirectText = SR["Back to home"]
-                }); catalog.Url = newId;
+                    x.StatusCode = 404;
+                    x.Title = SR["Not Found"];
+                    x.Details = SR["The resources have not been found, please check your request."];
+                    x.RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" });
+                    x.RedirectText = SR["Back to home"];
+                });
+            catalog.Url = newId;
             catalog.Title = title;
             catalog.PRI = pri;
             DB.SaveChanges();

@@ -23,14 +23,16 @@ namespace YuukoBlog
 
             services.AddSmartCookies();
 
-            services.AddJsonLocalization()
-                .AddCookieCulture();
-            
+            services.AddMemoryCache();
+            services.AddDistributedMemoryCache();
             services.AddSession(x => x.IdleTimeout = TimeSpan.FromMinutes(20));
 
             services.AddBlobStorage()
                 .AddEntityFrameworkStorage<BlogContext>()
                 .AddSessionUploadAuthorization();
+
+            services.AddJsonLocalization()
+                .AddCookieCulture();
 
             services.AddMvc()
                 .AddMultiTemplateEngine()
@@ -44,6 +46,7 @@ namespace YuukoBlog
             app.UseStaticFiles();
             app.UseSession();
             app.UseBlobStorage("/assets/shared/scripts/jquery.codecomb.fileupload.js");
+            app.UseDeveloperExceptionPage();
 
             app.UseMvc(router =>
             {
@@ -61,7 +64,6 @@ namespace YuukoBlog
                 .UseKestrel()
                 .UseUrls("http://*:80")
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
 

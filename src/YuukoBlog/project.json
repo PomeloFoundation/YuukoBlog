@@ -1,10 +1,5 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.App": {
-      "version": "1.0.0-rc2-3002702",
-      "type": "platform"
-    },
-    "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0-rc2-final",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-rc2-final",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0-rc2-final",
     "Microsoft.AspNetCore.Mvc": "1.0.0-rc2-final",
@@ -16,15 +11,15 @@
     "Pomelo.AspNetCore.Extensions": "1.0.0-rc2-final"
   },
 
-  "tools": {
-    "Microsoft.AspNetCore.Server.IISIntegration.Tools": {
-      "version": "1.0.0-preview1-final",
-      "imports": "portable-net45+win8+dnxcore50"
-    }
-  },
-
   "frameworks": {
+    "net451": { },
     "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0-rc2-3002702",
+          "type": "platform"
+        }
+      },
       "imports": [
         "dotnet5.6",
         "dnxcore50",
@@ -48,11 +43,18 @@
       "web.config",
       "Views",
       "Areas/**/Views",
-      "appsettings.json"
+      "config.json",
+      "Localization"
     ]
   },
 
-  "scripts": {
-    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+  "runtimes": {
+    "win7-x64": { },
+    "win7-x86": { },
+    "osx.10.11-x64": { },
+    "ubuntu.14.04-x64": { },
+    "centos.7-x64": { },
+    "rhel.7.2-x64": { },
+    "debian.8-x64": { }
   }
 }

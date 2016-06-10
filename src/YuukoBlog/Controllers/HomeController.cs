@@ -38,13 +38,13 @@ namespace YuukoBlog.Controllers
                 .Where(x => x.Url == id)
                 .SingleOrDefault();
             if (catalog == null)
-                return Prompt(new Prompt
+                return Prompt(x =>
                 {
-                    StatusCode = 404,
-                    Title = SR["Not Found"],
-                    Details = SR["The resources have not been found, please check your request."],
-                    RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" }),
-                    RedirectText = SR["Back to home"]
+                    x.StatusCode = 404;
+                    x.Title = SR["Not Found"];
+                    x.Details = SR["The resources have not been found, please check your request."];
+                    x.RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" });
+                    x.RedirectText = SR["Back to home"];
                 });
             ViewBag.Position = catalog.Url;
             return PagedView<PostViewModel, Post>(DB.Posts
@@ -76,7 +76,7 @@ namespace YuukoBlog.Controllers
                     .OrderByDescending(x => x.Time), 5, "Home");
         }
 
-        public new IActionResult Template(string Folder, [FromHeader] string Referer)
+        public IActionResult Template(string Folder, [FromHeader] string Referer)
         {
             Cookies["ASPNET_TEMPLATE"] = Folder;
             return Redirect(Referer ?? "/");

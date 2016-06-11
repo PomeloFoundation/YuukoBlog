@@ -1,20 +1,23 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Pomelo.AspNetCore.Extensions.BlobStorage;
 using YuukoBlog.Extensions;
 
 namespace YuukoBlog.Extensions
 {
-    public class SessionUploadAuthorization : IUploadAuthorizationProvider
+    public class SessionUploadAuthorization : IBlobUploadAuthorizationProvider
     {
-        private ISession Session;
-        public SessionUploadAuthorization(IHttpContextAccessor accessor)
+        private IServiceProvider services;
+
+        public SessionUploadAuthorization(IServiceProvider provider)
         {
-            Session = accessor.HttpContext.Session;
+            services = provider;
         }
 
         public bool IsAbleToUpload()
         {
-            var val = Session.GetString("Admin");
+            var val = services.GetRequiredService<IHttpContextAccessor>().HttpContext.Session.GetString("Admin");
             if (val == "true")
                 return true;
             return false;
@@ -28,7 +31,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IBlobStorageBuilder AddSessionUploadAuthorization(this IBlobStorageBuilder self)
         {
-            self.Services.AddSingleton<IUploadAuthorizationProvider, SessionUploadAuthorization>();
+            self.Services.AddSingleton<IBlobUploadAuthorizationProvider, SessionUploadAuthorization>();
             return self;
         }
     }

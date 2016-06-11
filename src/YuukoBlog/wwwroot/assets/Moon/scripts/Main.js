@@ -88,7 +88,17 @@ $(document).ready(function () {
 
 function DropEnable() {
     $('.markdown-textbox').unbind().each(function () {
-        $(this).dragDropOrPaste();
+        $(this).dragDropOrPaste(function (obj) {
+            var pos = obj.getCursorPosition();
+            var str = obj.val();
+            if (pos == 0 && !obj.is(':focus'))
+                pos = str.length;
+            obj.val(str.substr(0, pos) + '\r\n![Upload](Uploading...)\r\n' + str.substr(pos));
+        },
+        function (obj, result) {
+            var content = obj.val().replace('![Upload](Uploading...)', '![' + result.name + '](/file/download/' + result.id + ')');
+            obj.val(content);
+        });
     });
 }
 

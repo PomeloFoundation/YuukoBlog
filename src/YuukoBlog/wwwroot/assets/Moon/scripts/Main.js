@@ -88,16 +88,17 @@ $(document).ready(function () {
 
 function DropEnable() {
     $('.markdown-textbox').unbind().each(function () {
-        $(this).dragDropOrPaste(function (obj) {
-            var pos = obj.getCursorPosition();
-            var str = obj.val();
-            if (pos == 0 && !obj.is(':focus'))
+        var editor = $(this);
+        $(this).dragDropOrPaste(function () {
+            var pos = editor.getCursorPosition();
+            var str = editor.val();
+            if (pos == 0 && !editor.is(':focus'))
                 pos = str.length;
-            obj.val(str.substr(0, pos) + '\r\n![Upload](Uploading...)\r\n' + str.substr(pos));
+            editor.val(str.substr(0, pos) + '\r\n![Upload](Uploading...)\r\n' + str.substr(pos));
         },
-        function (obj, result) {
-            var content = obj.val().replace('![Upload](Uploading...)', '![' + result.name + '](/file/download/' + result.id + ')');
-            obj.val(content);
+        function (result) {
+            var content = editor.val().replace('![Upload](Uploading...)', '![' + result.FileName + '](/file/download/' + result.Id + ')');
+            editor.val(content);
         });
     });
 }

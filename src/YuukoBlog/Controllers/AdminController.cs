@@ -79,22 +79,25 @@ namespace YuukoBlog.Controllers
                 });
             var summary = "";
             var flag = false;
-            var tmp = content.Split('\n');
-            if (tmp.Count() > 16)
+            if (content != null)
             {
-                for (var i = 0; i < 16; i++)
+                var tmp = content.Split('\n');
+                if (tmp.Count() > 16)
                 {
-                    if (tmp[i].IndexOf("```") == 0)
-                        flag = !flag;
-                    summary += tmp[i] + '\n';
+                    for (var i = 0; i < 16; i++)
+                    {
+                        if (tmp[i].IndexOf("```") == 0)
+                            flag = !flag;
+                        summary += tmp[i] + '\n';
+                    }
+                    if (flag)
+                        summary += "```\r\n";
+                    summary += $"\r\n[{SR["Read More"]} »](/post/{newId})";
                 }
-                if (flag)
-                    summary += "```\r\n";
-                summary += $"\r\n[{SR["Read More"]} »](/post/{newId})";
-            }
-            else
-            {
-                summary = content;
+                else
+                {
+                    summary = content;
+                }
             }
             foreach (var t in post.Tags)
                 DB.PostTags.Remove(t);

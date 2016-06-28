@@ -32,6 +32,9 @@ namespace YuukoBlog.Controllers
             Configuration["Disqus"] = config.Disqus;
             Configuration["AvatarUrl"] = config.AvatarUrl;
             Configuration["AboutUrl"] = config.AboutUrl;
+            Configuration["BlogRoll:GitHub"] = config.GitHub;
+            Configuration["BlogRoll:Follower"] = config.Follower.ToString();
+            Configuration["BlogRoll:Following"] = config.Following.ToString();
             return RedirectToAction("Index", "Admin");
         }
 

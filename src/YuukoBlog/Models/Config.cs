@@ -9,5 +9,8 @@
         public string Disqus { get; set; }
         public string AvatarUrl { get; set; }
         public string AboutUrl { get; set; }
+        public string GitHub { get; set; }
+        public bool Follower { get; set; }
+        public bool Following { get; set; }
     }
 }

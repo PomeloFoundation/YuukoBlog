@@ -33,6 +33,18 @@
                 <input type="password" name="password" value="" />
             </p>
             <p>
+                GitHub: <br />
+                <input type="text" name="GitHub" value="@ViewBag.GitHub" />
+            </p>
+            <p>
+                Following: <br />
+                <input type="checkbox" name="Following" value="true" @(ViewBag.Following ? " checked" : "") />
+            </p>
+            <p>
+                Followers: <br />
+                <input type="text" name="Follower" value="true" @(ViewBag.Follower ? " checked" : "") />
+            </p>
+            <p>
                 <input type="button" class="more-link" value="保存" onclick="saveConfig()" />
             </p>
         </form>

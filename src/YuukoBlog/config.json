@@ -7,5 +7,10 @@
   "Description": "Amamiya Yuuko's ebullient future",
   "Disqus": "yuuko",
   "DefaultTemplate": "Default",
-  "DBFile": "Yuuko.db"
+  "DBFile": "Yuuko.db",
+  "BlogRoll": {
+    "GitHub": "Kagamine",
+    "Follower": true,
+    "Following": false
+  }
 }

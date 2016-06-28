@@ -65,7 +65,7 @@ namespace YuukoBlog.Jobs
             var count = await GetFollowersCount();
             var pages = (count + 50) / 51;
             var url = "https://github.com";
-            for (var i = 0; i < pages; i++)
+            for (var i = 1; i <= pages; i++)
             {
                 var endpoint = $"/{ Config["BlogRoll:GitHub"] }/followers?page=" + i;
                 using (var client = new HttpClient())
@@ -104,7 +104,7 @@ namespace YuukoBlog.Jobs
             var count = await GetFollowersCount();
             var pages = (count + 50) / 51;
             var url = "https://github.com";
-            for (var i = 0; i < pages; i++)
+            for (var i = 1; i <= pages; i++)
             {
                 var endpoint = $"/{ Config["BlogRoll:GitHub"] }/following?page=" + i;
                 using (var client = new HttpClient())
@@ -160,6 +160,7 @@ namespace YuukoBlog.Jobs
             else
                 needInsert = false;
             br.Type = Type;
+            br.GitHubId = Username;
             var url = $"https://github.com/{ Config["BlogRoll:GitHub"] }";
             using (var client = new HttpClient())
             {
@@ -168,7 +169,9 @@ namespace YuukoBlog.Jobs
                 var fullnameRegex = new Regex(@"(?<=<div class=""vcard-fullname"" itemprop=""name"">).*(?=</div>)");
                 var html = await result.Content.ReadAsStringAsync();
                 br.NickName = fullnameRegex.Match(html).Value;
-                var websiteRegex = new Regex(@"(?<=</svg><a href=""http).*(?= class=""url"" rel="")");
+                if (string.IsNullOrEmpty(br.NickName))
+                    br.NickName = Username;
+                var websiteRegex = new Regex(@"(?<=</svg><a href=""http).*(?="" class=""url"" rel="")");
                 var website = websiteRegex.Match(html).Value;
                 br.URL = string.IsNullOrEmpty(website) ? null : "http" + website;
                 var avatarRegex = new Regex(@"(?<=<meta content="").*(?="" name=""twitter:image:src"" /><meta content="")");

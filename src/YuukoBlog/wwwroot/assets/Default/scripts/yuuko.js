@@ -1003,6 +1003,14 @@ function showQrCode() {
     $('.qrcode').addClass('qrcode-active');
 }
 
+function BlogRoll(github)
+{
+    if (confirm("Follow me on GitHub will auto add you here. Do you want to follow me?"))
+    {
+        window.location = "https://github.com/" + github;
+    }
+}
+
 $(document).ready(function () {
     var url = $('#qrcode').attr('data-url');
     $('#qrcode').qrcode(url);
@@ -1011,5 +1019,20 @@ $(document).ready(function () {
             if ($(e.target).parents('.qrcode').length == 0 && !$(e.target).hasClass('qrcode'))
                 $('.qrcode').removeClass('qrcode-active');
         }
+    });
+    // Binding blog roll
+    $('.sidebar-blog-roll').hover(function () {
+        var name = $(this).find('img').attr('alt');
+        if (!name)
+            return;
+        var pos = $(this).position();
+        var top = pos.top + $(this).outerHeight();
+        var left = pos.left + $(this).outerWidth() / 2;
+        $('.sidebar-blog-roll-tip').css('top', top);
+        $('.sidebar-blog-roll-tip').css('left', left);
+        $('.sidebar-blog-roll-tip').text(name);
+        $('.sidebar-blog-roll-tip').addClass('active');
+    }, function () {
+        $('.sidebar-blog-roll-tip').removeClass('active');
     });
 });

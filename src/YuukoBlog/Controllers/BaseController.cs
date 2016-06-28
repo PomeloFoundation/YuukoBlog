@@ -22,6 +22,7 @@ namespace YuukoBlog.Controllers
             ViewBag.Disqus = Configuration["Disqus"];
             ViewBag.Account = Configuration["Account"];
             ViewBag.DefaultTemplate = Configuration["DefaultTemplate"];
+            ViewBag.GitHub = Configuration["BlogRoll:GitHub"];
 
             // Building Tags
             ViewBag.Tags = DB.PostTags
@@ -59,6 +60,18 @@ namespace YuukoBlog.Controllers
                     Count = x.Posts.Count(),
                     PRI = x.PRI,
                     Url = x.Url
+                })
+                .ToList();
+
+            // Building Blog Rolls
+            ViewBag.Rolls = DB.BlogRolls
+                .Where(x => !string.IsNullOrEmpty(x.URL) && x.AvatarId.HasValue)
+                .OrderBy(x => x.Type)
+                .Select(x => new BlogRollViewModel
+                {
+                    AvatarId = x.AvatarId.Value,
+                    Name = x.NickName,
+                    URL = x.URL
                 })
                 .ToList();
         }

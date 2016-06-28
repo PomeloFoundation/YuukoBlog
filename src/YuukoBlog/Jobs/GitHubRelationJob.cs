@@ -31,9 +31,12 @@ namespace YuukoBlog.Jobs
         {
             Console.WriteLine("Getting blog roll from github.com ...");
 
+            var rolls = new List<string>();
+
             if (Convert.ToBoolean(Config["BlogRoll:Follower"]))
             {
                 var followers = await GetFollowers();
+                rolls.AddRange(followers);
                 foreach(var x in followers)
                     await UpdateUserInformation(x, BlogRollType.Follower);
             }
@@ -41,10 +44,19 @@ namespace YuukoBlog.Jobs
             if (Convert.ToBoolean(Config["BlogRoll:Following"]))
             {
                 var following = await GetFollowing();
+                rolls.AddRange(following);
                 foreach (var x in following)
                     await UpdateUserInformation(x, BlogRollType.Following);
             }
+
+            rolls = rolls.Distinct().ToList();
+            var delete = DB.BlogRolls.Where(x => !rolls.Contains(x.GitHubId)).ToList();
+            foreach (var x in delete)
+                DB.BlogRolls.Remove(x);
+            DB.SaveChanges();
         }
+
+        #region Pull Blog Rolls From GitHub
 
         private async Task<long> GetFollowersCount()
         {
@@ -158,7 +170,11 @@ namespace YuukoBlog.Jobs
             if (br == null)
                 br = new BlogRoll();
             else
+            {
                 needInsert = false;
+                if (br.Type == BlogRollType.Follower && Type == BlogRollType.Following)
+                    return;
+            }
             br.Type = Type;
             br.GitHubId = Username;
             var url = $"https://github.com/{ Config["BlogRoll:GitHub"] }";
@@ -186,5 +202,6 @@ namespace YuukoBlog.Jobs
                 DB.BlogRolls.Add(br);
             DB.SaveChanges();
         }
+        #endregion
     }
 }

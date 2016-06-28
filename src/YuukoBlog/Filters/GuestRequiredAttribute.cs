@@ -22,7 +22,10 @@ namespace YuukoBlog.Filters
         public override Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             if (context.HttpContext.Session.GetString("Admin") == "true")
+            {
                 context.Result = new RedirectResult("/Admin/Index");
+                return Task.FromResult(0);
+            }
             return base.OnActionExecutionAsync(context, next);
         }
     }

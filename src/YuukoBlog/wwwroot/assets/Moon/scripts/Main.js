@@ -27,29 +27,9 @@ var blog = window.blog = {
     init: function () {
         var a = blog;
         a.autoHighlight();
-        MusicPlayerEnabled();
     }
 };
 var lock = false;
-
-function bor(musicSrc) {
-    if (autoplay) {
-        var bower = window.navigator.userAgent;
-        if (bower.indexOf("MSIE 6") != -1 || bower.indexOf("MSIE 7") != -1 || bower.indexOf("MSIE 8") != -1)
-        { return "<embed src='" + musicSrc + "' class='muc' autostart=true loop=true hiddle=true>"; }
-        if (bower.indexOf("Firefox") != -1)
-        { return "<audio src='" + musicSrc + "' class='muc' controls loop autoplay preload><p>您的浏览器版本过低请升级您的浏览器</p></audio>" }
-        else { return "<audio src='" + musicSrc + "' class='muc' controls loop autoplay preload><p>您的浏览器版本过低请升级您的浏览器</p></audio>" }
-    }
-    else {
-        var bower = window.navigator.userAgent;
-        if (bower.indexOf("MSIE 6") != -1 || bower.indexOf("MSIE 7") != -1 || bower.indexOf("MSIE 8") != -1)
-        { return "<embed src='" + musicSrc + "' class='muc' loop=true hiddle=true>"; }
-        if (bower.indexOf("Firefox") != -1)
-        { return "<audio src='" + musicSrc + "' class='muc' controls loop preload><p>您的浏览器版本过低请升级您的浏览器</p></audio>" }
-        else { return "<audio src='" + musicSrc + "' class='muc' controls loop preload><p>您的浏览器版本过低请升级您的浏览器</p></audio>" }
-    }
-};
 
 $(document).ready(function () {
     $('#lstTemplate').change(function () {

@@ -47,13 +47,7 @@ namespace YuukoBlog
             app.UseSession();
             app.UseBlobStorage("/assets/shared/scripts/jquery.codecomb.fileupload.js");
             app.UseDeveloperExceptionPage();
-
-            app.UseMvc(router =>
-            {
-                router.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvcWithDefaultRoute();
 
             await SampleData.InitializeYuukoBlog(app.ApplicationServices);
         }

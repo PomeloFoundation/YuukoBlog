@@ -18,27 +18,34 @@ namespace YuukoBlog.Models
 
         public DbSet<Blob> Blobs { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public DbSet<BlogRoll> BlogRolls { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(builder);
 
-            modelBuilder.SetupBlobStorage();
+            builder.SetupBlobStorage();
 
-            modelBuilder.Entity<Catalog>(e =>
+            builder.Entity<Catalog>(e =>
             {
                 e.HasIndex(x => x.PRI);
             });
 
-            modelBuilder.Entity<Post>(e =>
+            builder.Entity<Post>(e =>
             {
                 e.HasIndex(x => x.IsPage);
                 e.HasIndex(x => x.Time);
                 e.HasIndex(x => x.Url).IsUnique();
             });
 
-            modelBuilder.Entity<PostTag>(e =>
+            builder.Entity<PostTag>(e =>
             {
                 e.HasIndex(x => x.Tag);
+            });
+
+            builder.Entity<BlogRoll>(e =>
+            {
+                e.HasIndex(x => x.GitHubId);
             });
         }
     }

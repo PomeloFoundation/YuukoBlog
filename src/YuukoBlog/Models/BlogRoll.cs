@@ -16,7 +16,7 @@ namespace YuukoBlog.Models
         public Guid Id { get; set; }
 
         [MaxLength(64)]
-        public string GitHub { get; set; }
+        public string GitHubId { get; set; }
 
         [MaxLength(64)]
         public string NickName { get; set; }
@@ -24,7 +24,7 @@ namespace YuukoBlog.Models
         public BlogRollType Type { get; set; }
 
         [ForeignKey("Avatar")]
-        public Guid AvatarId { get; set; }
+        public Guid? AvatarId { get; set; }
 
         public virtual Blob Avatar { get; set; }
 

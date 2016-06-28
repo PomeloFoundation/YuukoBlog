@@ -1939,5 +1939,42 @@ namespace YuukoBlog.Tests
             var result = regex.Match(str);
             Assert.Equal("sakamoto-poteko", result.Value);
         }
+
+        [Fact]
+        public void parse_github_fullname_test()
+        {
+            var str = @"<div class=""vcard-fullname"" itemprop=""name"">xiaodao</div>";
+            var regex = new Regex(@"(?<=<div class=""vcard-fullname"" itemprop=""name"">).*(?=</div>)");
+            var result = regex.Match(str);
+            Assert.Equal("xiaodao", result.Value);
+        }
+
+        [Fact]
+        public void parse_github_avatar_test()
+        {
+            #region HTML Source
+            var html = @"    <meta property=""fb:app_id"" content=""1401488693436528"">
+
+      <meta content=""https://avatars1.githubusercontent.com/u/2216750?v=3&amp;s=400"" name=""twitter:image:src"" /><meta content=""@github"" name=""twitter:site"" /><meta content=""summary"" name=""twitter:card"" /><meta content=""Kagamine (あまみや ゆうこ)"" name=""twitter:title"" /><meta content=""Kagamine has 74 repositories written in Shell, JavaScript, and C++. Follow their code on GitHub."" name=""twitter:description"" />
+      <meta content=""https://avatars1.githubusercontent.com/u/2216750?v=3&amp;s=400"" property=""og:image"" /><meta content=""GitHub"" property=""og:site_name"" /><meta content=""profile"" property=""og:type"" /><meta content=""Kagamine (あまみや ゆうこ)"" property=""og:title"" /><meta content=""https://github.com/Kagamine"" property=""og:url"" /><meta content=""Kagamine has 74 repositories written in Shell, JavaScript, and C++. Follow their code on GitHub."" property=""og:description"" /><meta content=""Kagamine"" property=""profile:username"" />
+      <meta name=""browser-stats-url"" content=""https://api.github.com/_private/browser/stats"">
+    <meta name=""browser-errors-url"" content=""https://api.github.com/_private/browser/errors"">
+    <link rel=""assets"" href=""https://assets-cdn.github.com/"">
+    <link rel=""web-socket"" href=""wss://live.github.com/_sockets/MjIxNjc1MDowOmI4MGU5OGIyYTBhNWViMDVmMmM2M2FjYjhmYWIxMGY2ODY5M2E2M2E3OTM2OTgyYzE5NjhkMDE4NTYzZGNhYWM=--1aa1a0b8020c7dc5dbf6453277e81b50714aacd4"">
+    <meta name=""pjax-timeout"" content=""1000"">
+    <link rel=""sudo-modal"" href=""/sessions/sudo_modal"">
+
+    <meta name=""msapplication-TileImage"" content=""/windows-tile.png"">
+    <meta name=""msapplication-TileColor"" content=""#ffffff"">
+    <meta name=""selected-link"" value=""/kagamine"" data-pjax-transient>
+
+    <meta name=""google-site-verification"" content=""KT5gs8h0wvaagLKAVWq8bbeNwnZZK1r1XQysX3xurLU"">
+<meta name=""google-site-verification"" content=""ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA"">
+    <meta name=""google-analytics"" content=""UA-3769691-2"">";
+            #endregion
+            var regex = new Regex(@"(?<=<meta content="").*(?="" name=""twitter:image:src"" /><meta content="")");
+            var result = regex.Match(html).Value;
+            Assert.Equal("https://avatars1.githubusercontent.com/u/2216750?v=3&amp;s=400", result);
+        }
     }
 }

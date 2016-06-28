@@ -37,6 +37,8 @@ namespace YuukoBlog
             services.AddMvc()
                 .AddMultiTemplateEngine()
                 .AddCookieTemplateProvider();
+
+            services.AddTimedJob();
         }
 
         public async void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
@@ -50,6 +52,8 @@ namespace YuukoBlog
             app.UseMvcWithDefaultRoute();
 
             await SampleData.InitializeYuukoBlog(app.ApplicationServices);
+
+            app.UseTimedJob();
         }
 
         public static void Main(string[] args)

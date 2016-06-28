@@ -1005,7 +1005,7 @@ function showQrCode() {
 
 function BlogRoll(github)
 {
-    if (confirm("Follow me on GitHub will auto add you here. Do you want to follow me?"))
+    if (confirm("Follow me on GitHub will add you here automatically. Do you want to follow me now?"))
     {
         window.location = "https://github.com/" + github;
     }

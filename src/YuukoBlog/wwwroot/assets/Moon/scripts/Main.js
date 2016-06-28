@@ -31,6 +31,12 @@ var blog = window.blog = {
 };
 var lock = false;
 
+function BlogRoll(github) {
+    if (confirm("Follow me on GitHub will add you here automatically. Do you want to follow me now?")) {
+        window.location = "https://github.com/" + github;
+    }
+}
+
 $(document).ready(function () {
     // Binding blog roll
     $('.sidebar-blog-roll').hover(function () {

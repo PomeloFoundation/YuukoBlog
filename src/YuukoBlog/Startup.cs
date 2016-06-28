@@ -60,7 +60,7 @@ namespace YuukoBlog
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls("http://*:80")
+                .UseUrls("http://*:9500")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .Build();

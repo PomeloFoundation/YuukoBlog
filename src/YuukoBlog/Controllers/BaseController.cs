@@ -64,9 +64,9 @@ namespace YuukoBlog.Controllers
                 .ToList();
 
             // Building Blog Rolls
-            ViewBag.Rolls = DB.BlogRolls
+            var rolls = DB.BlogRolls
                 .Where(x => !string.IsNullOrEmpty(x.URL) && x.AvatarId.HasValue)
-                .OrderBy(x => x.Type)
+                .OrderByDescending(x => x.Type)
                 .Select(x => new BlogRollViewModel
                 {
                     AvatarId = x.AvatarId.Value,
@@ -74,6 +74,8 @@ namespace YuukoBlog.Controllers
                     URL = x.URL
                 })
                 .ToList();
+            rolls.Reverse();
+            ViewBag.Rolls = rolls;
         }
     }
 }

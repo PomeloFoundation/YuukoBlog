@@ -32,6 +32,22 @@ var blog = window.blog = {
 var lock = false;
 
 $(document).ready(function () {
+    // Binding blog roll
+    $('.sidebar-blog-roll').hover(function () {
+        var name = $(this).find('img').attr('alt');
+        if (!name)
+            return;
+        var pos = $(this).position();
+        var top = pos.top + $(this).outerHeight();
+        var left = pos.left + $(this).outerWidth() / 2;
+        $('.sidebar-blog-roll-tip').css('top', top);
+        $('.sidebar-blog-roll-tip').css('left', left);
+        $('.sidebar-blog-roll-tip').text(name);
+        $('.sidebar-blog-roll-tip').addClass('active');
+    }, function () {
+        $('.sidebar-blog-roll-tip').removeClass('active');
+    });
+
     $('#lstTemplate').change(function () {
         window.location = "/home/template?folder=" + $(this).val();
     });

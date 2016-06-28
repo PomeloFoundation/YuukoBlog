@@ -669,7 +669,7 @@ input[type="submit"], #submit {
     .wp-pagenavi .extend {
     }
 
-    .pager-outer {
+    .paging-outer {
         padding: 0;
         margin: 0;
         display: inline-block;
@@ -917,3 +917,70 @@ pre, code {
         visibility: hidden;
         transition: margin 0.2s linear, opacity 0.2s linear, visibility 0.2s linear;
     }
+
+    .sidebar-about .face {
+    text-align: center;
+}
+
+    .sidebar-about .face img {
+        width: 150px;
+        max-width: 100%;
+        border-radius: 50%;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+.mvp {
+    width: 208px;
+    max-width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+
+.sidebar-blog-roll {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    border-radius: 4px;
+    margin: 2px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.sidebar-blog-roll img {
+    width: 45px;
+    height: 45px;
+    border-radius: 4px;
+}
+
+.sidebar-blog-roll-tip {
+    opacity: 0;
+    visibility: hidden;
+    width: 120px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 30px;
+    height: 30px;
+    position: absolute;
+    margin-top: -10px;
+    transition: all 0.2s linear;
+    margin-left: -60px;
+    border-radius: 5px;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    text-wrap: none;
+    word-break: keep-all;
+}
+
+.sidebar-blog-roll-tip.active {
+    opacity: 1;
+    visibility: visible;
+    margin-top: 0;
+    background-color: rgba(58, 56, 56, 0.95);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    color: #fff;
+}
+
+.sidebar-blog-roll-outer {
+    padding-left: 20px;
+}

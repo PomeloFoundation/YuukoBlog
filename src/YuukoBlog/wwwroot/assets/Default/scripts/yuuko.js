@@ -1020,6 +1020,7 @@ $(document).ready(function () {
                 $('.qrcode').removeClass('qrcode-active');
         }
     });
+
     // Binding blog roll
     $('.sidebar-blog-roll').hover(function () {
         var name = $(this).find('img').attr('alt');

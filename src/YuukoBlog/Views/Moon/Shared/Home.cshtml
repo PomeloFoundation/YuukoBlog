@@ -32,7 +32,7 @@
     </div>
 }
 <div class="wp-pagenavi">
-    <div class="pages">共@((ViewData["PagerInfo"] as PagerInfo).PageCount)页</div>
+    <div class="pages">共@((ViewData["PagingInfo"] as PagingInfo).PageCount)页</div>
         @Html.Paging("page larger", "current")
         <div class="clear"></div>
 </div>

@@ -99,6 +99,29 @@
                         }
                     </ul>
                 </div>
+                @if (Model != null && Model.GetType() != typeof(Post))
+                {
+                    <div class="module widget_meta sidebar-about">
+                        <div class="title">关于我</div>
+                        <div class="face"><img src="@ViewBag.AvatarUrl"></div>
+                        <p style="text-align: center"><a href="@ViewBag.AboutUrl">@ViewBag.Site</a></p>
+                        <div style="text-align: center">
+                            <a target="_blank" href="https://mvp.microsoft.com/zh-cn/PublicProfile/5001885" yuuko-static><img src="~/assets/Default/images/mvp.png" alt="微软最有价值专家" class="mvp" /></a>
+                        </div>
+                    </div>
+
+                    <div class="module widget_meta sidebar-about">
+                        <div class="title">友情链接</div>
+                        <div class="sidebar-blog-roll-outer">
+                            @foreach (BlogRollViewModel x in ViewBag.Rolls)
+                            {
+                                <div class="sidebar-blog-roll"><a target="_blank" href="@x.URL"><img src="/file/download/@x.AvatarId" alt="@x.Name" /></a></div>
+                            }
+                            <div class="sidebar-blog-roll"><a href="javascript:BlogRoll('@ViewBag.GitHub');"><img src="~/assets/Default/images/blog-roll.png" /></a></div>
+                            <div class="sidebar-blog-roll-tip"></div>
+                        </div>
+                    </div>
+                }
             </div>
             <br clear="both" />
         </div>

@@ -1,11 +1,14 @@
-﻿<div class="sidebar-module sidebar-catalogs">
-    <h3>BLOG ROLLS</h3>
-    <div class="sidebar-body">
-        @foreach (BlogRollViewModel x in ViewBag.Rolls)
-        {
-            <div class="sidebar-blog-roll"><a target="_blank" href="@x.URL"><img src="/file/download/@x.AvatarId" alt="@x.Name" /></a></div>
-        }
-        <div class="sidebar-blog-roll"><a href="javascript:BlogRoll('@ViewBag.GitHub');"><img src="~/assets/Default/images/blog-roll.png" /></a></div>
-        <div class="sidebar-blog-roll-tip"></div>
+﻿@if (Model != null && Model.GetType() != typeof(Post))
+{
+    <div class="sidebar-module sidebar-catalogs">
+        <h3>BLOG ROLLS</h3>
+        <div class="sidebar-body">
+            @foreach (BlogRollViewModel x in ViewBag.Rolls)
+            {
+                <div class="sidebar-blog-roll"><a target="_blank" href="@x.URL"><img src="/file/download/@x.AvatarId" alt="@x.Name" /></a></div>
+            }
+            <div class="sidebar-blog-roll"><a href="javascript:BlogRoll('@ViewBag.GitHub');"><img src="~/assets/Default/images/blog-roll.png" /></a></div>
+            <div class="sidebar-blog-roll-tip"></div>
+        </div>
     </div>
-</div>
+}

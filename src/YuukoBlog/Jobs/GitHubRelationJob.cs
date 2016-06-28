@@ -26,7 +26,7 @@ namespace YuukoBlog.Jobs
         /// <summary>
         /// 获取GitHub粉丝信息
         /// </summary>
-        [Invoke(Interval = 1000 * 60 * 60 * 24, SkipWhileExecuting = true)]
+        [Invoke(Interval = 1000 * 60 * 60 * 2, SkipWhileExecuting = true)]
         public async void PullGitHubRelation()
         {
             Console.WriteLine("Getting blog roll from github.com ...");

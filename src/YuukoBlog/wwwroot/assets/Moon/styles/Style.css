@@ -158,7 +158,7 @@ a, a:visited, a:link {
         top: 0;
         width: 50%;
         height: 350px;
-        background: url('/assets/moon/images/header_left.png') repeat-x;
+        background: url('/assets/Moon/images/header_left.png') repeat-x;
     }
 
     .bg.m .m {
@@ -168,7 +168,7 @@ a, a:visited, a:link {
         top: 0;
         width: 100%;
         height: 350px;
-        background: url('/assets/moon/images/header_bg.png') repeat-x;
+        background: url('/assets/Moon/images/header_bg.png') repeat-x;
     }
 
     .bg.m .c {
@@ -180,7 +180,7 @@ a, a:visited, a:link {
         .bg.m .c .cm {
             width: 880px;
             height: 350px;
-            background: url('/assets/moon/images/header_bright.jpg') no-repeat;
+            background: url('/assets/Moon/images/header_bright.jpg') no-repeat;
         }
 
 .header.m {
@@ -190,7 +190,7 @@ a, a:visited, a:link {
 }
 
     .header.m div.search {
-        background: url('/assets/moon/images/search_bg.png') no-repeat;
+        background: url('/assets/Moon/images/search_bg.png') no-repeat;
         height: 27px;
         left: 270px;
         position: absolute;
@@ -237,7 +237,7 @@ a, a:visited, a:link {
             margin: 0;
             padding: 0;
             min-width: 0;
-            background: url('/assets/moon/images/search_icon.png') no-repeat;
+            background: url('/assets/Moon/images/search_icon.png') no-repeat;
             border: 0;
             cursor: pointer;
             height: 20px;
@@ -250,7 +250,7 @@ a, a:visited, a:link {
         }
 
             .header.m #search #btnSearch:hover {
-                background: url('/assets/moon/images/search_icon.png') no-repeat -20px;
+                background: url('/assets/Moon/images/search_icon.png') no-repeat -20px;
             }
 
     .header.m .nav {

@@ -31,29 +31,36 @@ namespace YuukoBlog.Jobs
         {
             Console.WriteLine("Getting blog roll from github.com ...");
 
-            var rolls = new List<string>();
-
-            if (Convert.ToBoolean(Config["BlogRoll:Follower"]))
+            try
             {
-                var followers = await GetFollowers();
-                rolls.AddRange(followers);
-                foreach(var x in followers)
-                    await UpdateUserInformation(x, BlogRollType.Follower);
-            }
+                var rolls = new List<string>();
 
-            if (Convert.ToBoolean(Config["BlogRoll:Following"]))
+                if (Convert.ToBoolean(Config["BlogRoll:Follower"]))
+                {
+                    var followers = await GetFollowers();
+                    rolls.AddRange(followers);
+                    foreach (var x in followers)
+                        await UpdateUserInformation(x, BlogRollType.Follower);
+                }
+
+                if (Convert.ToBoolean(Config["BlogRoll:Following"]))
+                {
+                    var following = await GetFollowing();
+                    rolls.AddRange(following);
+                    foreach (var x in following)
+                        await UpdateUserInformation(x, BlogRollType.Following);
+                }
+
+                rolls = rolls.Distinct().ToList();
+                var delete = DB.BlogRolls.Where(x => !rolls.Contains(x.GitHubId)).ToList();
+                foreach (var x in delete)
+                    DB.BlogRolls.Remove(x);
+                DB.SaveChanges();
+            }
+            catch(Exception e)
             {
-                var following = await GetFollowing();
-                rolls.AddRange(following);
-                foreach (var x in following)
-                    await UpdateUserInformation(x, BlogRollType.Following);
+                Console.WriteLine(e.ToString());
             }
-
-            rolls = rolls.Distinct().ToList();
-            var delete = DB.BlogRolls.Where(x => !rolls.Contains(x.GitHubId)).ToList();
-            foreach (var x in delete)
-                DB.BlogRolls.Remove(x);
-            DB.SaveChanges();
         }
 
         #region Pull Blog Rolls From GitHub
@@ -139,68 +146,83 @@ namespace YuukoBlog.Jobs
 
         public async Task<Guid> UpdateAvatar(string URL, Guid? Id = null)
         {
-            Blob avatar;
-            if (Id.HasValue)
-                avatar = DB.Blobs.Single(x => x.Id == Id.Value);
-            else
+            try
             {
-                avatar = new Blob();
-                avatar.Id = Guid.NewGuid();
+                Blob avatar;
+                if (Id.HasValue)
+                    avatar = DB.Blobs.Single(x => x.Id == Id.Value);
+                else
+                {
+                    avatar = new Blob();
+                    avatar.Id = Guid.NewGuid();
+                }
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(URL);
+                    var result = await client.GetAsync("");
+                    avatar.ContentType = result.Content.Headers.ContentType.ToString();
+                    avatar.FileName = "avatar";
+                    avatar.Time = DateTime.Now;
+                    avatar.Bytes = await result.Content.ReadAsByteArrayAsync();
+                    avatar.ContentLength = avatar.Bytes.LongCount();
+                }
+                if (!Id.HasValue)
+                    DB.Blobs.Add(avatar);
+                DB.SaveChanges();
+                return avatar.Id;
             }
-            using (var client = new HttpClient())
+            catch(Exception e)
             {
-                client.BaseAddress = new Uri(URL);
-                var result = await client.GetAsync("");
-                avatar.ContentType = result.Content.Headers.ContentType.ToString();
-                avatar.FileName = "avatar";
-                avatar.Time = DateTime.Now;
-                avatar.Bytes = await result.Content.ReadAsByteArrayAsync();
-                avatar.ContentLength = avatar.Bytes.LongCount();
+                Console.WriteLine(e.ToString());
+                return default(Guid);
             }
-            if (!Id.HasValue)
-                DB.Blobs.Add(avatar);
-            DB.SaveChanges();
-            return avatar.Id;
         }
 
         private async Task UpdateUserInformation(string Username, BlogRollType Type)
         {
-            var needInsert = true;
-            var br = DB.BlogRolls.SingleOrDefault(x => x.GitHubId == Username);
-            if (br == null)
-                br = new BlogRoll();
-            else
+            try
             {
-                needInsert = false;
-                if (br.Type == BlogRollType.Follower && Type == BlogRollType.Following)
-                    return;
-            }
-            br.Type = Type;
-            br.GitHubId = Username;
-            var url = $"https://github.com/{ Config["BlogRoll:GitHub"] }";
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(url);
-                var result = await client.GetAsync("/" + Username);
-                var fullnameRegex = new Regex(@"(?<=<div class=""vcard-fullname"" itemprop=""name"">).*(?=</div>)");
-                var html = await result.Content.ReadAsStringAsync();
-                br.NickName = fullnameRegex.Match(html).Value;
-                if (string.IsNullOrEmpty(br.NickName))
-                    br.NickName = Username;
-                var websiteRegex = new Regex(@"(?<=</svg><a href=""http).*(?="" class=""url"" rel="")");
-                var website = websiteRegex.Match(html).Value;
-                br.URL = string.IsNullOrEmpty(website) ? null : "http" + website;
-                var avatarRegex = new Regex(@"(?<=<meta content="").*(?="" name=""twitter:image:src"" /><meta content="")");
-                var avatarURL = avatarRegex.Match(html).Value.Replace("&amp;", "&").Replace("s=400", "s=150");
-                if (br.AvatarId == null)
-                    br.AvatarId = await UpdateAvatar(avatarURL);
+                var needInsert = true;
+                var br = DB.BlogRolls.SingleOrDefault(x => x.GitHubId == Username);
+                if (br == null)
+                    br = new BlogRoll();
                 else
-                    await UpdateAvatar(avatarURL, br.AvatarId.Value);
-            }
+                {
+                    needInsert = false;
+                    if (br.Type == BlogRollType.Follower && Type == BlogRollType.Following)
+                        return;
+                }
+                br.Type = Type;
+                br.GitHubId = Username;
+                var url = $"https://github.com/{ Config["BlogRoll:GitHub"] }";
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(url);
+                    var result = await client.GetAsync("/" + Username);
+                    var fullnameRegex = new Regex(@"(?<=<div class=""vcard-fullname"" itemprop=""name"">).*(?=</div>)");
+                    var html = await result.Content.ReadAsStringAsync();
+                    br.NickName = fullnameRegex.Match(html).Value;
+                    if (string.IsNullOrEmpty(br.NickName))
+                        br.NickName = Username;
+                    var websiteRegex = new Regex(@"(?<=</svg><a href=""http).*(?="" class=""url"" rel="")");
+                    var website = websiteRegex.Match(html).Value;
+                    br.URL = string.IsNullOrEmpty(website) ? null : "http" + website;
+                    var avatarRegex = new Regex(@"(?<=<meta content="").*(?="" name=""twitter:image:src"" /><meta content="")");
+                    var avatarURL = avatarRegex.Match(html).Value.Replace("&amp;", "&").Replace("s=400", "s=150");
+                    if (br.AvatarId == null)
+                        br.AvatarId = await UpdateAvatar(avatarURL);
+                    else
+                        await UpdateAvatar(avatarURL, br.AvatarId.Value);
+                }
 
-            if (needInsert)
-                DB.BlogRolls.Add(br);
-            DB.SaveChanges();
+                if (needInsert)
+                    DB.BlogRolls.Add(br);
+                DB.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         }
         #endregion
     }

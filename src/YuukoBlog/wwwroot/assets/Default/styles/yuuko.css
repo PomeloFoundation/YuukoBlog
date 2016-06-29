@@ -1978,13 +1978,13 @@ td input[type="text"], td input[type="password"] {
     text-align: left;
 }
 
-.upyun {
+.azure {
     width: 20%;
     float: right;
     text-align: right;
 }
 
-.upyun-logo {
+.azure-logo {
     height: 75px;
     margin-top: 4px;
 }
@@ -1996,13 +1996,13 @@ td input[type="text"], td input[type="password"] {
         width: 100%;
     }
 
-    .upyun {
+    .azure {
         float: none;
         text-align: center;
         width: 100%;
     }
 
-    .upyun-logo {
+    .azure-logo {
         height: 60px;
         margin-top: 0;
     }

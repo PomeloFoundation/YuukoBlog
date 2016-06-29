@@ -398,38 +398,38 @@ textarea {
     font-family: 'PT Sans';
     font-style: normal;
     font-weight: 400;
-    src: url(/assets/default/fonts/ptsans.eot);
-    src: local('PT Sans'),local('PTSans-Regular'),url(/assets/default/fonts/ptsans.eot) format('embedded-opentype'),url(/assets/default/fonts/ptsans.woff) format('woff'),url(/assets/default/fonts/ptsans.ttf) format('truetype'),url(/assets/default/fonts/ptsans.svg#PTSans) format('svg');
+    src: url(/assets/Default/fonts/ptsans.eot);
+    src: local('PT Sans'),local('PTSans-Regular'),url(/assets/Default/fonts/ptsans.eot) format('embedded-opentype'),url(/assets/Default/fonts/ptsans.woff) format('woff'),url(/assets/Default/fonts/ptsans.ttf) format('truetype'),url(/assets/Default/fonts/ptsans.svg#PTSans) format('svg');
 }
 
 @font-face {
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
-    src: url(/assets/default/fonts/opensans.eot);
-    src: local('Open Sans'),local('OpenSans'),url(/assets/default/fonts/opensans.eot) format('embedded-opentype'),url(/assets/default/fonts/opensans.woff) format('woff'),url(/assets/default/fonts/opensans.ttf) format('truetype'),url(/assets/default/fonts/opensans.svg#OpenSans) format('svg');
+    src: url(/assets/Default/fonts/opensans.eot);
+    src: local('Open Sans'),local('OpenSans'),url(/assets/Default/fonts/opensans.eot) format('embedded-opentype'),url(/assets/Default/fonts/opensans.woff) format('woff'),url(/assets/Default/fonts/opensans.ttf) format('truetype'),url(/assets/Default/fonts/opensans.svg#OpenSans) format('svg');
 }
 
 @font-face {
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 300;
-    src: url(/assets/default/fonts/opensans-light.eot);
-    src: local('Open Sans Light'),local('OpenSans-Light'),url(/assets/default/fonts/opensans-light.eot) format('embedded-opentype'),url(/assets/default/fonts/opensans-light.woff) format('woff'),url(/assets/default/fonts/opensans-light.ttf) format('truetype');
+    src: url(/assets/Default/fonts/opensans-light.eot);
+    src: local('Open Sans Light'),local('OpenSans-Light'),url(/assets/Default/fonts/opensans-light.eot) format('embedded-opentype'),url(/assets/Default/fonts/opensans-light.woff) format('woff'),url(/assets/Default/fonts/opensans-light.ttf) format('truetype');
 }
 
 @font-face {
     font-family: 'Oxygen Mono';
     font-style: normal;
     font-weight: 400;
-    src: url(/assets/default/fonts/oxygenmono.eot);
-    src: local('Oxygen Mono'),local('OxygenMono-Regular'),url(/assets/default/fonts/oxygenmono.eot) format('embedded-opentype'),url(/assets/default/fonts/oxygenmono.woff) format('woff'),url(/assets/default/fonts/oxygenmono.ttf) format('truetype'),url(/assets/default/fonts/oxygenmono.svg#OxygenMono) format('svg');
+    src: url(/assets/Default/fonts/oxygenmono.eot);
+    src: local('Oxygen Mono'),local('OxygenMono-Regular'),url(/assets/Default/fonts/oxygenmono.eot) format('embedded-opentype'),url(/assets/Default/fonts/oxygenmono.woff) format('woff'),url(/assets/Default/fonts/oxygenmono.ttf) format('truetype'),url(/assets/Default/fonts/oxygenmono.svg#OxygenMono) format('svg');
 }
 
 @font-face {
     font-family: bwicon;
-    src: url(/assets/default/fonts/bwicon.eot?ik20w7);
-    src: url(/assets/default/fonts/bwicon.eot?#iefixik20w7) format('embedded-opentype'),url(/assets/default/fonts/bwicon.woff?ik20w7) format('woff'),url(/assets/default/fonts/bwicon.ttf?ik20w7) format('truetype'),url(/assets/default/fonts/bwicon.svg?ik20w7#bwicon) format('svg');
+    src: url(/assets/Default/fonts/bwicon.eot?ik20w7);
+    src: url(/assets/Default/fonts/bwicon.eot?#iefixik20w7) format('embedded-opentype'),url(/assets/Default/fonts/bwicon.woff?ik20w7) format('woff'),url(/assets/Default/fonts/bwicon.ttf?ik20w7) format('truetype'),url(/assets/Default/fonts/bwicon.svg?ik20w7#bwicon) format('svg');
     font-weight: 400;
     font-style: normal;
 }

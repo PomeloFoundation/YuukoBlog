@@ -1492,7 +1492,7 @@ a, a:visited {
 body {
     -webkit-transition: background-color .3s linear;
     transition: background-color .3s linear;
-    background: fixed url(/assets/default/images/texture.png) top center;
+    background: fixed url(/assets/Default/images/texture.png) top center;
 }
 
 .body-home {

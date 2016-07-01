@@ -2106,3 +2106,31 @@ td input[type="text"], td input[type="password"] {
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     color: #fff;
 }
+
+.markdown-textbox-outer {
+    border: 1px solid #ccc;
+}
+
+.markdown-textbox {
+    border: none;
+    outline: 0;
+    display: block;
+    height: 80px;
+    padding: 10px;
+    width: 100%;
+}
+
+.markdown-textbox:focus {
+    box-shadow: none;
+}
+
+.markdown-textbox-bottom {
+    background-color: #f2f2f2;
+    color: #888;
+    font-size: 10px;
+    padding: 5px 10px;
+}
+
+#frmAjaxUpload {
+    display: none;
+}

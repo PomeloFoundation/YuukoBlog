@@ -48,8 +48,14 @@
                     </select>
                 </p>
                 <p>
-                    <textarea id="txtContent" class="markdown-textbox" placeholder="文章内容使用Markdown编码，同样您可以使用HTML代码来编辑您的文章。您可以拖拽图片至编辑区或直接通过剪贴板粘贴，图片将会自动上传。">@(new HtmlString(Model.Content))</textarea>
+                    <div class="markdown-textbox-outer">
+                        <textarea id="txtContent" class="markdown-textbox" name="Content" placeholder="Markdown here..."></textarea>
+                        <div class="markdown-textbox-bottom">拖拽文件、粘贴文件或<a href="javascript:uploadAttachment();">选择文件</a>以添加附件。</div>
+                    </div>
                 </p>
+                <form id="frmAjaxUpload">
+                    <input type="file" id="uploadFile" name="file" />
+                </form>
                 <p>
                     <input type="text" id="txtTags" placeholder="标签用,分隔" value="@Html.TagSerialize(Model.Tags)" />
                 </p>

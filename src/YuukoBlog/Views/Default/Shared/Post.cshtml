@@ -40,8 +40,14 @@
                         </select>
                     </p>
                     <p>
-                        <textarea id="txtContent" class="markdown-textbox" placeholder="@SR["Markdown enabled, you can paste or drag drop an image into this area, the file will be uploaded automaticly."]">@(new HtmlString(Model.Content))</textarea>
+                        <div class="markdown-textbox-outer">
+                            <textarea id="txtContent" class="markdown-textbox" name="Content" placeholder="Markdown here..."></textarea>
+                            <div class="markdown-textbox-bottom">拖拽文件、粘贴文件或<a href="javascript:uploadAttachment();">选择文件</a>以添加附件。</div>
+                        </div>                    
                     </p>
+                    <form id="frmAjaxUpload">
+                        <input type="file" id="uploadFile" name="file" />
+                    </form>
                     <p>
                         <input type="text" id="txtTags" placeholder="@SR["Use a ',' to split tags"]" value="@Html.TagSerialize(Model.Tags)" />
                     </p>

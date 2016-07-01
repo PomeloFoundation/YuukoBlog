@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YuukoBlog.Models;
@@ -23,8 +24,8 @@ namespace YuukoBlog.Controllers
             ViewBag.Account = Configuration["Account"];
             ViewBag.DefaultTemplate = Configuration["DefaultTemplate"];
             ViewBag.GitHub = Configuration["BlogRoll:GitHub"];
-            ViewBag.Following = Configuration["BlogRoll:Following"];
-            ViewBag.Follower = Configuration["BlogRoll:Follower"];
+            ViewBag.Following = Convert.ToBoolean(Configuration["BlogRoll:Following"]);
+            ViewBag.Follower = Convert.ToBoolean(Configuration["BlogRoll:Follower"]);
 
             // Building Tags
             ViewBag.Tags = DB.PostTags

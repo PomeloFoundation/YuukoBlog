@@ -17,6 +17,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E121BC87-4
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "YuukoBlog.Tests", "test\YuukoBlog.Tests\YuukoBlog.Tests.xproj", "{E1E89DE4-6946-4185-97DF-A48C3631234B}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pomelo.AntiXss", "..\dotNETCore-Extensions\src\Pomelo.AntiXss\Pomelo.AntiXss.xproj", "{DC98679B-223F-4548-9432-873F4E83CC40}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pomelo.AspNetCore.AntiXSS", "..\dotNETCore-Extensions\src\Pomelo.AspNetCore.AntiXSS\Pomelo.AspNetCore.AntiXSS.xproj", "{D7DC4D44-D948-4466-8CC0-18CB2F8B1E37}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pomelo.HtmlAgilityPack", "..\dotNETCore-Extensions\src\Pomelo.HtmlAgilityPack\Pomelo.HtmlAgilityPack.xproj", "{F6224349-9ABC-4E1C-8100-C5F007577F17}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pomelo.AspNetCore.Common", "..\dotNETCore-Extensions\src\Pomelo.AspNetCore.Common\Pomelo.AspNetCore.Common.xproj", "{CAC5D089-C25C-4B70-B98D-623DA7B48D7D}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pomelo.AspNetCore.Extensions", "..\dotNETCore-Extensions\src\Pomelo.AspNetCore.Extensions\Pomelo.AspNetCore.Extensions.xproj", "{1F0DC9F2-F875-48AE-A261-1040DDA742D3}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pomelo.AspNetCore.TimedJob", "..\dotNETCore-Extensions\src\Pomelo.AspNetCore.TimedJob\Pomelo.AspNetCore.TimedJob.xproj", "{343BDEB6-9852-481F-9617-00293FCCAF26}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pomelo.Extensions.Common", "..\dotNETCore-Extensions\src\Pomelo.Extensions.Common\Pomelo.Extensions.Common.xproj", "{1911668D-54DF-408C-862A-4929F3A42ACC}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pomelo.Marked", "..\dotNETCore-Extensions\src\Pomelo.Marked\Pomelo.Marked.xproj", "{392BCACF-A74D-48D8-933B-83EFBE47A624}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Pomelo.Net.Smtp", "..\dotNETCore-Extensions\src\Pomelo.Net.Smtp\Pomelo.Net.Smtp.xproj", "{E18AAD03-4464-4844-90B4-D9B78E2424F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +49,42 @@ Global
 		{E1E89DE4-6946-4185-97DF-A48C3631234B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1E89DE4-6946-4185-97DF-A48C3631234B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1E89DE4-6946-4185-97DF-A48C3631234B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC98679B-223F-4548-9432-873F4E83CC40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC98679B-223F-4548-9432-873F4E83CC40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC98679B-223F-4548-9432-873F4E83CC40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC98679B-223F-4548-9432-873F4E83CC40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7DC4D44-D948-4466-8CC0-18CB2F8B1E37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7DC4D44-D948-4466-8CC0-18CB2F8B1E37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7DC4D44-D948-4466-8CC0-18CB2F8B1E37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7DC4D44-D948-4466-8CC0-18CB2F8B1E37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6224349-9ABC-4E1C-8100-C5F007577F17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6224349-9ABC-4E1C-8100-C5F007577F17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6224349-9ABC-4E1C-8100-C5F007577F17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6224349-9ABC-4E1C-8100-C5F007577F17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAC5D089-C25C-4B70-B98D-623DA7B48D7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAC5D089-C25C-4B70-B98D-623DA7B48D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAC5D089-C25C-4B70-B98D-623DA7B48D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAC5D089-C25C-4B70-B98D-623DA7B48D7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F0DC9F2-F875-48AE-A261-1040DDA742D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F0DC9F2-F875-48AE-A261-1040DDA742D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F0DC9F2-F875-48AE-A261-1040DDA742D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F0DC9F2-F875-48AE-A261-1040DDA742D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{343BDEB6-9852-481F-9617-00293FCCAF26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{343BDEB6-9852-481F-9617-00293FCCAF26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{343BDEB6-9852-481F-9617-00293FCCAF26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{343BDEB6-9852-481F-9617-00293FCCAF26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1911668D-54DF-408C-862A-4929F3A42ACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1911668D-54DF-408C-862A-4929F3A42ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1911668D-54DF-408C-862A-4929F3A42ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1911668D-54DF-408C-862A-4929F3A42ACC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{392BCACF-A74D-48D8-933B-83EFBE47A624}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{392BCACF-A74D-48D8-933B-83EFBE47A624}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{392BCACF-A74D-48D8-933B-83EFBE47A624}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{392BCACF-A74D-48D8-933B-83EFBE47A624}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E18AAD03-4464-4844-90B4-D9B78E2424F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E18AAD03-4464-4844-90B4-D9B78E2424F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E18AAD03-4464-4844-90B4-D9B78E2424F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E18AAD03-4464-4844-90B4-D9B78E2424F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

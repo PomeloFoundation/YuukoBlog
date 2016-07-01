@@ -42,7 +42,7 @@
             </p>
             <p>
                 Followers: <br />
-                <input type="text" name="Follower" value="true" @(ViewBag.Follower ? " checked" : "") />
+                <input type="checkbox" name="Follower" value="true" @(ViewBag.Follower ? " checked" : "") />
             </p>
             <p>
                 <input type="button" class="more-link" value="保存" onclick="saveConfig()" />

@@ -56,7 +56,7 @@
                     </p>
                     <p>
                         @SR["Followers"]: <br />
-                        <input type="text" name="Follower" value="true" @(ViewBag.Follower ? " checked" : "") />
+                        <input type="checkbox" name="Follower" value="true" @(ViewBag.Follower ? " checked" : "") />
                     </p>
                     <p>
                         <input type="button" value="@SR["Save"]" onclick="saveConfig()" />

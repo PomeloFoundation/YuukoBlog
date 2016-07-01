@@ -1,5 +1,5 @@
 ﻿{
-  "projects": [ "src", "test", "C:\\Users\\1\\Documents\\GitHub\\dotNETCore-Extensions\\src" ],
+  "projects": [ "src", "test" ],
   "sdk": {
     "version": "1.0.0-preview2-003121"
   }

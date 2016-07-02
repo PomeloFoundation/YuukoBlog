@@ -24,7 +24,6 @@ namespace YuukoBlog
             services.AddSmartCookies();
 
             services.AddMemoryCache();
-            services.AddDistributedMemoryCache();
             services.AddSession(x => x.IdleTimeout = TimeSpan.FromMinutes(20));
 
             services.AddBlobStorage()

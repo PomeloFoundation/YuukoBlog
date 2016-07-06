@@ -1,8 +1,3 @@
 ﻿{
-  "Set": "en-US",
-  "Culture": [ "en", "en-US", "en-GB" ],
-  "IsDefault": false,
-  "LocalizedStrings": {
-    "_DATE_FORMAT_STRING": "MMM yyyy"
-  }
+  "_DATE_FORMAT_STRING": "MMM yyyy"
 }

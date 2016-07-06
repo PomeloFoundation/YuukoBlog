@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Pomelo.AspNetCore.Localization;
 using YuukoBlog.Models;
 
 namespace YuukoBlog
@@ -30,8 +31,11 @@ namespace YuukoBlog
                 .AddEntityFrameworkStorage<BlogContext>()
                 .AddSessionUploadAuthorization();
 
-            services.AddJsonLocalization()
-                .AddCookieCulture();
+            services.AddPomeloLocalization(x =>
+            {
+                x.AddCulture(new string[] { "zh", "zh-CN", "zh-Hans", "zh-Hans-CN" }, new JsonLocalizedStringStore(Path.Combine("Localization", "zh-CN.json")));
+                x.AddCulture(new string[] { "en", "en-US", "en-GB" }, new JsonLocalizedStringStore(Path.Combine("Localization", "en-US.json")));
+            });
 
             services.AddMvc()
                 .AddMultiTemplateEngine()

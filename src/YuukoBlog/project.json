@@ -8,8 +8,8 @@
     "Microsoft.AspNetCore.Session": "1.0.0",
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0",
-    "Pomelo.AspNetCore.Extensions": "1.0.0",
-    "Pomelo.AspNetCore.TimedJob": "1.0.0"
+    "Pomelo.AspNetCore.Extensions": "1.0.0-prerelease-20160726",
+    "Pomelo.AspNetCore.TimedJob": "1.0.0-prerelease-20160726"
   },
 
   "frameworks": {

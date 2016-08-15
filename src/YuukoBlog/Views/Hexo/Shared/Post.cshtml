@@ -1,8 +1,11 @@
 ﻿@model Post
 <article class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-meta @(Html.IsAdmin() ? "admin" : "")">
-        <a href="javascript:$('#frmDeletePost').submit();"><i class="fa fa-trash"></i> 删除</a>&nbsp;&nbsp;&nbsp;
-        <a href="javascript:DropEnable();$('.post-body').slideUp();$('.post-edit').slideDown();"><i class="fa fa-pencil"></i> 编辑</a>&nbsp;&nbsp;&nbsp;
+        @if (Html.IsAdmin())
+        {
+            <a href="javascript:$('#frmDeletePost').submit();"><i class="fa fa-trash"></i> 删除</a>@(new HtmlString("&nbsp; &nbsp; &nbsp;"))
+            <a href="javascript:DropEnable();$('.post-body').slideUp();$('.post-edit').slideDown();"><i class="fa fa-pencil"></i> 编辑</a>@(new HtmlString("&nbsp; &nbsp; &nbsp;"))
+        }
         <a href="/post/@Model.Url" class="article-date">
             <time datetime="@Model.Time.ToString()" itemprop="datePublished">@Model.Time.ToString("yyyy年MM月dd日 HH:mm")</time>
         </a>
@@ -70,7 +73,6 @@
         </div>
     </div>
 </article>
-
 <div id="cmt">
     <div id="disqus_thread" style="padding: 15px 15px 15px 15px">
         <script type="text/javascript">

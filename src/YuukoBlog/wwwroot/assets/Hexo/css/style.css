@@ -2584,8 +2584,8 @@ pre, code {
     color: #aaa;
 }
 
-#cmt {
-    margin: 0 15px;
+#disqus-outer {
+    margin: 0 30px;
 }
 
 .clear {
@@ -2596,6 +2596,10 @@ pre, code {
     .post-nav {
         margin: 0 10px;
     }
+
+    #disqus-outer {
+    margin: 0 10px;
+}
 }
 
 #js-friends {

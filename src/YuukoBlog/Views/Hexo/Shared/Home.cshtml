@@ -1,0 +1,47 @@
+﻿@model IEnumerable<PostViewModel>
+@{
+    ViewBag.Title = "Home";
+}
+@foreach (var x in Model)
+{
+    <article class="article article-type-post" itemscope itemprop="blogPost">
+        <div class="article-meta">
+            <a href="/post/@x.Url" class="article-date">
+                <time datetime="@x.Time.ToString()" itemprop="datePublished">@x.Time.ToString("yyyy年MM月dd日 HH:mm")</time>
+            </a>
+        </div>
+        <div class="article-inner">
+            <input type="hidden" class="isFancy" />
+            <header class="article-header">
+                <h1 itemprop="name">
+                    <a class="article-title" href="/post/@x.Url">@x.Title</a>
+                </h1>
+            </header>
+            <div class="article-entry" itemprop="articleBody">
+                @Html.Marked(x.Summary)
+            </div>
+            <div class="article-info article-info-index">
+                <div class="article-tag tagcloud">
+                    <ul class="article-tag-list">
+                        @foreach (PostTag y in x.Tags)
+                        {
+                            <li class="article-tag-list-item"><a class="article-tag-list-link" asp-action="Tag" asp-controller="Home" asp-route-tag="@y.Tag">@y.Tag</a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </article>
+}
+@if ((ViewData["PagingInfo"] as PagingInfo).Count > 0)
+{
+    <div>
+        @Html.Paging("post-nav-page", "post-nav-page-current", "post-nav", null, new[] { "raw" })
+        <div class="clear"></div>
+    </div>
+}
+
+<script>
+    $("#p_@ViewBag.Position").addClass("current_page_item");
+</script>

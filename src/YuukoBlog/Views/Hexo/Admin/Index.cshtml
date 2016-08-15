@@ -1,0 +1,57 @@
+﻿<article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        <input type="hidden" class="isFancy" />
+        <header class="article-header">
+            <h1 itemprop="name">
+                <a class="article-title" href="#">站点信息</a>
+            </h1>
+        </header>
+        <div class="article-entry" itemprop="articleBody">
+            <form asp-action="Index" asp-controller="Admin" method="post" id="frmConfig">
+                <p>
+                    网站名称: <br />
+                    <input class="textbox w-3" type="text" name="site" value="@ViewBag.Site" />
+                </p>
+                <p>
+                    网站介绍: <br />
+                    <input class="textbox w-3" type="text" name="description" value="@ViewBag.Description" />
+                </p>
+                <p>
+                    头像URL: <br />
+                    <input class="textbox w-3" type="text" name="avatarUrl" value="@ViewBag.AvatarUrl" />
+                </p>
+                <p>
+                    Disqus: <br />
+                    <input class="textbox w-3" type="text" name="disqus" value="@ViewBag.Disqus" />
+                </p>
+                <p>
+                    关于URL: <br />
+                    <input class="textbox w-3" type="text" name="aboutUrl" value="@ViewBag.AboutUrl" />
+                </p>
+                <p>
+                    用户名: <br />
+                    <input class="textbox w-3" type="text" name="Account" value="@ViewBag.Account" />
+                </p>
+                <p>
+                    密码: <br />
+                    <input class="textbox w-3" type="password" name="password" value="" />
+                </p>
+                <p>
+                    GitHub: <br />
+                    <input class="textbox w-3" type="text" name="GitHub" value="@ViewBag.GitHub" />
+                </p>
+                <p>
+                    Following: <br />
+                    <input type="checkbox" name="Following" value="true" @(ViewBag.Following ? " checked" : "") />
+                </p>
+                <p>
+                    Followers: <br />
+                    <input type="checkbox" name="Follower" value="true" @(ViewBag.Follower ? " checked" : "") />
+                </p>
+                <p>
+                    <input type="button" class="button button-def" value="保存" onclick="saveConfig()" />
+                </p>
+            </form>
+        </div>
+    </div>
+</article>

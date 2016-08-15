@@ -23,7 +23,7 @@ namespace YuukoBlog.Tests
             #endregion
             var regex = new Regex(@"(?<=<span class=""counter"">)[\s\r\n0-9]{0,}");
             Assert.True(regex.Match(html).Success);
-            Assert.Equal(41, Convert.ToInt32(regex.Match(html).Value.Trim()));
+            Assert.Equal(105, Convert.ToInt32(regex.Match(html).Value.Trim()));
         }
 
         [Fact]
@@ -1928,7 +1928,7 @@ namespace YuukoBlog.Tests
             #endregion
             var regex = new Regex(@"(?<=<span class=""css-truncate css-truncate-target"" title="").*(?=</a></span></h3>)");
             var matches = regex.Matches(html);
-            Assert.Equal(41, matches.Count);
+            Assert.Equal(105, matches.Count);
         }
 
         [Fact]

@@ -2764,3 +2764,7 @@ pre, code {
     border: 0;
     width: auto;
 }
+
+#disqus_thread {
+    padding: 0!important;
+}

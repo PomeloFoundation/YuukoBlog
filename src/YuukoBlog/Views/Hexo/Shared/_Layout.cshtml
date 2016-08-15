@@ -106,10 +106,15 @@
                             </section>
                             <section class="switch-part switch-part2">
                                 <div class="widget">
-                                    @foreach (CalendarViewModel x in ViewBag.Calendars)
-                                    {
-                                        <a href="/@x.Year/@x.Month">@(new DateTime(x.Year, x.Month, 1).ToString(SR["_DATE_FORMAT_STRING"])) (@x.Count)</a>
-                                    }
+
+                                    <nav class="header-menu">
+                                        <ul>
+                                            @foreach (CalendarViewModel x in ViewBag.Calendars)
+                                            {
+                                                <li><a href="/@x.Year/@x.Month">@(new DateTime(x.Year, x.Month, 1).ToString(SR["_DATE_FORMAT_STRING"])) (@x.Count)</a></li>
+                                            }
+                                        </ul>
+                                    </nav>
                                 </div>
                             </section>
                             <section class="switch-part switch-part3">

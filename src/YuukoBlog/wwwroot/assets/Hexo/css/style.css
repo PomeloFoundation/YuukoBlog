@@ -2343,7 +2343,7 @@ pre .css ~ * .id {
 .hljs-subst,
 .hljs-tag .hljs-title,
 .nginx .hljs-title {
-    color: #637c84;
+    color: #a9a9f2;
 }
 
 .hljs-string,
@@ -2400,7 +2400,7 @@ pre .css ~ * .id {
 .markdown .hljs-bullet,
 .asciidoc .hljs-link_url,
 .markdown .hljs-link_url {
-    color: #080;
+    color: #86c685;
 }
 
 .hljs-label,
@@ -2432,7 +2432,7 @@ pre .css ~ * .id {
 .lasso .hljs-attribute,
 .coffeescript .hljs-property,
 .hljs-phony {
-    color: #88f;
+    color: #f0bef3;
 }
 
 .hljs-keyword,
@@ -2604,6 +2604,7 @@ pre, code {
 
 #js-friends {
     overflow: auto;
+    max-height: 285px;
 }
 
 .textbox {

@@ -61,6 +61,7 @@
                                 <li>日历</li>
                                 <li>标签</li>
                                 <li>友情链接</li>
+                                <li><a href="@ViewBag.AboutUrl">关于我</a></li>
                                 @if (Html.IsAdmin())
                                 {
                                     <li><a href="javascript:$('#frmNewPost').submit();">发表文章</a></li>
@@ -96,10 +97,10 @@
                                 </nav>
                                 <nav class="header-nav">
                                     <div class="social">
-                                        <a class="github" target="_blank" href="/#" title="github">github</a>
-                                        <a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
-                                        <a class="rss" target="_blank" href="/#" title="rss">rss</a>
-                                        <a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+                                        <a class="github" target="_blank" href="https://github.com/Kagamine" title="github">github</a>
+                                        <a class="mvp" target="_blank" href="https://mvp.microsoft.com/zh-cn/PublicProfile/5001885" title="mvp">mvp</a>
+                                        <a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E9%80%B8%E7%AC%99-%E9%83%91-3b9980100" title="LinkedIn">LinkedIn</a>
+                                        <a class="mail" target="_blank" href="mailto:1@1234.sh" title="Email">Email</a>
                                     </div>
                                 </nav>
                             </section>
@@ -164,10 +165,10 @@
                         </nav>
                         <nav class="header-nav">
                             <div class="social">
-                                <a class="github" target="_blank" href="/#" title="github">github</a>
-                                <a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
-                                <a class="rss" target="_blank" href="/#" title="rss">rss</a>
-                                <a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+                                <a class="github" target="_blank" href="https://github.com/Kagamine" title="github">github</a>
+                                <a class="mvp" target="_blank" href="https://mvp.microsoft.com/zh-cn/PublicProfile/5001885" title="mvp">mvp</a>
+                                <a class="linkedin" target="_blank" href="http://www.linkedin.com/in/%E9%80%B8%E7%AC%99-%E9%83%91-3b9980100" title="LinkedIn">LinkedIn</a>
+                                <a class="mail" target="_blank" href="mailto:1@1234.sh" title="Email">Email</a>
                             </div>
                         </nav>
                     </header>
@@ -182,7 +183,13 @@
                 <div class="outer">
                     <div id="footer-info">
                         <div class="footer-left">
-                            &copy; 2016 <a href="https://github.com/PomeloFoundation">Pomelo Foundation</a>
+                            &copy; 2016 <a href="https://github.com/PomeloFoundation">Pomelo Foundation</a>, Template
+                            <select id="lstTemplate">
+                                @foreach (var t in Template.Collection.Templates)
+                                {
+                                    <!option @(Template.Current.Identifier == t.Identifier ? "selected" : "") value="@t.Identifier">@t.Title</!option>
+                                }
+                            </select>
                         </div>
                         <div class="footer-right">
                             Powered by <a href="https://github.com/PomeloFoundation/YuukoBlog" target="_blank">YuukoBlog</a>

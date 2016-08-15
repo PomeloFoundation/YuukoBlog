@@ -609,12 +609,12 @@ a {
 #header .header-nav .social a:last-of-type {
   margin-right: 0;
 }
-#header .header-nav .social a.weibo {
-  background: url("../img/weibo.png") center no-repeat #aaf;
-  border: 1px solid #aaf;
+#header .header-nav .social a.mvp {
+  background: url("../img/mvp.png") center no-repeat #0078d8;
+  border: 1px solid #0078d8;
 }
-#header .header-nav .social a.weibo:hover {
-  border: 1px solid #aaf;
+#header .header-nav .social a.mvp:hover {
+  border: 1px solid #0078d8;
 }
 #header .header-nav .social a.rss {
   background: url("../img/rss.png") center no-repeat #ef7522;
@@ -624,11 +624,11 @@ a {
   border: 1px solid #cf5d0f;
 }
 #header .header-nav .social a.github {
-  background: url("../img/github.png") center no-repeat #afb6ca;
-  border: 1px solid #afb6ca;
+  background: url("../img/github.png") center no-repeat #2aad2d;
+  border: 1px solid #2aad2d;
 }
 #header .header-nav .social a.github:hover {
-  border: 1px solid #909ab6;
+  border: 1px solid #2aad2d;
 }
 #header .header-nav .social a.facebook {
   background: url("../img/facebook.png") center no-repeat #3b5998;
@@ -652,11 +652,11 @@ a {
   border: 1px solid #24c1f6;
 }
 #header .header-nav .social a.linkedin {
-  background: url("../img/linkedin.png") center no-repeat #005a87;
-  border: 1px solid #005a87;
+  background: url("../img/linkedin.png") center no-repeat #ef7522;
+  border: 1px solid #ef7522;
 }
 #header .header-nav .social a.linkedin:hover {
-  border: 1px solid #006b98;
+  border: 1px solid #ef7522;
 }
 #header .header-nav .social a.zhihu {
   background: url("../img/zhihu.png") center no-repeat #0078d8;
@@ -673,11 +673,11 @@ a {
   border: 1px solid #06c611;
 }
 #header .header-nav .social a.mail {
-  background: url("../img/mail.png") center no-repeat #005a87;
-  border: 1px solid #005a87;
+  background: url("../img/mail.png") center no-repeat #c059e6;
+  border: 1px solid #c059e6;
 }
 #header .header-nav .social a.mail:hover {
-  border: 1px solid #006b98;
+  border: 1px solid #c059e6;
 }
 #header .switch-part {
   width: 100%;
@@ -2752,4 +2752,10 @@ pre, code {
 
 .article-meta.admin {
     width: 300px;
+}
+
+#lstTemplate {
+    background: none;
+    border: 0;
+    width: auto;
 }

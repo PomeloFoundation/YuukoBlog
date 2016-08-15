@@ -126,6 +126,10 @@ $(document).ready(function () {
         $('.sidebar-blog-roll-tip').removeClass('active');
     });
 
+    $('#lstTemplate').change(function () {
+        window.location = "/home/template?folder=" + $(this).val();
+    });
+
     Highlight();
 });
 

@@ -33,7 +33,7 @@ namespace YuukoBlog
 
             services.AddPomeloLocalization(x =>
             {
-                x.AddCulture(new string[] { "zh", "zh-CN", "zh-Hans", "zh-Hans-CN" }, new JsonLocalizedStringStore(Path.Combine("Localization", "zh-CN.json")));
+                x.AddCulture(new string[] { "zh", "zh-CN", "zh-Hans", "zh-Hans-CN", "zh-cn" }, new JsonLocalizedStringStore(Path.Combine("Localization", "zh-CN.json")));
                 x.AddCulture(new string[] { "en", "en-US", "en-GB" }, new JsonLocalizedStringStore(Path.Combine("Localization", "en-US.json")));
             });
 
@@ -63,7 +63,7 @@ namespace YuukoBlog
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls("http://*:80")
+                .UseIISIntegration()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .Build();

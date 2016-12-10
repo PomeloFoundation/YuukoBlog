@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
+    "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
     "Microsoft.AspNetCore.Mvc": "1.1.0",
@@ -13,6 +13,10 @@
     "Pomelo.AspNetCore.TimedJob": "1.1.0-rtm-10029"
   },
 
+  "tools": {
+    "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.1.0-preview4-final"
+  },
+
   "frameworks": {
     "net451": { },
     "netcoreapp1.0": {
@@ -20,7 +24,8 @@
         "Microsoft.NETCore.App": {
           "version": "1.1.0",
           "type": "platform"
-        }
+        },
+        "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.1.0-preview4-final"
       },
       "imports": [
         "dotnet5.6",

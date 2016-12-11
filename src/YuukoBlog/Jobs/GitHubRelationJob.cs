@@ -204,7 +204,7 @@ namespace YuukoBlog.Jobs
                     br.NickName = fullnameRegex.Match(html).Value;
                     if (string.IsNullOrEmpty(br.NickName))
                         br.NickName = Username;
-                    var websiteRegex = new Regex(@"(?<=</svg><a href=""http).*(?="" class=""url"" rel="")");
+                    var websiteRegex = new Regex(@"(?<=<a href=""http).*(?="" class=""url"" rel="")");
                     var website = websiteRegex.Match(html).Value;
                     br.URL = string.IsNullOrEmpty(website) ? null : "http" + website;
                     var avatarRegex = new Regex(@"(?<=<meta content="").*(?="" name=""twitter:image:src"" /><meta content="")");

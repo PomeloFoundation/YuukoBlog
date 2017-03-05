@@ -1972,7 +1972,7 @@ namespace YuukoBlog.Tests
 <meta name=""google-site-verification"" content=""ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA"">
     <meta name=""google-analytics"" content=""UA-3769691-2"">";
             #endregion
-            var regex = new Regex(@"(?<=<meta content="").*(?="" name=""twitter:image:src"" /><meta content="")");
+            var regex = new Regex(@"(?<=<meta content="").*(?="" property=""og:image"" /><meta content="")");
             var result = regex.Match(html).Value;
             Assert.Equal("https://avatars1.githubusercontent.com/u/2216750?v=3&amp;s=400", result);
         }

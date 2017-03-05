@@ -207,7 +207,7 @@ namespace YuukoBlog.Jobs
                     var websiteRegex = new Regex(@"(?<=<a href=""http).*(?="" class=""url"" rel="")");
                     var website = websiteRegex.Match(html).Value;
                     br.URL = string.IsNullOrEmpty(website) ? null : "http" + website;
-                    var avatarRegex = new Regex(@"(?<=<meta content="").*(?="" name=""twitter:image:src"" /><meta content="")");
+                    var avatarRegex = new Regex(@"(?<=<meta content="").*(?="" property=""og:image"" /><meta content="")");
                     var avatarURL = avatarRegex.Match(html).Value.Replace("&amp;", "&").Replace("s=400", "s=150");
                     if (br.AvatarId == null)
                         br.AvatarId = await UpdateAvatar(avatarURL);

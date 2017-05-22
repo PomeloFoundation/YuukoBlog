@@ -181,7 +181,7 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
         padding: 3px 7px;
     }
 
-pre, code {
+.hljs pre, .hljs code {
     font-family: 'source-code-pro', Menlo, Consolas, 'Courier New', monospace;
     margin: 0;
     padding: 0;
@@ -201,6 +201,41 @@ pre, code {
     padding-left: 9px;
     position: relative;
     z-index: 0;
+}
+
+.post-body code, .post-body kbd, .post-body pre, .post-body samp {
+    font-family: monospace,serif;
+    font-size: 1em;
+}
+
+.post-body code {
+    font-size: .8em;
+    line-height: 1.5;
+}
+
+.post-body pre {
+    margin: 1.5em 0;
+    overflow: auto;
+    border: 1px solid #e8e8e8;
+    background: #fafafa;
+    padding: 10px;
+}
+
+.post-body code, .post-body pre, .post-body tt {
+    font-family: "Oxygen Mono","YaHei Consolas Hybrid",Consolas,"Lucida Console","Bitstream Vera Sans Mono","Courier New",Courier,monospace,"宋体";
+    white-space: pre;
+}
+
+.post-body code, .post-body pre, .post-body tt {
+    word-wrap: break-word;
+    word-break: normal;
+}
+
+.CodeMirror {
+    height: 200px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom: none;
 }
 
 .float-left {

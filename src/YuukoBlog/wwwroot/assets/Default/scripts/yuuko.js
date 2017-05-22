@@ -1,6 +1,9 @@
 ﻿/* NProgress, (c) 2013, 2014 Rico Sta. Cruz - http://ricostacruz.com/nprogress
  * @license MIT */
 
+var replaceInnerText = '![Upload](Uploading...)';
+var replaceText = '\r\n' + replaceInnerText + '\r\n';
+
 ; (function (root, factory) {
 
     if (typeof define === 'function' && define.amd) {
@@ -906,17 +909,27 @@
 function DropEnable() {
     $('.markdown-textbox').unbind().each(function () {
         var editor = $(this);
-        $(this).dragDropOrPaste(function () {
-            var pos = editor.getCursorPosition();
-            var str = editor.val();
-            if (pos == 0 && !editor.is(':focus'))
-                pos = str.length;
-            editor.val(str.substr(0, pos) + '\r\n![Upload](Uploading...)\r\n' + str.substr(pos));
-        },
-        function (result) {
-            var content = editor.val().replace('![Upload](Uploading...)', '![' + result.FileName + '](/file/download/' + result.Id + ')');
-            editor.val(content);
-        });
+        if (editor[0].smde == undefined)
+        {
+            var smde = new SimpleMDE({
+                element: editor[0],
+                spellChecker: false,
+                status: false
+            });
+            editor[0].smde = smde;
+            var begin_pos, end_pos;
+            $(this).parent().children().unbind().dragDropOrPaste(function () {
+                begin_pos = smde.codemirror.getCursor();
+                smde.codemirror.setSelection(begin_pos, begin_pos);
+                smde.codemirror.replaceSelection(replaceText);
+                begin_pos.line++;
+                end_pos = { line: begin_pos.line, ch: begin_pos.ch + replaceInnerText.length };
+            },
+            function (result) {
+                smde.codemirror.setSelection(begin_pos, end_pos);
+                smde.codemirror.replaceSelection('![' + result.FileName + '](/file/download/' + result.Id + ')');
+            });
+        }
     });
 }
 
@@ -926,7 +939,7 @@ function savePost(url) {
         title: $('#txtTitle').val(),
         id: url,
         newId: $('#txtUrl').val(),
-        content: $('#txtContent').val(),
+        content: $('#txtContent')[0].smde.value(),
         tags: $('#txtTags').val(),
         catalog: $('#lstCatalogs').val(),
         isPage: $('#chkIsPage').is(':checked')
@@ -1023,11 +1036,15 @@ function uploadFile()
 {
     var formData = new FormData($('#frmAjaxUpload')[0]);
     var editor = $('.markdown-textbox');
-    var pos = editor.getCursorPosition();
-    var str = editor.val();
-    if (pos == 0 && !editor.is(':focus'))
-        pos = str.length;
-    editor.val(str.substr(0, pos) + '\r\n![Upload](Uploading...)\r\n' + str.substr(pos));
+    var smde = editor[0].smde;
+
+    var begin_pos, end_pos;
+
+    begin_pos = smde.codemirror.getCursor();
+    smde.codemirror.setSelection(begin_pos, begin_pos);
+    smde.codemirror.replaceSelection(replaceText);
+    begin_pos.line++;
+    end_pos = { line: begin_pos.line, ch: begin_pos.ch + replaceInnerText.length };
 
     $.ajax({
         url: '/file/upload',
@@ -1039,8 +1056,8 @@ function uploadFile()
         contentType: false,
         processData: false,
         success: function (result) {
-            var content = editor.val().replace('![Upload](Uploading...)', '![' + result.FileName + '](/file/download/' + result.Id + ')');
-            editor.val(content);
+            smde.codemirror.setSelection(begin_pos, end_pos);
+            smde.codemirror.replaceSelection('![' + result.FileName + '](/file/download/' + result.Id + ')');
         },
         error: function (returndata) {
         }

@@ -1,20 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26606.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6B058FF7-8DFD-49CA-AB30-4054D88551E1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{97ADCA02-71FC-4CE1-8081-881BEE58C7C7}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "YuukoBlog", "src\YuukoBlog\YuukoBlog.xproj", "{A86E6E29-580C-4917-A0B9-22278E54BB87}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E121BC87-4F9E-440F-ABE5-F840886DC4C9}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "YuukoBlog.Tests", "test\YuukoBlog.Tests\YuukoBlog.Tests.xproj", "{E1E89DE4-6946-4185-97DF-A48C3631234B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuukoBlog", "src\YuukoBlog\YuukoBlog.csproj", "{CFD6F23B-DEFB-4727-A163-E454187FB3E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuukoBlog.Tests", "test\YuukoBlog.Tests\YuukoBlog.Tests.csproj", "{C7238E7C-F497-4D66-B712-B77FDD534333}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,20 +19,20 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A86E6E29-580C-4917-A0B9-22278E54BB87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A86E6E29-580C-4917-A0B9-22278E54BB87}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A86E6E29-580C-4917-A0B9-22278E54BB87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A86E6E29-580C-4917-A0B9-22278E54BB87}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E1E89DE4-6946-4185-97DF-A48C3631234B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1E89DE4-6946-4185-97DF-A48C3631234B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1E89DE4-6946-4185-97DF-A48C3631234B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1E89DE4-6946-4185-97DF-A48C3631234B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFD6F23B-DEFB-4727-A163-E454187FB3E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFD6F23B-DEFB-4727-A163-E454187FB3E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFD6F23B-DEFB-4727-A163-E454187FB3E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFD6F23B-DEFB-4727-A163-E454187FB3E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7238E7C-F497-4D66-B712-B77FDD534333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7238E7C-F497-4D66-B712-B77FDD534333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7238E7C-F497-4D66-B712-B77FDD534333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7238E7C-F497-4D66-B712-B77FDD534333}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A86E6E29-580C-4917-A0B9-22278E54BB87} = {6B058FF7-8DFD-49CA-AB30-4054D88551E1}
-		{E1E89DE4-6946-4185-97DF-A48C3631234B} = {E121BC87-4F9E-440F-ABE5-F840886DC4C9}
+		{CFD6F23B-DEFB-4727-A163-E454187FB3E5} = {6B058FF7-8DFD-49CA-AB30-4054D88551E1}
+		{C7238E7C-F497-4D66-B712-B77FDD534333} = {E121BC87-4F9E-440F-ABE5-F840886DC4C9}
 	EndGlobalSection
 EndGlobal

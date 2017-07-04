@@ -17,10 +17,15 @@ namespace YuukoBlog
         {
             IConfiguration Configuration;
             services.AddConfiguration(out Configuration);
-            var connStr = $"Data source={Configuration["DBFile"]};";
-            if (connStr.IndexOf('\\') >= 0)
-                connStr = connStr.Replace("/", "\\");
-            services.AddDbContext<BlogContext>(x => x.UseSqlite(connStr));
+
+            if (Configuration["Database:Type"] == "SQLite")
+            {
+                services.AddDbContext<BlogContext>(x => x.UseSqlite(Configuration["Database:ConnectionString"]));
+            }
+            else if (Configuration["Database:Type"] == "MySQL")
+            {
+                services.AddDbContext<BlogContext>(x => x.UseMySql(Configuration["Database:ConnectionString"]));
+            }
 
             services.AddSmartCookies();
 

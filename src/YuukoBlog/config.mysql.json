@@ -8,8 +8,8 @@
   "Disqus": "yuuko",
   "DefaultTemplate": "Default",
   "Database": {
-    "Type": "SQLite",
-    "ConnectionString": "Data source=yuuko.db"
+    "Type": "MySQL",
+    "ConnectionString": "Server=localhost; Uid=root; Pwd=123456; Database=yuuko"
   },
   "BlogRoll": {
     "GitHub": "Kagamine",

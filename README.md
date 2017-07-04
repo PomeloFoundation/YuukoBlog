@@ -1,12 +1,12 @@
 # Yuuko Blog
 
-A light-weight single user blog system which based on ASP.Net Core 1.0.0
+A light-weight single user blog system which based on ASP.Net Core 2.0.0-preview2
 
-- ASP.Net Core 1.0.0
-- Entity Framework Core 1.0.0
-- SQLite v3
-- ASP.Net MVC Core 1.0.0
-- Pomelo Extensions for .Net Core 1.0.0
+- ASP.Net Core 2.0.0-preview2
+- Pomelo.EntityFrameworkCore.MySql 2.0.0-preview2
+- Microsoft.EntityFrameworkCore.Sqlite 2.0.0-preview2
+- ASP.Net MVC Core 2.0.0-preview2
+- Pomelo Extensions for .Net Core 2.0.0-preview2
 
 ![image](https://cloud.githubusercontent.com/assets/2216750/15952346/94f0e3e2-2ef2-11e6-9e31-9fbc6e389c36.png)
 

@@ -20,7 +20,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.0-preview2-final" />
     <PackageReference Include="Pomelo.AspNetCore.Extensions" Version="2.0.0-preview2-CI10041" />
     <PackageReference Include="Pomelo.AspNetCore.TimedJob" Version="2.0.0-preview2-CI10041" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.0-preview2-10043" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.0-preview2-10046" />
   </ItemGroup>
 
 </Project>

@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E121BC87-4F9E-440F-ABE5-F840886DC4C9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuukoBlog", "src\YuukoBlog\YuukoBlog.csproj", "{CFD6F23B-DEFB-4727-A163-E454187FB3E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuukoBlog", "src\YuukoBlog\YuukoBlog.csproj", "{CFD6F23B-DEFB-4727-A163-E454187FB3E5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YuukoBlog.Tests", "test\YuukoBlog.Tests\YuukoBlog.Tests.csproj", "{C7238E7C-F497-4D66-B712-B77FDD534333}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuukoBlog.Tests", "test\YuukoBlog.Tests\YuukoBlog.Tests.csproj", "{C7238E7C-F497-4D66-B712-B77FDD534333}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

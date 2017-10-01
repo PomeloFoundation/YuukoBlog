@@ -6,7 +6,7 @@
     <AssemblyName>YuukoBlog</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>YuukoBlog</PackageId>
-    <RuntimeFrameworkVersion>2.0.0-preview2-25407-01</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>2.0.0-*</RuntimeFrameworkVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,11 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0-preview2-final" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.0-preview2-final" />
-    <PackageReference Include="Pomelo.AspNetCore.Extensions" Version="2.0.0-preview2-CI10041" />
-    <PackageReference Include="Pomelo.AspNetCore.TimedJob" Version="2.0.0-preview2-CI10041" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.0-preview3-10051" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.0" />
+    <PackageReference Include="Pomelo.AspNetCore.Extensions" Version="2.0.0-*" />
+    <PackageReference Include="Pomelo.AspNetCore.TimedJob" Version="2.0.0-*" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.0" />
   </ItemGroup>
 
 </Project>

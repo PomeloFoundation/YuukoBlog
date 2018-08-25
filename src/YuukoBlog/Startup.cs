@@ -15,9 +15,8 @@ namespace YuukoBlog
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            IConfiguration Configuration;
-            services.AddConfiguration(out Configuration);
-
+            string DBServerType = "sqlserver";
+            services.AddConfiguration(out IConfiguration Configuration, "config." + DBServerType);
             if (Configuration["Database:Type"] == "SQLite")
             {
                 services.AddDbContext<BlogContext>(x => x.UseSqlite(Configuration["Database:ConnectionString"]));
@@ -25,6 +24,10 @@ namespace YuukoBlog
             else if (Configuration["Database:Type"] == "MySQL")
             {
                 services.AddDbContext<BlogContext>(x => x.UseMySql(Configuration["Database:ConnectionString"]));
+            }
+            else if (Configuration["Database:Type"] == "SQLServer")
+            {
+                services.AddDbContext<BlogContext>(x => x.UseSqlServer(Configuration["Database:ConnectionString"]));
             }
 
             services.AddSmartCookies();
@@ -49,7 +52,7 @@ namespace YuukoBlog
             services.AddTimedJob();
         }
 
-        public async void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        public async void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IHostingEnvironment enviornment)
         {
             loggerFactory.AddConsole(LogLevel.Warning, true);
 

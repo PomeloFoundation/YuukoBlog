@@ -59,7 +59,10 @@ namespace YuukoBlog
             app.UseStaticFiles();
             app.UseSession();
             app.UseBlobStorage("/assets/shared/scripts/jquery.codecomb.fileupload.js");
-            app.UseDeveloperExceptionPage();
+            if (enviornment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
             app.UseMvcWithDefaultRoute();
 
             await SampleData.InitializeYuukoBlog(app.ApplicationServices);

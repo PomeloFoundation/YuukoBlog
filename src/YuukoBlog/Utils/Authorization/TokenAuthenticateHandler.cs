@@ -14,7 +14,7 @@ namespace YuukoBlog.Utils.Authorization
     [ExcludeFromCodeCoverage]
     public class TokenAuthenticateHandler : AuthenticationHandler<TokenOptions>
     {
-        public new const string Scheme = "Session";
+        public new const string Scheme = "Pomelo";
 
         public TokenAuthenticateHandler(
             IOptionsMonitor<TokenOptions> options,
@@ -33,6 +33,8 @@ namespace YuukoBlog.Utils.Authorization
             }
 
             var claimIdentity = new ClaimsIdentity(Scheme, ClaimTypes.Name, ClaimTypes.Role);
+            claimIdentity.AddClaim(new Claim(ClaimTypes.Name, "root"));
+            claimIdentity.AddClaim(new Claim(ClaimTypes.Role, "role"));
             var ticket = new AuthenticationTicket(new ClaimsPrincipal(claimIdentity), Scheme);
 
             return Task.FromResult(AuthenticateResult.Success(ticket));

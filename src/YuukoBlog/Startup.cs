@@ -2,6 +2,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,8 +27,10 @@ namespace YuukoBlog
         {
             services.AddDbContext<BlogContext>(x => x.UseSqlite("Data source=blog.db"));
 
-            services.AddAuthentication(x => x.DefaultScheme = TokenAuthenticateHandler.Scheme)
-                .AddPersonalAccessToken();
+            services.AddAuthentication(x =>
+            {
+                x.DefaultScheme = TokenAuthenticateHandler.Scheme;
+            }).AddPersonalAccessToken();
 
             services.AddSingleton(Configuration);
 

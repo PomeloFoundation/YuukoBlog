@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Pomelo.Marked;
 using YuukoBlog.Filters;
 using YuukoBlog.Models;
@@ -12,7 +14,7 @@ namespace YuukoBlog.Controllers
 {
     public class AdminController : BaseController
     {
-        [AdminRequired]
+        [Authorize]
         [HttpGet]
         [Route("Admin/Index")]
         public IActionResult Index() 
@@ -20,9 +22,8 @@ namespace YuukoBlog.Controllers
             return View();
         }
 
-        [AdminRequired]
+        [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [Route("Admin/Index")]
         public IActionResult Index(Config config)
         {
@@ -30,12 +31,8 @@ namespace YuukoBlog.Controllers
             Configuration["Password"] = config.Password;
             Configuration["Site"] = config.Site;
             Configuration["Description"] = config.Description;
-            Configuration["Disqus"] = config.Disqus;
-            Configuration["AvatarUrl"] = config.AvatarUrl;
-            Configuration["AboutUrl"] = config.AboutUrl;
-            Configuration["BlogRoll:GitHub"] = config.GitHub;
-            Configuration["BlogRoll:Follower"] = config.Follower.ToString();
-            Configuration["BlogRoll:Following"] = config.Following.ToString();
+            Configuration["Name"] = config.Name;
+            System.IO.File.WriteAllText("appsettings.json", JsonConvert.SerializeObject(config));
             return RedirectToAction("Index", "Admin");
         }
 
@@ -61,9 +58,8 @@ namespace YuukoBlog.Controllers
             }
         }
 
-        [AdminRequired]
+        [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [Route("Admin/Post/Edit")]
         public IActionResult PostEdit(string id, string newId, string tags, bool isPage, string title, Guid? catalog, string content)
         {
@@ -120,35 +116,8 @@ namespace YuukoBlog.Controllers
             return Content(Instance.Parse(content));
         }
 
-        [AdminRequired]
+        [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Route("Admin/Post/Delete")]
-        public IActionResult PostDelete(string id)
-        {
-            var post = DB.Posts
-                .Include(x => x.Tags)
-                .Where(x => x.Url == id).SingleOrDefault();
-            
-            if (post == null)
-                return Prompt(x =>
-                {
-                    x.StatusCode = 404;
-                    x.Title = "Not Found";
-                    x.Details = "The resources have not been found, please check your request.";
-                    x.RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" });
-                    x.RedirectText = "Back to home";
-                });
-            foreach (var t in post.Tags)
-                DB.PostTags.Remove(t);
-            DB.Posts.Remove(post);
-            DB.SaveChanges();
-            return RedirectToAction("Index", "Home");
-        }
-
-        [AdminRequired]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         [Route("Admin/Post/New")]
         public IActionResult PostNew()
         {
@@ -168,24 +137,22 @@ namespace YuukoBlog.Controllers
             return RedirectToAction("Post", "Post", new { id = post.Url });
         }
 
-        [AdminRequired]
+        [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
 
-        [AdminRequired]
+        [Authorize]
         public IActionResult Catalog()
         {
             return View(DB.Catalogs.OrderByDescending(x => x.Priority).ToList());
         }
 
-        [AdminRequired]
+        [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [Route("Admin/Catalog/Delete")]
         public IActionResult CatalogDelete(string id)
         {
@@ -204,9 +171,8 @@ namespace YuukoBlog.Controllers
             return Content("true");
         }
 
-        [AdminRequired]
+        [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [Route("Admin/Catalog/Edit")]
         public IActionResult CatalogEdit(string id, string newId, string title, int pri)
         {
@@ -227,9 +193,8 @@ namespace YuukoBlog.Controllers
             return Content("true");
         }
 
-        [AdminRequired]
+        [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [Route("Admin/Catalog/New")]
         public IActionResult CatalogNew()
         {
@@ -244,6 +209,7 @@ namespace YuukoBlog.Controllers
             return RedirectToAction("Catalog", "Admin");
         }
 
+        [Authorize]
         [HttpPost]
         [Route("Admin/Delete/{id}")]
         public async ValueTask<IActionResult> Delete(Guid id)

@@ -15,7 +15,7 @@
                 <div class="blog-comment-right-container">
                     <div class="blog-comment-header">
                         <span class="blog-comment-master" v-if="!comment.isGuest">Master</span>
-                        {{ comment.isGuest ? comment.Name : '@ViewBag.Name' }}
+                        {{ comment.isGuest ? comment.name : '@ViewBag.Name' }}
                         <span class="blog-comment-time">@@{{ comment.time }}</span>
                     </div>
                     <div class="blog-comment-body" v-html="comment.content"></div>
@@ -26,7 +26,7 @@
                         <img v-if="!comment.isGuest" src="~/images/avatar.jpg" class="blog-comment-avatar" />
                         <img v-else v-bind:src="sub.avatar" class="blog-comment-avatar" />
                         <span v-if="!sub.isGuest" class="blog-comment-master">Master</span>
-                        {{ sub.isGuest ? sub.Name : '@ViewBag.Name' }}
+                        {{ sub.isGuest ? sub.name : '@ViewBag.Name' }}
                         <span class="blog-comment-time">@@{{ sub.time }}</span>
                     </div>
                     <div class="blog-subcomment-body" v-html="sub.content"></div>
@@ -44,15 +44,18 @@
                     {
                     <div class="row blog-comment-input-row">
                         <div class="col-md-6">
-                            <input class="form-control" placeholder="Name" />
+                            <input class="form-control" id="txt-name" placeholder="Name" />
                         </div>
                         <div class="col-md-6">
-                            <input class="form-control" placeholder="Email" />
+                            <input class="form-control" id="txt-email" placeholder="Email" />
                         </div>
                     </div>
                     }
                     <div>
-                        <textarea class="markdown-textbox"></textarea>
+                        <textarea class="markdown-textbox" id="txt-comment"></textarea>
+                    </div>
+                    <div class="blog-comment-buttons">
+                        <a class="blog-comment-button" v-on:click="postComment">Post</a>
                     </div>
                 </div>
             </div>
@@ -64,6 +67,7 @@
 <script src="~/scripts/simplemde.js"></script>
 <script>
     var postId = '@Model.Id';
+    var authenticated = @User.Identity.IsAuthenticated.ToString().ToLower();
     var app = new Vue({
         el: '#blog-comments',
         data: {
@@ -75,6 +79,42 @@
                 jQuery.getJSON('/comment/' + postId, {}, function (data) {
                     self.comments = data;
                 });
+            },
+            postComment: function () {
+                var self = this;
+                if (!jQuery('#txt-name').val()) {
+                    alert('Please input your name');
+                    return;
+                }
+                if (!jQuery('#txt-email').val()) {
+                    alert('Please input your email');
+                    return;
+                }
+                if (!jQuery('#txt-comment')[0].smde.value()) {
+                    alert('Please input content');
+                    return;
+                }
+                if (!authenticated) {
+                    jQuery.post('/comment/' + postId, {
+                        name: jQuery('#txt-name').val(),
+                        email: jQuery('#txt-email').val(),
+                        content: jQuery('#txt-comment')[0].smde.value()
+                    }, function (data) {
+                        self.loadComments();
+                        jQuery('#txt-name').val('');
+                        jQuery('#txt-email').val('');
+                        jQuery('#txt-comment')[0].smde.value('')
+                    });
+                } else {
+                    jQuery.post('/comment/' + postId, {
+                        content: jQuery('#txt-comment')[0].smde.value()
+                    }, function (data) {
+                        self.loadComments();
+                        jQuery('#txt-name').val('');
+                        jQuery('#txt-email').val('');
+                        jQuery('#txt-comment')[0].smde.value('')
+                    });
+                }
             }
         },
         created: function () {

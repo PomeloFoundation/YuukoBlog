@@ -124,7 +124,7 @@ body {
     margin-top: 15px;
 }
 
-.blog-post-tags-item {
+.blog-post-tags-item, .blog-comment-button {
     color: #888;
     display: inline-block;
     font-size: 16px;
@@ -133,7 +133,7 @@ body {
     border-bottom: 5px solid #e0e0e0;
 }
 
-    .blog-post-tags-item.category {
+    .blog-post-tags-item.category, .blog-comment-button {
         color: #188010;
         background: #e7f3df;
         border-color: #8acc85;
@@ -329,4 +329,8 @@ body {
 
 .blog-comment .CodeMirror, .blog-comment .CodeMirror-scroll {
     height: 120px;
+}
+
+.blog-comment-button {
+    margin-top: 15px;
 }

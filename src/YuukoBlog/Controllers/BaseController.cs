@@ -189,8 +189,9 @@ namespace YuukoBlog.Controllers
                     Id = x.Id,
                     Title = x.Title,
                     Count = x.Posts.Count(),
-                    PRI = x.Priority,
-                    Url = x.Url
+                    Priority = x.Priority,
+                    Url = x.Url,
+                    Icon = x.Icon
                 })
                 .ToList();
 

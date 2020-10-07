@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title>Yuko</title>
     <link rel='stylesheet' id='elementor-post-151-css'
-          href='/styles/base.css'
+          href='~/styles/base.css'
           type='text/css' media='all' />
     <link rel='stylesheet' id='elementor-post-151-css'
-          href='/styles/bootstrap.css'
+          href='~/styles/bootstrap.css'
           type='text/css' media='all' />
     <link rel='stylesheet' id='elementor-post-151-css'
-          href='/styles/font-awesome.min.css'
+          href='~/styles/font-awesome.min.css'
           type='text/css' media='all' />
     <link rel='stylesheet' id='elementor-post-151-css'
-          href='/styles/site.css'
+          href='~/styles/site.css'
           type='text/css' media='all' />
-    <script type='text/javascript' src='/scripts/jquery.js'
+    <script type='text/javascript' src='~/scripts/jquery.js'
             id='jquery-core-js'></script>
 </head>
 <body>
@@ -51,10 +51,17 @@
                 Home
             </div>
         </a>
-        <div class="blog-nav-item">
-            <i class="fa fa-fw fa-pencil"></i>
-            Daily
-        </div>
+
+        @foreach (CatalogViewModel x in ViewBag.Catalogs)
+        {
+            <a href="/catalog/@x.Url.ToLower()">
+                <div class="blog-nav-item">
+                    <i class="fa fa-fw fa-@x.Icon"></i>
+                    @x.Title
+                </div>
+            </a>
+        }
+
         @foreach (Link x in ViewBag.Links)
         {
             <a href="@x.Url">
@@ -65,7 +72,7 @@
             </a>
         }
         <div class="blog-banner">
-            <img src="images/avatar.jpg" class="blog-banner-avatar" />
+            <img src="~/images/avatar.jpg" class="blog-banner-avatar" />
             <div class="blog-banner-right">
                 <div class="blog-banner-title">@ViewBag.Description</div>
                 <div class="blog-banner-subtitle">
@@ -85,6 +92,31 @@
                 @RenderBody()
             </div>
             <div class="col-md-4">
+                @if (Model is Post post)
+                {
+                <div class="blog-sidebar-section">
+                    <div class="blog-sidebar-title">
+                        <div class="blog-sidebar-title-icon">
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                        Post
+                    </div>
+                    <div class="blog-sidebar-list">
+                        @if (post.CatalogId != null)
+                        {
+                            <a href="/catalog/@Model.Catalog.Url.ToLower()/">
+                                <div class="blog-post-tags-item category">@Model.Catalog.Url</div>
+                            </a>
+                        }
+                        @foreach (PostTag t in post.Tags)
+                        {
+                            <a href="/tag/@t.Tag/">
+                                <div class="blog-post-tags-item">@t.Tag</div>
+                            </a>
+                        }
+                    </div>
+                </div>
+                }
                 <div class="blog-sidebar-section">
                     <div class="blog-sidebar-title">
                         <div class="blog-sidebar-title-icon">
@@ -127,20 +159,23 @@
                         }
                     </div>
                 </div>
-                <div class="blog-sidebar-section">
-                    <div class="blog-sidebar-title">
-                        <div class="blog-sidebar-title-icon">
-                            <i class="fa fa-star-o"></i>
+                @if (!(Model is Post))
+                {
+                    <div class="blog-sidebar-section">
+                        <div class="blog-sidebar-title">
+                            <div class="blog-sidebar-title-icon">
+                                <i class="fa fa-star-o"></i>
+                            </div>
+                            Blog Rolls
                         </div>
-                        Blog Rolls
+                        <ul class="blog-sidebar-list">
+                            @foreach (BlogRollViewModel x in ViewBag.Rolls)
+                            {
+                                <li><a href="x.Url" target="_blank">@x.Display</a></li>
+                            }
+                        </ul>
                     </div>
-                    <ul class="blog-sidebar-list">
-                        @foreach (BlogRollViewModel x in ViewBag.Rolls)
-                        {
-                            <li><a href="x.Url" target="_blank">@x.Display</a></li>
-                        }
-                    </ul>
-                </div>
+                }
             </div>
         </div>
     </div>
@@ -159,8 +194,8 @@
         </style>
     </noscript>
     <script data-noptimize="1">window.lazySizesConfig = window.lazySizesConfig || {}; window.lazySizesConfig.loadMode = 1;</script>
-    <script async data-noptimize="1" src='scripts/lazysizes.js'></script>
-    <script defer src="scripts/autoptimize.js"></script>
+    <script async data-noptimize="1" src='~/scripts/lazysizes.js'></script>
+    <script defer src="~/scripts/autoptimize.js"></script>
 </body>
 
 </html>

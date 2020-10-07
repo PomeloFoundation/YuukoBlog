@@ -8,6 +8,7 @@ namespace YuukoBlog.Models
         public string Url { get; set; }
         public string Title { get; set; }
         public int Count { get; set; }
-        public int PRI { get; set; }
+        public int Priority { get; set; }
+        public string Icon { get; set; }
     }
 }

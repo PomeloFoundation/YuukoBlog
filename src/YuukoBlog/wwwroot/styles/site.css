@@ -103,6 +103,10 @@ body {
     margin-top: 10px;
 }
 
+    .blog-post-content.no-margin {
+        margin-top: 0;
+    }
+
 .blog-post-tags {
     margin-top: 15px;
 }

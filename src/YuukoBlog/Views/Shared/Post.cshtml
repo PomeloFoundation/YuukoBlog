@@ -4,5 +4,55 @@
     <div class="blog-post-content no-margin">
         @Html.Marked(Model.Content as string)
     </div>
-    <h3><i class="fa fa-comments-o"></i> Comments</h3>
+    <div class="blog-comment-title"><i class="fa fa-comments-o"></i> Comments</div>
+    <div class="blog-comments">
+        <div class="blog-comment">
+            <div class="blog-comment-left">
+                <img src="~/images/avatar.jpg" class="blog-comment-avatar" />
+            </div>
+            <div class="blog-comment-right">
+                <div class="blog-comment-right-container">
+                    <div class="blog-comment-header">
+                        <span class="blog-comment-master">Master</span>
+                        Yuko
+                        <span class="blog-comment-time">@@2020-10-07 11:42</span>
+                    </div>
+                    <div class="blog-comment-body">
+                        @Html.Marked("hello world\r\n\r\n123")
+                    </div>
+                </div>
+                <!-- Sub-comments -->
+                <div class="blog-subcomment">
+                    <div class="blog-comment-header">
+                        <img src="~/images/avatar.jpg" class="blog-subcomment-avatar" />
+                        <span class="blog-comment-master">Master</span>
+                        Yuko
+                        <span class="blog-comment-time">@@2020-10-07 11:42</span>
+                    </div>
+                    <div class="blog-subcomment-body">
+                        @Html.Marked("hello world\r\n\r\n123")
+                    </div>
+                </div>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="blog-comment">
+            <div class="blog-comment-left">
+                <img src="~/images/avatar.jpg" class="blog-comment-avatar" />
+            </div>
+            <div class="blog-comment-right">
+                <div class="blog-comment-right-container">
+                    <div class="blog-comment-header">
+                        <span class="blog-comment-master">Master</span>
+                        Yuko
+                        <span class="blog-comment-time">@@2020-10-07 11:42</span>
+                    </div>
+                    <div class="blog-comment-body">
+                        @Html.Marked("hello world")
+                    </div>
+                </div>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
 </div>

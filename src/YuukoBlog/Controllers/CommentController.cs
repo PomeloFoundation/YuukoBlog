@@ -20,6 +20,20 @@ namespace YuukoBlog.Controllers
                 .Where(x => !x.ParentId.HasValue)
                 .OrderBy(x => x.Time)
                 .ToListAsync(cancellationToken);
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                foreach (var x in comments)
+                {
+                    x.Email = null;
+                    foreach (var y in x.Comments)
+                    {
+                        x.Email = null;
+                    }
+                }
+            }
+
+            return Json(comments);
         }
 
         private static string GetAvatarUrl(string email)

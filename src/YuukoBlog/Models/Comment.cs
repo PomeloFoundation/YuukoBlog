@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace YuukoBlog.Models
 {
@@ -12,6 +13,7 @@ namespace YuukoBlog.Models
         [ForeignKey(nameof(Post))]
         public Guid PostId { get; set; }
 
+        [JsonIgnore]
         public virtual Post Post { get; set; }
 
         [MaxLength(256)]
@@ -32,6 +34,7 @@ namespace YuukoBlog.Models
         [ForeignKey(nameof(Parent))]
         public Guid? ParentId { get; set; }
 
+        [JsonIgnore]
         public virtual Comment Parent { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();

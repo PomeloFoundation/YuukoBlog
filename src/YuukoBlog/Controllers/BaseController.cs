@@ -146,14 +146,10 @@ namespace YuukoBlog.Controllers
             ViewBag.Description = Configuration["Description"];
             ViewBag.Title = Configuration["Site"];
             ViewBag.Site = Configuration["Site"];
+            ViewBag.Name = Configuration["Name"];
             ViewBag.AboutUrl = Configuration["AboutUrl"];
             ViewBag.AvatarUrl = Configuration["AvatarUrl"];
-            ViewBag.Disqus = Configuration["Disqus"];
             ViewBag.Account = Configuration["Account"];
-            ViewBag.DefaultTemplate = Configuration["DefaultTemplate"];
-            ViewBag.GitHub = Configuration["BlogRoll:GitHub"];
-            ViewBag.Following = Convert.ToBoolean(Configuration["BlogRoll:Following"]);
-            ViewBag.Follower = Convert.ToBoolean(Configuration["BlogRoll:Follower"]);
 
             // Building Tags
             ViewBag.Tags = DB.PostTags

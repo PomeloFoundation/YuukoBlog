@@ -26,5 +26,6 @@
     <Folder Include="Utils\Pagination\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Shared\" />
+    <Folder Include="Utils\AntiXSS\" />
   </ItemGroup>
 </Project>

@@ -26,9 +26,11 @@ namespace YuukoBlog.Controllers
                 foreach (var x in comments)
                 {
                     x.Email = null;
+                    x.Content = Pomelo.AntiXSS.Instance.Sanitize(Pomelo.Marked.Instance.Parse(x.Content));
                     foreach (var y in x.Comments)
                     {
                         x.Email = null;
+                        y.Content = Pomelo.AntiXSS.Instance.Sanitize(Pomelo.Marked.Instance.Parse(y.Content));
                     }
                 }
             }

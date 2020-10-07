@@ -5,54 +5,55 @@
         @Html.Marked(Model.Content as string)
     </div>
     <div class="blog-comment-title"><i class="fa fa-comments-o"></i> Comments</div>
-    <div class="blog-comments">
-        <div class="blog-comment">
+    <div class="blog-comments" id="blog-comments">
+        <div class="blog-comment" v-for="comment in comments">
             <div class="blog-comment-left">
-                <img src="~/images/avatar.jpg" class="blog-comment-avatar" />
+                <img v-if="!comment.isGuest" src="~/images/avatar.jpg" class="blog-comment-avatar" />
+                <img v-else v-bind:src="comment.avatar" class="blog-comment-avatar" />
             </div>
             <div class="blog-comment-right">
                 <div class="blog-comment-right-container">
                     <div class="blog-comment-header">
-                        <span class="blog-comment-master">Master</span>
-                        Yuko
-                        <span class="blog-comment-time">@@2020-10-07 11:42</span>
+                        <span class="blog-comment-master" v-if="!comment.isGuest">Master</span>
+                        {{ comment.isGuest ? comment.Name : '@ViewBag.Name' }}
+                        <span class="blog-comment-time">@@{{ comment.time }}</span>
                     </div>
-                    <div class="blog-comment-body">
-                        @Html.Marked("hello world\r\n\r\n123")
-                    </div>
+                    <div class="blog-comment-body" v-html="comment.content"></div>
                 </div>
                 <!-- Sub-comments -->
-                <div class="blog-subcomment">
+                <div class="blog-subcomment" v-for="sub in comment.comments">
                     <div class="blog-comment-header">
-                        <img src="~/images/avatar.jpg" class="blog-subcomment-avatar" />
-                        <span class="blog-comment-master">Master</span>
-                        Yuko
-                        <span class="blog-comment-time">@@2020-10-07 11:42</span>
+                        <img v-if="!comment.isGuest" src="~/images/avatar.jpg" class="blog-comment-avatar" />
+                        <img v-else v-bind:src="sub.avatar" class="blog-comment-avatar" />
+                        <span v-if="!sub.isGuest" class="blog-comment-master">Master</span>
+                        {{ sub.isGuest ? sub.Name : '@ViewBag.Name' }}
+                        <span class="blog-comment-time">@@{{ sub.time }}</span>
                     </div>
-                    <div class="blog-subcomment-body">
-                        @Html.Marked("hello world\r\n\r\n123")
-                    </div>
-                </div>
-            </div>
-            <div style="clear: both"></div>
-        </div>
-        <div class="blog-comment">
-            <div class="blog-comment-left">
-                <img src="~/images/avatar.jpg" class="blog-comment-avatar" />
-            </div>
-            <div class="blog-comment-right">
-                <div class="blog-comment-right-container">
-                    <div class="blog-comment-header">
-                        <span class="blog-comment-master">Master</span>
-                        Yuko
-                        <span class="blog-comment-time">@@2020-10-07 11:42</span>
-                    </div>
-                    <div class="blog-comment-body">
-                        @Html.Marked("hello world")
-                    </div>
+                    <div class="blog-subcomment-body" v-html="sub.content"></div>
                 </div>
             </div>
             <div style="clear: both"></div>
         </div>
     </div>
 </div>
+<script src="~/scripts/vue.js"></script>
+<script>
+    var postId = '@Model.Id';
+    var app = new Vue({
+        el: '#blog-comments',
+        data: {
+            comments: []
+        },
+        methods: {
+            loadComments: function () {
+                var self = this;
+                jQuery.getJSON('/comment/' + postId, {}, function (data) {
+                    self.comments = data;
+                });
+            }
+        },
+        created: function () {
+            this.loadComments();
+        }
+    })
+</script>

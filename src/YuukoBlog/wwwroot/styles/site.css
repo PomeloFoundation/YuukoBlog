@@ -294,7 +294,12 @@ body {
 
 .blog-comment-header {
     font-size: 14px;
-    margin-top: -10px;
+    margin-top: -15px;
+}
+
+.blog-subcomment-header {
+    font-size: 14px;
+    margin-top: -5px;
 }
 
 .blog-comment-time {
@@ -315,6 +320,7 @@ body {
 .blog-subcomment-body {
     padding-left: 40px;
     margin-top: 5px;
+    margin-bottom: 15px;
 }
 
 .blog-subcomment {
@@ -333,4 +339,17 @@ body {
 
 .blog-comment-button {
     margin-top: 15px;
+}
+
+.blog-subcomment-editor-outer {
+    padding-left: 15px;
+}
+
+.blog-comment-buttons {
+    margin-bottom: 15px;
+}
+
+.blog-comment-add {
+    font-size: 14px;
+    color: #188010;
 }

@@ -1,0 +1,166 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Yuko</title>
+    <link rel='stylesheet' id='elementor-post-151-css'
+          href='/styles/base.css'
+          type='text/css' media='all' />
+    <link rel='stylesheet' id='elementor-post-151-css'
+          href='/styles/bootstrap.css'
+          type='text/css' media='all' />
+    <link rel='stylesheet' id='elementor-post-151-css'
+          href='/styles/font-awesome.min.css'
+          type='text/css' media='all' />
+    <link rel='stylesheet' id='elementor-post-151-css'
+          href='/styles/site.css'
+          type='text/css' media='all' />
+    <script type='text/javascript' src='/scripts/jquery.js'
+            id='jquery-core-js'></script>
+</head>
+<body>
+    <div class="page page_wrap">
+        <div class="preloader">
+            <div class="centrize full-width">
+                <div class="vertical-center">
+                    <div class="spinner default-circle"></div>
+                </div>
+            </div>
+        </div>
+        <div class="background gradient">
+            <ul class="bg-bubbles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container blog-header">
+        <a href="/">
+            <div class="blog-nav-item active">
+                <i class="fa fa-fw fa-home"></i>
+                Home
+            </div>
+        </a>
+        <div class="blog-nav-item">
+            <i class="fa fa-fw fa-pencil"></i>
+            Daily
+        </div>
+        @foreach (Link x in ViewBag.Links)
+        {
+            <a href="@x.Url">
+                <div class="blog-nav-item right">
+                    <i class="fa fa-fw fa-@x.Icon"></i>
+                    @x.Display
+                </div>
+            </a>
+        }
+        <div class="blog-banner">
+            <img src="images/avatar.jpg" class="blog-banner-avatar" />
+            <div class="blog-banner-right">
+                <div class="blog-banner-title">@ViewBag.Description</div>
+                <div class="blog-banner-subtitle">
+                    <a target="_blank" href="https://github.com/yukozh"><i class="fa fa-github"></i></a>
+                    <a target="_blank" href="#"><i class="fa fa-fw fa-linkedin-square"></i></a>
+                    <a target="_blank" href="#"><i class="fa fa-fw fa-qq"></i></a>
+                    <a target="_blank" href="#"><i class="fa fa-fw fa-envelope-o"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <div class="blog-split"></div>
+    <div class="container blog-main-container">
+        <div class="row">
+            <div class="col-md-8">
+                @RenderBody()
+            </div>
+            <div class="col-md-4">
+                <div class="blog-sidebar-section">
+                    <div class="blog-sidebar-title">
+                        <div class="blog-sidebar-title-icon">
+                            <i class="fa fa-book"></i>
+                        </div>
+                        Category
+                    </div>
+                    <ul class="blog-sidebar-list">
+                        @foreach (CatalogViewModel x in ViewBag.Catalogs)
+                        {
+                            <li><a href="/catalog/@x.Url.ToLower()">@x.Url.ToUpper() (@x.Count)</a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="blog-sidebar-section">
+                    <div class="blog-sidebar-title">
+                        <div class="blog-sidebar-title-icon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        Calendar
+                    </div>
+                    <ul class="blog-sidebar-list">
+                        @foreach (CalendarViewModel x in ViewBag.Calendars)
+                        {
+                            <li><a href="/@x.Year/@x.Month">@(new DateTime(x.Year, x.Month, 1).ToString("yyyy MMM")) (@x.Count)</a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="blog-sidebar-section">
+                    <div class="blog-sidebar-title">
+                        <div class="blog-sidebar-title-icon">
+                            <i class="fa fa-tags"></i>
+                        </div>
+                        Tags
+                    </div>
+                    <div class="blog-sidebar-tags-outer">
+                        @foreach (TagViewModel x in ViewBag.Tags)
+                        {
+                            <a class="blog-sidebar-tag" href="/tag/@x.Title/">@x.Title (@x.Count)</a>
+                        }
+                    </div>
+                </div>
+                <div class="blog-sidebar-section">
+                    <div class="blog-sidebar-title">
+                        <div class="blog-sidebar-title-icon">
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        Blog Rolls
+                    </div>
+                    <ul class="blog-sidebar-list">
+                        @foreach (BlogRollViewModel x in ViewBag.Rolls)
+                        {
+                            <li><a href="x.Url" target="_blank">@x.Display</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="blog-split"></div>
+    <div class="blog-footer">
+        <div class="container">
+            <span>Powered by Yuko Blog.</span>
+            <span class="blog-footer-right">© Yuko Zheng 2020</span>
+        </div>
+    </div>
+    <noscript>
+        <style>
+            .lazyload {
+                display: none;
+            }
+        </style>
+    </noscript>
+    <script data-noptimize="1">window.lazySizesConfig = window.lazySizesConfig || {}; window.lazySizesConfig.loadMode = 1;</script>
+    <script async data-noptimize="1" src='scripts/lazysizes.js'></script>
+    <script defer src="scripts/autoptimize.js"></script>
+</body>
+
+</html>

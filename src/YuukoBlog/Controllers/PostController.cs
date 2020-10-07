@@ -18,10 +18,10 @@ namespace YuukoBlog.Controllers
                 return Prompt(x =>
                 {
                     x.StatusCode = 404;
-                    x.Title = SR["Not Found"];
-                    x.Details = SR["The resources have not been found, please check your request."];
+                    x.Title = "Not Found";
+                    x.Details = "The resources have not been found, please check your request.";
                     x.RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" });
-                    x.RedirectText = SR["Back to home"];
+                    x.RedirectText = "Back to home";
                 });
             ViewBag.Title = post.Title;
             ViewBag.Position = post.CatalogId != null ? post.Catalog.Url : "home";
@@ -38,10 +38,10 @@ namespace YuukoBlog.Controllers
                 return Prompt(x =>
                 {
                     x.StatusCode = 404;
-                    x.Title = SR["Not Found"];
-                    x.Details = SR["The resources have not been found, please check your request."];
+                    x.Title = "Not Found";
+                    x.Details = "The resources have not been found, please check your request.";
                     x.RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" });
-                    x.RedirectText = SR["Back to home"];
+                    x.RedirectText = "Back to home";
                 });
             ViewBag.Title = post.Title;
             ViewBag.Position = post.CatalogId.HasValue ? post.Catalog.Url : "home";

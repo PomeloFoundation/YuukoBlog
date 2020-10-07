@@ -41,10 +41,10 @@ namespace YuukoBlog.Controllers
                 return Prompt(x =>
                 {
                     x.StatusCode = 404;
-                    x.Title = SR["Not Found"];
-                    x.Details = SR["The resources have not been found, please check your request."];
+                    x.Title = "Not Found";
+                    x.Details = "The resources have not been found, please check your request.";
                     x.RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" });
-                    x.RedirectText = SR["Back to home"];
+                    x.RedirectText = "Back to home";
                 });
             ViewBag.Position = catalog.Url;
             return PagedView<PostViewModel, Post>(DB.Posts
@@ -74,12 +74,6 @@ namespace YuukoBlog.Controllers
                     .Where(x => !x.IsPage)
                     .Where(x => x.Title.Contains(id) || id.Contains(x.Title))
                     .OrderByDescending(x => x.Time), 5, "Home");
-        }
-
-        public IActionResult Template(string Folder, [FromHeader] string Referer)
-        {
-            Cookies["ASPNET_TEMPLATE"] = Folder;
-            return Redirect(Referer ?? "/");
         }
     }
 }

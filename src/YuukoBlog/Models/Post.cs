@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using YuukoBlog.Utils;
 
 namespace YuukoBlog.Models
 {
@@ -13,6 +14,7 @@ namespace YuukoBlog.Models
         [MaxLength(256)]
         public string Url { get; set; }
 
+        [MaxLength(256)]
         public string Title { get; set; }
 
         public string Summary { get; set; }
@@ -22,6 +24,8 @@ namespace YuukoBlog.Models
         public DateTime Time { get; set; }
 
         public bool IsPage { get; set; }
+
+        public bool IsPinned { get; set; }
 
         [ForeignKey("Catalog")]
         public Guid? CatalogId { get; set; }

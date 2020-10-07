@@ -1,0 +1,28 @@
+﻿@model IEnumerable<dynamic>
+
+@foreach (dynamic x in Model)
+{
+    <div class="blog-post">
+        <h3 class="blog-title"><a href="/post/@x.Url">@x.Title</a></h3>
+        <div class="blog-post-info"><i class="fa fa-clock-o"></i> @x.Time</div>
+        <div class="blog-post-content">
+            @Html.Marked(x.Summary as string)
+        </div>
+        <div class="blog-post-tags">
+            @if (x.CatalogId != null)
+            {
+                <a href="/catalog/@x.Catalog.Url.ToLower()/">
+                    <div class="blog-post-tags-item category">@x.Catalog.Url</div>
+                </a>
+            }
+            @foreach (PostTag t in x.Tags)
+            {
+                <a href="/tag/@t.Tag/">
+                    <div class="blog-post-tags-item">@t.Tag</div>
+                </a>
+            }
+        </div>
+    </div>
+}
+
+@Html.Paging("blog-nav-page", "active", "blog-nav", null, new string[] { })

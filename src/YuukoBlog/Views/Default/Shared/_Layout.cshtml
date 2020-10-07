@@ -3,8 +3,6 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - @ViewBag.Description</title>
     <link href="~/assets/Default/styles/simplemde.css" rel="stylesheet" />
-    <link href="~/assets/@Template.Current.Identifier/styles/yuuko.css?v20150815" rel="stylesheet" />
-    <script src="~/assets/@Template.Current.Identifier/scripts/jquery-1.10.2.min.js"></script>
     <script src="~/assets/Default/scripts/jquery.qrcode.min.js"></script>
     <script src="~/assets/Default/scripts/simplemde.js"></script>
     <script type="text/javascript" src="~/assets/shared/scripts/jquery.codecomb.fileupload.js"></script>
@@ -65,12 +63,6 @@
                             Copyright © 2016 <a href="http://www.1234.sh" target="_self">Amamiya Yuuko</a>, all rights reserved. 黑ICP备15005987号.
                         </p>
                         <p>Powered by <a href="https://github.com/PomeloFoundation/YuukoBlog" target="_blank" yuuko-static>YuukoBlog</a>, Template: 
-                            <select id="lstTemplate">
-                                @foreach (var t in Template.Collection.Templates)
-                                {
-                                    <!option @(Template.Current.Identifier == t.Identifier ? "selected" : "") value="@t.Identifier">@t.Title</!option>
-                                }
-                            </select>
                         @if (!Html.IsAdmin())
                         {
                             <a href="/admin/login" target="_self">Manage</a>

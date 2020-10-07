@@ -75,10 +75,10 @@ namespace YuukoBlog.Controllers
                 return Prompt(x =>
                 {
                     x.StatusCode = 404;
-                    x.Title = SR["Not Found"];
-                    x.Details = SR["The resources have not been found, please check your request."];
+                    x.Title = "Not Found";
+                    x.Details = "The resources have not been found, please check your request.";
                     x.RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" });
-                    x.RedirectText = SR["Back to home"];
+                    x.RedirectText = "Back to home";
                 });
             var summary = "";
             var flag = false;
@@ -95,7 +95,7 @@ namespace YuukoBlog.Controllers
                     }
                     if (flag)
                         summary += "```\r\n";
-                    summary += $"\r\n[{SR["Read More"]} »](/post/{newId})";
+                    summary += $"\r\n[{"Read More"} »](/post/{newId})";
                 }
                 else
                 {
@@ -134,10 +134,10 @@ namespace YuukoBlog.Controllers
                 return Prompt(x =>
                 {
                     x.StatusCode = 404;
-                    x.Title = SR["Not Found"];
-                    x.Details = SR["The resources have not been found, please check your request."];
+                    x.Title = "Not Found";
+                    x.Details = "The resources have not been found, please check your request.";
                     x.RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" });
-                    x.RedirectText = SR["Back to home"];
+                    x.RedirectText = "Back to home";
                 });
             foreach (var t in post.Tags)
                 DB.PostTags.Remove(t);
@@ -156,7 +156,7 @@ namespace YuukoBlog.Controllers
             {
                 Id = Guid.NewGuid(),
                 Url = Guid.NewGuid().ToString().Substring(0, 8),
-                Title = SR["Untitled Post"],
+                Title = "Untitled Post",
                 Content = "",
                 Summary = "",
                 CatalogId = null,
@@ -180,7 +180,7 @@ namespace YuukoBlog.Controllers
         [AdminRequired]
         public IActionResult Catalog()
         {
-            return View(DB.Catalogs.OrderByDescending(x => x.PRI).ToList());
+            return View(DB.Catalogs.OrderByDescending(x => x.Priority).ToList());
         }
 
         [AdminRequired]
@@ -194,10 +194,10 @@ namespace YuukoBlog.Controllers
                 return Prompt(x =>
                 {
                     x.StatusCode = 404;
-                    x.Title = SR["Not Found"];
-                    x.Details = SR["The resources have not been found, please check your request."];
+                    x.Title = "Not Found";
+                    x.Details = "The resources have not been found, please check your request.";
                     x.RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" });
-                    x.RedirectText = SR["Back to home"];
+                    x.RedirectText = "Back to home";
                 });
             DB.Catalogs.Remove(catalog);
             DB.SaveChanges();
@@ -215,14 +215,14 @@ namespace YuukoBlog.Controllers
                 return Prompt(x =>
                 {
                     x.StatusCode = 404;
-                    x.Title = SR["Not Found"];
-                    x.Details = SR["The resources have not been found, please check your request."];
+                    x.Title = "Not Found";
+                    x.Details = "The resources have not been found, please check your request.";
                     x.RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" });
-                    x.RedirectText = SR["Back to home"];
+                    x.RedirectText = "Back to home";
                 });
             catalog.Url = newId;
             catalog.Title = title;
-            catalog.PRI = pri;
+            catalog.Priority = pri;
             DB.SaveChanges();
             return Content("true");
         }
@@ -236,8 +236,8 @@ namespace YuukoBlog.Controllers
             var catalog = new Catalog
             {
                 Url = Guid.NewGuid().ToString().Substring(0, 8),
-                PRI = 0,
-                Title = SR["New Catalog"]
+                Priority = 0,
+                Title = "New Catalog"
             };
             DB.Catalogs.Add(catalog);
             DB.SaveChanges();

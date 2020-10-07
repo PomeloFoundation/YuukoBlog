@@ -4,10 +4,10 @@
         <h3>MANAGE</h3>
         <div class="sidebar-body">
             <ul class="sidebar-list">
-                <li class="sidebar-item"><a yuuko-static href="/admin/index">@SR["Settings"]</a></li>
-                <li class="sidebar-item"><a yuuko-static href="javascript:$('#frmNewPost').submit();">@SR["New Post"]</a></li>
-                <li class="sidebar-item"><a href="/admin/catalog">@SR["Manage Catalogs"]</a></li>
-                <li class="sidebar-item"><a yuuko-static href="javascript:$('#frmLogout').submit();">@SR["Sign Out"]</a></li>
+                <li class="sidebar-item"><a yuuko-static href="/admin/index">Settings</a></li>
+                <li class="sidebar-item"><a yuuko-static href="javascript:$('#frmNewPost').submit();">New Post</a></li>
+                <li class="sidebar-item"><a href="/admin/catalog">Manage Catalogs</a></li>
+                <li class="sidebar-item"><a yuuko-static href="javascript:$('#frmLogout').submit();">Sign Out</a></li>
             </ul>
         </div>
         <form asp-action="PostNew" asp-controller="Admin" method="post" id="frmNewPost">

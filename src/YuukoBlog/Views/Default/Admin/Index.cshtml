@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = SR["Admin Panel"];
+    ViewBag.Title = "Admin Panel";
 }
 @if (Html.IsRaw())
 {
@@ -19,15 +19,15 @@
             <div class="post-body">
                 <form asp-action="Index" asp-controller="Admin" method="post" id="frmConfig">
                     <p>
-                        @SR["Site name"]: <br />
+                        Site name: <br />
                         <input type="text" name="site" value="@ViewBag.Site" />
                     </p>
                     <p>
-                        @SR["Description"]: <br />
+                        Description: <br />
                         <input type="text" name="description" value="@ViewBag.Description" />
                     </p>
                     <p>
-                        @SR["Avatar URL"]: <br />
+                        Avatar URL: <br />
                         <input type="text" name="avatarUrl" value="@ViewBag.AvatarUrl" />
                     </p>
                     <p>
@@ -35,31 +35,19 @@
                         <input type="text" name="disqus" value="@ViewBag.Disqus" />
                     </p>
                     <p>
-                        @SR["About-me URL"]: <br />
+                        About-me URL: <br />
                         <input type="text" name="aboutUrl" value="@ViewBag.AboutUrl" />
                     </p>
                     <p>
-                        @SR["User Name"]: <br />
+                        User Name: <br />
                         <input type="text" name="Account" value="@ViewBag.Account" />
                     </p>
                     <p>
-                        @SR["Password"]: <br />
+                        Password: <br />
                         <input type="password" name="password" value="" />
                     </p>
                     <p>
-                        @SR["GitHub"]: <br />
-                        <input type="text" name="GitHub" value="@ViewBag.GitHub" />
-                    </p>
-                    <p>
-                        @SR["Following"]: <br />
-                        <input type="checkbox" name="Following" value="true" @(ViewBag.Following ? " checked" : "") />
-                    </p>
-                    <p>
-                        @SR["Followers"]: <br />
-                        <input type="checkbox" name="Follower" value="true" @(ViewBag.Follower ? " checked" : "") />
-                    </p>
-                    <p>
-                        <input type="button" value="@SR["Save"]" onclick="saveConfig()" />
+                        <input type="button" value="Save" onclick="saveConfig()" />
                     </p>
                 </form>
             </div>

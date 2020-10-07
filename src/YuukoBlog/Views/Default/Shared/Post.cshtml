@@ -28,7 +28,7 @@
                 @if (Html.IsAdmin())
                 {
                 <div class="post-edit">
-                    <p><input id="txtTitle" type="text" placeholder="@SR["Title"]" value="@Model.Title" /></p>
+                    <p><input id="txtTitle" type="text" placeholder="Title" value="@Model.Title" /></p>
                     <p><input id="txtUrl" type="text" placeholder="URL" value="@Model.Url" /></p>
                     <p>
                         <select id="lstCatalogs">
@@ -49,24 +49,19 @@
                         <input type="file" id="uploadFile" name="file" />
                     </form>
                     <p>
-                        <input type="text" id="txtTags" placeholder="@SR["Use a ',' to split tags"]" value="@Html.TagSerialize(Model.Tags)" />
+                        <input type="text" id="txtTags" placeholder="Use a ',' to split tags" value="@Html.TagSerialize(Model.Tags)" />
                     </p>
                     <p>
-                        <input type="checkbox" id="chkIsPage" @(Model.IsPage ? "checked" : "") /> @SR["Is a page"]
+                        <input type="checkbox" id="chkIsPage" @(Model.IsPage ? "checked" : "") /> Is a page
                     </p>
                     <p>
-                        <input type="button" id="btnSavePost" onclick="savePost('@Model.Url')" value="@SR["Save"]" class="more-link" />
-                        <a href="javascript:$('.post-edit').slideUp();$('.post-body').slideDown();" yuuko-static>@SR["Cancel"]</a>
+                        <input type="button" id="btnSavePost" onclick="savePost('@Model.Url')" value="Save" class="more-link" />
+                        <a href="javascript:$('.post-edit').slideUp();$('.post-body').slideDown();" yuuko-static>Cancel"]</a>
                     </p>
                 </div>
                 }
             </div>
             <div class="community-sharing">
-                <span>@SR["Share to:"]</span> 
-                <div class="community-sharing-links">
-                    <a href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?showcount=0&desc=&summary=&url=@(Context.Request.Scheme + "://" + Context.Request.Host + Context.Request.Path)&Title=@Model.Title&Site=@("Amamiya Yuuko\'s ebullient future")"><img src="~/assets/Default/images/qzone.png" /></a>
-                    <a href="javascript:showQrCode();"><img src="~/assets/Default/images/wechat.png" /></a>
-                </div>
             </div>
             <div class="comments">
                 <h2>Comments</h2>

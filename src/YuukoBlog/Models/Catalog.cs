@@ -11,9 +11,13 @@ namespace YuukoBlog.Models
         [MaxLength(32)]
         public string Url { get; set; }
 
+        [MaxLength(64)]
         public string Title { get; set; }
 
-        public int PRI { get; set; }
+        [MaxLength(16)]
+        public string Icon { get; set; }
+
+        public int Priority { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
     }

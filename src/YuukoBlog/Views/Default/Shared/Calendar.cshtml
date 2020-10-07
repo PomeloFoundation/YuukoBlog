@@ -4,7 +4,7 @@
         <ul class="sidebar-list">
             @foreach (CalendarViewModel x in ViewBag.Calendars)
             {
-                <li class="sidebar-item"><a href="/@x.Year/@x.Month">@(new DateTime(x.Year, x.Month, 1).ToString(SR["_DATE_FORMAT_STRING"])) (@x.Count)</a></li>
+                <li class="sidebar-item"><a href="/@x.Year/@x.Month">@(new DateTime(x.Year, x.Month, 1).ToString()) (@x.Count)</a></li>
             }
         </ul>
     </div>

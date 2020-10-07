@@ -1,5 +1,5 @@
 ﻿@{ 
-    ViewBag.Title = SR["Admin Panel"];
+    ViewBag.Title = "Admin Panel";
 }
 @if (Html.IsRaw())
 {
@@ -18,8 +18,8 @@
             <div class="post">
                 <div class="post-body">
                     <form asp-action="Login" asp-controller="Admin" method="post">
-                        <p><input type="text" name="Username" placeholder="@SR["User Name"]" /></p>
-                        <p><input type="password" name="Password" placeholder="@SR["Password"]" /></p>
+                        <p><input type="text" name="Username" placeholder="User Name" /></p>
+                        <p><input type="password" name="Password" placeholder="Password" /></p>
                         <input type="submit" value="Log in" />
                     </form>
                 </div>

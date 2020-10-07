@@ -6,74 +6,81 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Pomelo.AspNetCore.Localization;
+using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Converters;
 using YuukoBlog.Models;
+using YuukoBlog.Utils.Authorization;
 
 namespace YuukoBlog
 {
     public class Startup
     {
+        public readonly IConfiguration Configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            IConfiguration Configuration;
-            services.AddConfiguration(out Configuration);
+            services.AddDbContext<BlogContext>(x => x.UseSqlite("Data source=blog.db"));
 
-            if (Configuration["Database:Type"] == "SQLite")
+            services.AddAuthentication(x => x.DefaultScheme = TokenAuthenticateHandler.Scheme)
+                .AddPersonalAccessToken();
+
+            services.AddSingleton(Configuration);
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
             {
-                services.AddDbContext<BlogContext>(x => x.UseSqlite(Configuration["Database:ConnectionString"]));
-            }
-            else if (Configuration["Database:Type"] == "MySQL")
-            {
-                services.AddDbContext<BlogContext>(x => x.UseMySql(Configuration["Database:ConnectionString"]));
-            }
-
-            services.AddSmartCookies();
-
-            services.AddMemoryCache();
-            services.AddSession(x => x.IdleTimeout = TimeSpan.FromMinutes(20));
-
-            services.AddBlobStorage()
-                .AddEntityFrameworkStorage<BlogContext>()
-                .AddSessionUploadAuthorization();
-
-            services.AddPomeloLocalization(x =>
-            {
-                x.AddCulture(new string[] { "zh", "zh-CN", "zh-Hans", "zh-Hans-CN", "zh-cn" }, new JsonLocalizedStringStore(Path.Combine("Localization", "zh-CN.json")));
-                x.AddCulture(new string[] { "en", "en-US", "en-GB" }, new JsonLocalizedStringStore(Path.Combine("Localization", "en-US.json")));
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.IsEssential = true;
             });
 
-            services.AddMvc()
-                .AddMultiTemplateEngine()
-                .AddCookieTemplateProvider();
+            services.AddHttpContextAccessor();
 
-            services.AddTimedJob();
+            services.AddMvc()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
+                    options.SerializerSettings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
+                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                })
+                .AddControllersAsServices();
         }
 
         public async void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(LogLevel.Warning, true);
-
-            app.UseStaticFiles();
             app.UseSession();
-            app.UseBlobStorage("/assets/shared/scripts/jquery.codecomb.fileupload.js");
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseStaticFiles();
             app.UseDeveloperExceptionPage();
-            app.UseMvcWithDefaultRoute();
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}");
+            });
 
-            await SampleData.InitializeYuukoBlog(app.ApplicationServices);
-
-            app.UseTimedJob();
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                await SampleData.InitializeYuukoBlog(scope.ServiceProvider);
+            }
         }
 
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseIISIntegration()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseStartup<Startup>()
-                .Build();
+            var host = Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
 
-            host.Run();
+            host.Build().Run();
         }
     }
 }

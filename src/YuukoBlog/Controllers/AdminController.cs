@@ -46,7 +46,6 @@ namespace YuukoBlog.Controllers
 
         [GuestRequired]
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Login(string Username, string Password)
         {
             var tmp = Configuration["Account"];

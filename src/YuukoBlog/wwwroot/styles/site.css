@@ -3,7 +3,11 @@ a:hover {
 }
 
 body {
-    background: #fafafa
+    background: #fafafa;
+}
+
+a {
+    cursor: pointer;
 }
 
 .blog-nav-item {

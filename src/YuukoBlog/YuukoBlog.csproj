@@ -27,5 +27,6 @@
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="Utils\AntiXSS\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
 </Project>

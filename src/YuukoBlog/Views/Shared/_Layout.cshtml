@@ -104,28 +104,28 @@
             <div class="col-md-4">
                 @if (Model is Post post)
                 {
-                <div class="blog-sidebar-section">
-                    <div class="blog-sidebar-title">
-                        <div class="blog-sidebar-title-icon">
-                            <i class="fa fa-file-text-o"></i>
+                    <div class="blog-sidebar-section">
+                        <div class="blog-sidebar-title">
+                            <div class="blog-sidebar-title-icon">
+                                <i class="fa fa-file-text-o"></i>
+                            </div>
+                            Post
                         </div>
-                        Post
+                        <div class="blog-sidebar-list">
+                            @if (post.CatalogId != null)
+                            {
+                                <a href="/catalog/@Model.Catalog.Url.ToLower()/">
+                                    <div class="blog-post-tags-item category">@Model.Catalog.Url</div>
+                                </a>
+                            }
+                            @foreach (PostTag t in post.Tags)
+                            {
+                                <a href="/tag/@t.Tag/">
+                                    <div class="blog-post-tags-item">@t.Tag</div>
+                                </a>
+                            }
+                        </div>
                     </div>
-                    <div class="blog-sidebar-list">
-                        @if (post.CatalogId != null)
-                        {
-                            <a href="/catalog/@Model.Catalog.Url.ToLower()/">
-                                <div class="blog-post-tags-item category">@Model.Catalog.Url</div>
-                            </a>
-                        }
-                        @foreach (PostTag t in post.Tags)
-                        {
-                            <a href="/tag/@t.Tag/">
-                                <div class="blog-post-tags-item">@t.Tag</div>
-                            </a>
-                        }
-                    </div>
-                </div>
                 }
                 <div class="blog-sidebar-section">
                     <div class="blog-sidebar-title">
@@ -186,6 +186,24 @@
                         </ul>
                     </div>
                 }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="blog-sidebar-section">
+                        <div class="blog-sidebar-title">
+                            <div class="blog-sidebar-title-icon">
+                                <i class="fa fa-cog"></i>
+                            </div>
+                            Settings
+                        </div>
+                        <ul class="blog-sidebar-list">
+                            <li><a href="/admin/index" target="_blank">General</a></li>
+                            <li><a href="/admin/catalog" target="_blank">Catalog</a></li>
+                            <li><a href="/admin/link" target="_blank">Link</a></li>
+                            <li><a href="/admin/blogroll" target="_blank">Blog Roll</a></li>
+                            <li><a href="/admin/logout" target="_blank">Logout</a></li>
+                        </ul>
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -193,6 +211,7 @@
     <div class="blog-footer">
         <div class="container">
             <span>Powered by Yuko Blog.</span>
+            <a href="/admin/login">Manage</a>
             <span class="blog-footer-right">© Yuko Zheng 2020</span>
         </div>
     </div>

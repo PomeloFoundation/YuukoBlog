@@ -30,11 +30,13 @@ namespace YuukoBlog.Models
             builder.Entity<Catalog>(e =>
             {
                 e.HasIndex(x => x.Priority);
+                e.HasMany(x => x.Posts).WithOne(x => x.Catalog).OnDelete(DeleteBehavior.SetNull);
             });
 
             builder.Entity<Comment>(e =>
             {
                 e.HasIndex(x => x.Time);
+                e.HasMany(x => x.Comments).WithOne(x => x.Parent).OnDelete(DeleteBehavior.Cascade);
             });
 
             builder.Entity<Post>(e =>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -23,9 +24,16 @@ namespace YuukoBlog.Models
 
         public string Content { get; set; }
 
+        [MaxLength(256)]
+        public string Avatar { get; set; }
+
+        public DateTime Time { get; set; } = DateTime.Now;
+
         [ForeignKey(nameof(Parent))]
         public Guid? ParentId { get; set; }
 
         public virtual Comment Parent { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
     }
 }

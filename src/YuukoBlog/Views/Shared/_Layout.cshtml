@@ -72,16 +72,24 @@
             </a>
         }
         <div class="blog-banner">
-            <img src="~/images/avatar.jpg" class="blog-banner-avatar" />
-            <div class="blog-banner-right">
-                <div class="blog-banner-title">@ViewBag.Description</div>
-                <div class="blog-banner-subtitle">
-                    <a target="_blank" href="https://github.com/yukozh"><i class="fa fa-github"></i></a>
-                    <a target="_blank" href="#"><i class="fa fa-fw fa-linkedin-square"></i></a>
-                    <a target="_blank" href="#"><i class="fa fa-fw fa-qq"></i></a>
-                    <a target="_blank" href="#"><i class="fa fa-fw fa-envelope-o"></i></a>
+            @if (Model is Post)
+            {
+                <div class="blog-banner-post-title">@Model.Title</div>
+                <div class="blog-banner-post-subtitle"><i class="fa fa-clock-o"></i> @Model.Time</div>
+            }
+            else
+            {
+                <img src="~/images/avatar.jpg" class="blog-banner-avatar" />
+                <div class="blog-banner-right">
+                    <div class="blog-banner-title">@ViewBag.Description</div>
+                    <div class="blog-banner-subtitle">
+                        <a target="_blank" href="https://github.com/yukozh"><i class="fa fa-github"></i></a>
+                        <a target="_blank" href="#"><i class="fa fa-fw fa-linkedin-square"></i></a>
+                        <a target="_blank" href="#"><i class="fa fa-fw fa-qq"></i></a>
+                        <a target="_blank" href="#"><i class="fa fa-fw fa-envelope-o"></i></a>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
         <div style="clear: both"></div>
     </div>

@@ -20,8 +20,8 @@ namespace YuukoBlog.Models
         public string Summary { get; set; }
 
         public string Content { get; set; }
-        
-        public DateTime Time { get; set; }
+
+        public DateTime Time { get; set; } = DateTime.Now;
 
         public bool IsPage { get; set; }
 

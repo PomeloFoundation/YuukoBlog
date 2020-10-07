@@ -53,6 +53,19 @@ body {
     text-shadow: 3px 3px 2px #4c9f9199;
 }
 
+.blog-banner-post-title {
+    margin-top: 20px;
+    font-size: 50px;
+    color: #fff;
+    text-shadow: 3px 3px 2px #4c9f9199;
+}
+
+.blog-banner-post-subtitle {
+    font-size: 20px;
+    color: #fff;
+    text-shadow: 3px 3px 2px #4c9f9199;
+}
+
 .blog-banner-subtitle {
     font-size: 28px;
     color: #fff;
@@ -98,7 +111,7 @@ body {
 }
 
 .blog-post-content {
-    font-size: 18px!important;
+    font-size: 20px!important;
     color: #888;
     margin-top: 10px;
 }

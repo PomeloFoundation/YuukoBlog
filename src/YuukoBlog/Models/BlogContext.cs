@@ -32,6 +32,11 @@ namespace YuukoBlog.Models
                 e.HasIndex(x => x.Priority);
             });
 
+            builder.Entity<Comment>(e =>
+            {
+                e.HasIndex(x => x.Time);
+            });
+
             builder.Entity<Post>(e =>
             {
                 e.HasIndex(x => x.Title);

@@ -34,9 +34,34 @@
             </div>
             <div style="clear: both"></div>
         </div>
+        <div class="blog-comment">
+            <div class="blog-comment-left">
+                <img src="~/images/default-avatar.jpg" class="blog-comment-avatar" />
+            </div>
+            <div class="blog-comment-right">
+                <div class="blog-comment-right-container">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                    <div class="row blog-comment-input-row">
+                        <div class="col-md-6">
+                            <input class="form-control" placeholder="Name" />
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control" placeholder="Email" />
+                        </div>
+                    </div>
+                    }
+                    <div>
+                        <textarea class="markdown-textbox"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div style="clear: both"></div>
+        </div>
     </div>
 </div>
 <script src="~/scripts/vue.js"></script>
+<script src="~/scripts/simplemde.js"></script>
 <script>
     var postId = '@Model.Id';
     var app = new Vue({
@@ -56,4 +81,27 @@
             this.loadComments();
         }
     })
+    jQuery('.markdown-textbox').unbind().each(function () {
+        var editor = jQuery(this);
+        if (editor[0].smde == undefined) {
+            var smde = new SimpleMDE({
+                element: editor[0],
+                spellChecker: false,
+                status: false
+            });
+            editor[0].smde = smde;
+            var begin_pos, end_pos;
+            jQuery(this).parent().children().unbind().dragDropOrPaste(function () {
+                begin_pos = smde.codemirror.getCursor();
+                smde.codemirror.setSelection(begin_pos, begin_pos);
+                smde.codemirror.replaceSelection(replaceText);
+                begin_pos.line++;
+                end_pos = { line: begin_pos.line, ch: begin_pos.ch + replaceInnerText.length };
+            },
+            function (result) {
+                smde.codemirror.setSelection(begin_pos, end_pos);
+                smde.codemirror.replaceSelection('![' + result.FileName + '](/file/download/' + result.Id + ')');
+            });
+        }
+    });
 </script>

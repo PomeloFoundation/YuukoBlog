@@ -320,3 +320,13 @@ body {
 .blog-subcomment {
     padding-left: 15px;
 }
+
+.blog-comment-input-row {
+    margin-right: -15px!important;
+    margin-left: -15px!important;
+    margin-bottom: 10px;
+}
+
+.blog-comment .CodeMirror, .blog-comment .CodeMirror-scroll {
+    height: 120px;
+}

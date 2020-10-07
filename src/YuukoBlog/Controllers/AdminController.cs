@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -241,6 +242,16 @@ namespace YuukoBlog.Controllers
             DB.Catalogs.Add(catalog);
             DB.SaveChanges();
             return RedirectToAction("Catalog", "Admin");
+        }
+
+        [HttpPost]
+        [Route("Admin/Delete/{id}")]
+        public async ValueTask<IActionResult> Delete(Guid id)
+        {
+            var post = await DB.Posts.SingleAsync(x => x.Id == id);
+            DB.Posts.Remove(post);
+            await DB.SaveChangesAsync();
+            return Content("Succeeded");
         }
     }
 }

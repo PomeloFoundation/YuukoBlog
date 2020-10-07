@@ -124,6 +124,13 @@
                                     <div class="blog-post-tags-item">@t.Tag</div>
                                 </a>
                             }
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div>
+                                    <a href="/admin/edit/@post.Id"><div class="blog-post-tags-item">Edit</div></a>
+                                    <a href="javascript:app.deletePost('@post.Id');"><div class="blog-post-tags-item">Delete</div></a>
+                                </div>
+                            }
                         </div>
                     </div>
                 }

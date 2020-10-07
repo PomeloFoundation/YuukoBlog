@@ -34,6 +34,8 @@ namespace YuukoBlog.Models
 
         public virtual ICollection<PostTag> Tags { get; set; } = new List<PostTag>();
 
+        public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+
         PostViewModel IConvertible<PostViewModel>.ToType()
         {
             return new PostViewModel

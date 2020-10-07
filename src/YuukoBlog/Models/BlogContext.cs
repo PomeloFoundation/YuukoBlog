@@ -43,6 +43,8 @@ namespace YuukoBlog.Models
                 e.HasIndex(x => x.IsPage);
                 e.HasIndex(x => x.Time);
                 e.HasIndex(x => x.Url).IsUnique();
+                e.HasMany(x => x.Comments).WithOne(x => x.Post).OnDelete(DeleteBehavior.Cascade);
+                e.HasMany(x => x.Tags).WithOne(x => x.Post).OnDelete(DeleteBehavior.Cascade);
             });
 
             builder.Entity<PostTag>(e =>

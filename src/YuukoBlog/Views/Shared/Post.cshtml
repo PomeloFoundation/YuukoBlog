@@ -71,6 +71,11 @@
         </div>
     </div>
 </div>
+@if (User.Identity.IsAuthenticated)
+{
+    <form method="post" id="form-delete-post" action="/admin/delete">
+    </form>
+}
 <script src="~/scripts/vue.js"></script>
 <script src="~/scripts/simplemde.js"></script>
 <script>
@@ -94,6 +99,10 @@
                     jQuery('#root-reply').append(jQuery('#comment-editor'));
                 }
             },
+            deletePost: function (id) {
+                jQuery('#form-delete-post').attr('action', '/admin/delete/' + id);
+                jQuery('#form-delete-post').submit();
+            },
             loadComments: function () {
                 var self = this;
                 jQuery.getJSON('/comment/' + postId, {}, function (data) {
@@ -102,13 +111,15 @@
             },
             postComment: function () {
                 var self = this;
-                if (!jQuery('#txt-name').val()) {
-                    alert('Please input your name');
-                    return;
-                }
-                if (!jQuery('#txt-email').val()) {
-                    alert('Please input your email');
-                    return;
+                if (!authenticated) {
+                    if (!jQuery('#txt-name').val()) {
+                        alert('Please input your name');
+                        return;
+                    }
+                    if (!jQuery('#txt-email').val()) {
+                        alert('Please input your email');
+                        return;
+                    }
                 }
                 if (!jQuery('#txt-comment')[0].smde.value()) {
                     alert('Please input content');

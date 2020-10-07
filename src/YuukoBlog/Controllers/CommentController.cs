@@ -53,7 +53,7 @@ namespace YuukoBlog.Controllers
                 Content = content,
                 Name = User.Identity.IsAuthenticated ? null : name,
                 Email = User.Identity.IsAuthenticated ? null : email,
-                Avatar = GetAvatarUrl(email),
+                Avatar = User.Identity.IsAuthenticated ? null : GetAvatarUrl(email),
                 ParentId = parentId,
                 PostId = id,
                 IsGuest = !User.Identity.IsAuthenticated

@@ -28,6 +28,10 @@ namespace YuukoBlog.Controllers
         public IActionResult Index(Config config)
         {
             Configuration["Account"] = config.Account;
+            if (string.IsNullOrEmpty(config.Password))
+            {
+                config.Password = Configuration["Password"];
+            }
             Configuration["Password"] = config.Password;
             Configuration["Site"] = config.Site;
             Configuration["Description"] = config.Description;

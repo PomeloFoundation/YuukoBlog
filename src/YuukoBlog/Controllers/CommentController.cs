@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using YuukoBlog.Models;
 
 namespace YuukoBlog.Controllers
 {
@@ -36,6 +37,30 @@ namespace YuukoBlog.Controllers
             }
 
             return Json(comments);
+        }
+
+        [HttpPost("/comment/{id}")]
+        public async ValueTask<IActionResult> Post(
+            Guid id,
+            string content,
+            string name = null,
+            string email = null,
+            Guid? parentId = null,
+            CancellationToken cancellationToken = default)
+        {
+            var comment = new Comment
+            {
+                Content = content,
+                Name = User.Identity.IsAuthenticated ? null : name,
+                Email = User.Identity.IsAuthenticated ? null : email,
+                Avatar = GetAvatarUrl(email),
+                ParentId = parentId,
+                PostId = id,
+                IsGuest = !User.Identity.IsAuthenticated
+            };
+            DB.Comments.Add(comment);
+            await DB.SaveChangesAsync(cancellationToken);
+            return Content("Succeeded");
         }
 
         private static string GetAvatarUrl(string email)

@@ -357,3 +357,17 @@ a {
     font-size: 14px;
     color: #188010;
 }
+
+.blog-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .blog-table tr {
+        border: 1px solid #ddd;
+    }
+
+    .blog-table td, .blog-table th {
+        padding: 5px 8px;
+        text-align: left;
+    }

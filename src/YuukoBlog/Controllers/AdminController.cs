@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -156,6 +157,17 @@ namespace YuukoBlog.Controllers
         }
 
         [Authorize]
+        [HttpGet]
+        [Route("Admin/Catalog/All")]
+        public async ValueTask<IActionResult> CatalogAll(CancellationToken cancellationToken = default)
+        {
+            var catalogs = await DB.Catalogs
+                .OrderBy(x => x.Priority)
+                .ToListAsync(cancellationToken);
+            return Json(catalogs);
+        }
+
+        [Authorize]
         [HttpPost]
         [Route("Admin/Catalog/Delete")]
         public IActionResult CatalogDelete(string id)
@@ -178,9 +190,9 @@ namespace YuukoBlog.Controllers
         [Authorize]
         [HttpPost]
         [Route("Admin/Catalog/Edit")]
-        public IActionResult CatalogEdit(string id, string newId, string title, int pri)
+        public IActionResult CatalogEdit(Guid id, string url, string title, int priority)
         {
-            var catalog = DB.Catalogs.Where(x => x.Url == id).SingleOrDefault();
+            var catalog = DB.Catalogs.Where(x => x.Id == id).SingleOrDefault();
             if (catalog == null)
                 return Prompt(x =>
                 {
@@ -190,9 +202,9 @@ namespace YuukoBlog.Controllers
                     x.RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" });
                     x.RedirectText = "Back to home";
                 });
-            catalog.Url = newId;
+            catalog.Url = url;
             catalog.Title = title;
-            catalog.Priority = pri;
+            catalog.Priority = priority;
             DB.SaveChanges();
             return Content("true");
         }
@@ -200,13 +212,14 @@ namespace YuukoBlog.Controllers
         [Authorize]
         [HttpPost]
         [Route("Admin/Catalog/New")]
-        public IActionResult CatalogNew()
+        public IActionResult CatalogNew(Catalog model)
         {
             var catalog = new Catalog
             {
-                Url = Guid.NewGuid().ToString().Substring(0, 8),
-                Priority = 0,
-                Title = "New Catalog"
+                Url = model.Url,
+                Priority = model.Priority,
+                Title = model.Title,
+                Icon = model.Icon
             };
             DB.Catalogs.Add(catalog);
             DB.SaveChanges();

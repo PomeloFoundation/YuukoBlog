@@ -144,7 +144,7 @@
                     <ul class="blog-sidebar-list">
                         @foreach (CatalogViewModel x in ViewBag.Catalogs)
                         {
-                            <li><a href="/catalog/@x.Url.ToLower()">@x.Url.ToUpper() (@x.Count)</a></li>
+                            <li><a href="/catalog/@x.Url.ToLower()">@x.Title (@x.Count)</a></li>
                         }
                     </ul>
                 </div>
@@ -203,11 +203,11 @@
                             Settings
                         </div>
                         <ul class="blog-sidebar-list">
-                            <li><a href="/admin/index" target="_blank">General</a></li>
-                            <li><a href="/admin/catalog" target="_blank">Catalog</a></li>
-                            <li><a href="/admin/link" target="_blank">Link</a></li>
-                            <li><a href="/admin/blogroll" target="_blank">Blog Roll</a></li>
-                            <li><a href="/admin/logout" target="_blank">Logout</a></li>
+                            <li><a href="/admin/index">General</a></li>
+                            <li><a href="/admin/catalog">Catalog</a></li>
+                            <li><a href="/admin/link">Link</a></li>
+                            <li><a href="/admin/blogroll">Blog Roll</a></li>
+                            <li><a href="/admin/logout" >Logout</a></li>
                         </ul>
                     </div>
                 }

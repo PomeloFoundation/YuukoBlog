@@ -237,6 +237,7 @@ namespace YuukoBlog.Controllers
             return Content("Succeeded");
         }
 
+        [Authorize]
         public IActionResult Link() => View();
 
         [Authorize]

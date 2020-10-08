@@ -236,5 +236,59 @@ namespace YuukoBlog.Controllers
             await DB.SaveChangesAsync();
             return Content("Succeeded");
         }
+
+        public IActionResult Link() => View();
+
+        [Authorize]
+        [HttpGet]
+        [Route("Admin/Link/All")]
+        public async ValueTask<IActionResult> GetLinks(CancellationToken cancellationToken = default)
+        {
+            var links = await DB.Links
+                .OrderBy(x => x.Priority)
+                .ToListAsync();
+
+            return Json(links);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("Admin/Link/Delete")]
+        public async ValueTask<IActionResult> DeleteLink(Guid id, CancellationToken cancellationToken = default)
+        {
+            var link = await DB.Links
+                .SingleAsync(x => x.Id == id, cancellationToken);
+            DB.Links.Remove(link);
+            await DB.SaveChangesAsync();
+            return Content("Succeeded");
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("Admin/Link/Edit")]
+        public async ValueTask<IActionResult> EditLink(
+            Guid id, string display, string url, string icon,
+            int priority, CancellationToken cancellationToken = default)
+        {
+            var link = await DB.Links
+                .SingleAsync(x => x.Id == id, cancellationToken);
+            link.Display = display;
+            link.Url = url;
+            link.Icon = icon;
+            link.Priority = priority;
+            await DB.SaveChangesAsync();
+            return Content("Saved");
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("Admin/Link/New")]
+        public async ValueTask<IActionResult> NewLink(
+            Link model, CancellationToken cancellationToken = default)
+        {
+            DB.Links.Add(model);
+            await DB.SaveChangesAsync();
+            return Content("Added");
+        }
     }
 }

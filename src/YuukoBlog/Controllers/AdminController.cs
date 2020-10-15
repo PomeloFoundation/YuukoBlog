@@ -291,5 +291,57 @@ namespace YuukoBlog.Controllers
             await DB.SaveChangesAsync();
             return Content("Added");
         }
+
+
+        [Authorize]
+        public IActionResult BlogRoll() => View();
+
+        [Authorize]
+        [HttpGet]
+        [Route("Admin/BlogRoll/All")]
+        public async ValueTask<IActionResult> GetBlogRoll(CancellationToken cancellationToken = default)
+        {
+            var blogRolls = await DB.BlogRolls
+                .OrderBy(x => x.Priority)
+                .ToListAsync(cancellationToken);
+            return Json(blogRolls);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("Admin/BlogRoll/New")]
+        public async ValueTask<IActionResult> NewBlogRoll(
+            BlogRoll model, CancellationToken cancellationToken = default)
+        {
+            DB.BlogRolls.Add(model);
+            await DB.SaveChangesAsync();
+            return Content("Added");
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("Admin/BlogRoll/Delete")]
+        public async ValueTask<IActionResult> DeleteBlogRoll(
+            Guid id, CancellationToken cancellationToken = default)
+        {
+            var blogRoll = await DB.BlogRolls.SingleAsync(x => x.Id == id, cancellationToken);
+            DB.BlogRolls.Remove(blogRoll);
+            await DB.SaveChangesAsync();
+            return Content("Succeeded");
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("Admin/BlogRoll/Edit")]
+        public async ValueTask<IActionResult> EditBlogRoll(
+            Guid id, string display, string url, int priority, CancellationToken cancellationToken = default)
+        {
+            var blogRoll = await DB.BlogRolls.SingleAsync(x => x.Id == id, cancellationToken);
+            blogRoll.Display = display;
+            blogRoll.Priority = priority;
+            blogRoll.URL = url;
+            await DB.SaveChangesAsync();
+            return Content("Succeeded");
+        }
     }
 }

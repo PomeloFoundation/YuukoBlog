@@ -286,6 +286,7 @@ namespace YuukoBlog.Controllers
             return Content("Succeeded");
         }
 
+        [Authorize]
         [Route("Admin/Edit/{id}")]
         public IActionResult Edit(Guid id)
         {
@@ -303,7 +304,6 @@ namespace YuukoBlog.Controllers
                 .SingleAsync(x => x.Id == id, cancellationToken);
             return Json(post);
         }
-
 
         [Authorize]
         [HttpPost]
@@ -363,6 +363,19 @@ namespace YuukoBlog.Controllers
             }
             DB.SaveChanges();
             return Content(Instance.Parse(content));
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("Admin/Comment/Delete")]
+        public async ValueTask<IActionResult> DeleteComment(
+            Guid id, CancellationToken cancellationToken = default)
+        {
+            var comment = await DB.Comments
+                .SingleAsync(x => x.Id == id, cancellationToken);
+            DB.Comments.Remove(comment);
+            await DB.SaveChangesAsync();
+            return Content("Succeeded");
         }
     }
 }

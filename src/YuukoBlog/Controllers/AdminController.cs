@@ -308,11 +308,13 @@ namespace YuukoBlog.Controllers
         [Authorize]
         [HttpPost]
         [Route("Admin/Post/Edit")]
-        public IActionResult PostEdit(string id, string newId, string tags, bool isPage, string title, Guid? catalog, string content)
+        public IActionResult PostEdit(
+            Guid id, string url, string tagsText, bool isPage,
+            string title, Guid? catalogId, string content)
         {
             var post = DB.Posts
                 .Include(x => x.Tags)
-                .Where(x => x.Url == id)
+                .Where(x => x.Id == id)
                 .SingleOrDefault();
             if (post == null)
                 return Prompt(x =>
@@ -338,7 +340,7 @@ namespace YuukoBlog.Controllers
                     }
                     if (flag)
                         summary += "```\r\n";
-                    summary += $"\r\n[{"Read More"} »](/post/{newId})";
+                    summary += $"\r\n[{"Read More"} »](/post/{url})";
                 }
                 else
                 {
@@ -347,15 +349,15 @@ namespace YuukoBlog.Controllers
             }
             foreach (var t in post.Tags)
                 DB.PostTags.Remove(t);
-            post.Url = newId;
+            post.Url = url;
             post.Summary = summary;
             post.Title = title;
             post.Content = content;
-            post.CatalogId = catalog;
+            post.CatalogId = catalogId;
             post.IsPage = isPage;
-            if (!string.IsNullOrEmpty(tags))
+            if (!string.IsNullOrEmpty(tagsText))
             {
-                var _tags = tags.Split(',');
+                var _tags = tagsText.Split(',');
                 foreach (var t in _tags)
                     post.Tags.Add(new PostTag { PostId = post.Id, Tag = t.Trim(' ') });
             }

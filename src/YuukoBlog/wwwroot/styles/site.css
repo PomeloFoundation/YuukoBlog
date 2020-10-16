@@ -135,6 +135,7 @@ a {
     padding: 5px 10px;
     background: #f0f0f0;
     border-bottom: 5px solid #e0e0e0;
+    margin-bottom: 5px;
 }
 
     .blog-post-tags-item.category, .blog-comment-button {
@@ -261,6 +262,7 @@ a {
     font-size: 18px;
     color: #65a660;
     padding-bottom: 5px;
+    margin-top: 25px;
 }
 
 .blog-comment-left {

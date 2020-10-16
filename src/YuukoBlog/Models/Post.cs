@@ -40,7 +40,7 @@ namespace YuukoBlog.Models
         [NotMapped]
         public string TagsText
         {
-            get { return string.Join(",", Tags); }
+            get { return string.Join(",", Tags.Select(x => x.Tag)); }
         }
 
         [JsonIgnore]

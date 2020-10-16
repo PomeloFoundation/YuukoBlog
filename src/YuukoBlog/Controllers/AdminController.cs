@@ -65,64 +65,6 @@ namespace YuukoBlog.Controllers
 
         [Authorize]
         [HttpPost]
-        [Route("Admin/Post/Edit")]
-        public IActionResult PostEdit(string id, string newId, string tags, bool isPage, string title, Guid? catalog, string content)
-        {
-            var post = DB.Posts
-                .Include(x => x.Tags)
-                .Where(x => x.Url == id)
-                .SingleOrDefault();
-            if (post == null)
-                return Prompt(x =>
-                {
-                    x.StatusCode = 404;
-                    x.Title = "Not Found";
-                    x.Details = "The resources have not been found, please check your request.";
-                    x.RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" });
-                    x.RedirectText = "Back to home";
-                });
-            var summary = "";
-            var flag = false;
-            if (content != null)
-            {
-                var tmp = content.Split('\n');
-                if (tmp.Count() > 16)
-                {
-                    for (var i = 0; i < 16; i++)
-                    {
-                        if (tmp[i].IndexOf("```") == 0)
-                            flag = !flag;
-                        summary += tmp[i] + '\n';
-                    }
-                    if (flag)
-                        summary += "```\r\n";
-                    summary += $"\r\n[{"Read More"} »](/post/{newId})";
-                }
-                else
-                {
-                    summary = content;
-                }
-            }
-            foreach (var t in post.Tags)
-                DB.PostTags.Remove(t);
-            post.Url = newId;
-            post.Summary = summary;
-            post.Title = title;
-            post.Content = content;
-            post.CatalogId = catalog;
-            post.IsPage = isPage;
-            if (!string.IsNullOrEmpty(tags))
-            { 
-                var _tags = tags.Split(',');
-                foreach (var t in _tags)
-                    post.Tags.Add(new PostTag { PostId = post.Id, Tag = t.Trim(' ') });
-            }
-            DB.SaveChanges();
-            return Content(Instance.Parse(content));
-        }
-
-        [Authorize]
-        [HttpPost]
         [Route("Admin/Post/New")]
         public IActionResult PostNew()
         {
@@ -342,6 +284,83 @@ namespace YuukoBlog.Controllers
             blogRoll.URL = url;
             await DB.SaveChangesAsync();
             return Content("Succeeded");
+        }
+
+        [Route("Admin/Edit/{id}")]
+        public IActionResult Edit(Guid id)
+        {
+            ViewBag.PostId = id;
+            return View();
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("Admin/Post/Body")]
+        public async ValueTask<IActionResult> GetPost(Guid id, CancellationToken cancellationToken = default)
+        {
+            var post = await DB.Posts
+                .Include(x => x.Tags)
+                .SingleAsync(x => x.Id == id, cancellationToken);
+            return Json(post);
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        [Route("Admin/Post/Edit")]
+        public IActionResult PostEdit(string id, string newId, string tags, bool isPage, string title, Guid? catalog, string content)
+        {
+            var post = DB.Posts
+                .Include(x => x.Tags)
+                .Where(x => x.Url == id)
+                .SingleOrDefault();
+            if (post == null)
+                return Prompt(x =>
+                {
+                    x.StatusCode = 404;
+                    x.Title = "Not Found";
+                    x.Details = "The resources have not been found, please check your request.";
+                    x.RedirectUrl = Url.Link("default", new { controller = "Home", action = "Index" });
+                    x.RedirectText = "Back to home";
+                });
+            var summary = "";
+            var flag = false;
+            if (content != null)
+            {
+                var tmp = content.Split('\n');
+                if (tmp.Count() > 16)
+                {
+                    for (var i = 0; i < 16; i++)
+                    {
+                        if (tmp[i].IndexOf("```") == 0)
+                            flag = !flag;
+                        summary += tmp[i] + '\n';
+                    }
+                    if (flag)
+                        summary += "```\r\n";
+                    summary += $"\r\n[{"Read More"} »](/post/{newId})";
+                }
+                else
+                {
+                    summary = content;
+                }
+            }
+            foreach (var t in post.Tags)
+                DB.PostTags.Remove(t);
+            post.Url = newId;
+            post.Summary = summary;
+            post.Title = title;
+            post.Content = content;
+            post.CatalogId = catalog;
+            post.IsPage = isPage;
+            if (!string.IsNullOrEmpty(tags))
+            {
+                var _tags = tags.Split(',');
+                foreach (var t in _tags)
+                    post.Tags.Add(new PostTag { PostId = post.Id, Tag = t.Trim(' ') });
+            }
+            DB.SaveChanges();
+            return Content(Instance.Parse(content));
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using YuukoBlog.Utils;
+using Newtonsoft.Json;
 
 namespace YuukoBlog.Models
 {
@@ -30,10 +31,19 @@ namespace YuukoBlog.Models
         [ForeignKey("Catalog")]
         public Guid? CatalogId { get; set; }
 
+        [JsonIgnore]
         public virtual Catalog Catalog { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<PostTag> Tags { get; set; } = new List<PostTag>();
 
+        [NotMapped]
+        public string TagsText
+        {
+            get { return string.Join(",", Tags); }
+        }
+
+        [JsonIgnore]
         public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
         PostViewModel IConvertible<PostViewModel>.ToType()

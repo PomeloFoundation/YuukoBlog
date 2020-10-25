@@ -173,21 +173,6 @@
     text-decoration: none;
   }
   
-  pre,
-  code,
-  kbd,
-  samp {
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    font-size: 1em;
-  }
-  
-  pre {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    overflow: auto;
-    -ms-overflow-style: scrollbar;
-  }
-  
   figure {
     margin: 0 0 1rem;
   }
@@ -498,12 +483,6 @@
     color: #6c757d;
   }
   
-  code {
-    font-size: 87.5%;
-    color: #e83e8c;
-    word-wrap: break-word;
-  }
-  
   a > code {
     color: inherit;
   }
@@ -520,18 +499,6 @@
     padding: 0;
     font-size: 100%;
     font-weight: 700;
-  }
-  
-  pre {
-    display: block;
-    font-size: 87.5%;
-    color: #212529;
-  }
-  
-  pre code {
-    font-size: inherit;
-    color: inherit;
-    word-break: normal;
   }
   
   .pre-scrollable {

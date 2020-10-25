@@ -37,11 +37,14 @@ namespace YuukoBlog.Controllers
             else
             {
                 var b64 = HttpContext.Request.Form["file"].ToString();
-                var bytes = Convert.FromBase64String(b64);
+                var header = b64.Split(',')[0];
+                var contentType = header.Split(':')[1].Split(';')[0];
+                var content = b64.Substring(header.Length + 1);
+                var bytes = Convert.FromBase64String(content);
                 var f = new Blob
                 {
                     Time = DateTime.Now,
-                    ContentType = "application/octet-stream",
+                    ContentType = contentType,
                     ContentLength = bytes.Length,
                     FileName = "File",
                     Bytes = bytes
@@ -52,6 +55,7 @@ namespace YuukoBlog.Controllers
             }
         }
 
+        [HttpGet("[controller]/[action]/{id}")]
         public async ValueTask<IActionResult> Download(Guid id)
         {
             HttpContext.Response.Headers["Cache-Control"] = $"max-age={ 60 * 24 }";

@@ -605,8 +605,6 @@ span.wpcf7-list-item{margin:0 1em 0 0}
 ul{list-style:disc;margin-top:25px;margin-bottom:25px;padding-left:0;list-style-position:inside}
 ol{list-style:decimal;margin-top:25px;margin-bottom:25px;padding-left:0;list-style-position:inside}
 ol ol,ol ul,ul ol,ul ul{margin-top:15px;margin-bottom:15px;margin-left:15px}
-code{padding:0 4px;font-style:italic;color:#999;text-decoration:none;display:inline-block;vertical-align:middle;overflow:auto;max-width:100%;white-space:nowrap}
-pre{background:#f6f6f6;margin:30px 0;padding:30px;max-width:100%;overflow:auto;white-space:pre}
 ins,mark{background:#eee;text-decoration:none}
 table{width:100%;margin:30px 0;padding:0;border-collapse:collapse;background:#fcfcfc}
 table caption{padding:6px 0;background:#f6f6f6;font-size:12px}
@@ -7809,4 +7807,286 @@ span.CodeMirror-selectedtext {
 
 .CodeMirror .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
     background: rgba(255,0,0,.15)
+}
+
+.hljs {
+    display: block;
+}
+
+.hljs,
+.hljs-subst,
+.hljs-tag .hljs-title,
+.nginx .hljs-title {
+    color: #637c84;
+}
+
+.hljs-string,
+.hljs-title,
+.hljs-constant,
+.hljs-parent,
+.hljs-tag .hljs-value,
+.hljs-rules .hljs-value,
+.hljs-preprocessor,
+.hljs-pragma,
+.haml .hljs-symbol,
+.ruby .hljs-symbol,
+.ruby .hljs-symbol .hljs-string,
+.hljs-template_tag,
+.django .hljs-variable,
+.smalltalk .hljs-class,
+.hljs-addition,
+.hljs-flow,
+.hljs-stream,
+.bash .hljs-variable,
+.apache .hljs-tag,
+.apache .hljs-cbracket,
+.tex .hljs-command,
+.tex .hljs-special,
+.erlang_repl .hljs-function_or_atom,
+.asciidoc .hljs-header,
+.markdown .hljs-header,
+.coffeescript .hljs-attribute {
+    color: #859900;
+}
+
+.smartquote,
+.hljs-comment,
+.hljs-annotation,
+.diff .hljs-header,
+.hljs-chunk,
+.asciidoc .hljs-blockquote,
+.markdown .hljs-blockquote {
+    color: #888;
+}
+
+.hljs-number,
+.hljs-date,
+.hljs-regexp,
+.hljs-literal,
+.hljs-hexcolor,
+.smalltalk .hljs-symbol,
+.smalltalk .hljs-char,
+.go .hljs-constant,
+.hljs-change,
+.lasso .hljs-variable,
+.makefile .hljs-variable,
+.asciidoc .hljs-bullet,
+.markdown .hljs-bullet,
+.asciidoc .hljs-link_url,
+.markdown .hljs-link_url {
+    color: #080;
+}
+
+.hljs-label,
+.hljs-javadoc,
+.ruby .hljs-string,
+.hljs-decorator,
+.hljs-filter .hljs-argument,
+.hljs-localvars,
+.hljs-array,
+.hljs-attr_selector,
+.hljs-important,
+.hljs-pseudo,
+.hljs-pi,
+.haml .hljs-bullet,
+.hljs-doctype,
+.hljs-deletion,
+.hljs-envvar,
+.hljs-shebang,
+.apache .hljs-sqbracket,
+.nginx .hljs-built_in,
+.tex .hljs-formula,
+.erlang_repl .hljs-reserved,
+.hljs-prompt,
+.asciidoc .hljs-link_label,
+.markdown .hljs-link_label,
+.vhdl .hljs-attribute,
+.clojure .hljs-attribute,
+.asciidoc .hljs-attribute,
+.lasso .hljs-attribute,
+.coffeescript .hljs-property,
+.hljs-phony {
+    color: #88f;
+}
+
+.hljs-keyword,
+.hljs-id,
+.hljs-title,
+.hljs-built_in,
+.css .hljs-tag,
+.hljs-javadoctag,
+.hljs-phpdoc,
+.hljs-dartdoc,
+.hljs-yardoctag,
+.smalltalk .hljs-class,
+.hljs-winutils,
+.bash .hljs-variable,
+.apache .hljs-tag,
+.hljs-type,
+.hljs-typename,
+.tex .hljs-command,
+.asciidoc .hljs-strong,
+.markdown .hljs-strong,
+.hljs-request,
+.hljs-status {
+    font-weight: normal;
+}
+
+.asciidoc .hljs-emphasis,
+.markdown .hljs-emphasis {
+    font-style: italic;
+}
+
+.nginx .hljs-built_in {
+    font-weight: normal;
+}
+
+.coffeescript .javascript,
+.javascript .xml,
+.lasso .markup,
+.tex .hljs-formula,
+.xml .javascript,
+.xml .vbscript,
+.xml .css,
+.xml .hljs-cdata {
+    opacity: 0.5;
+}
+
+.hljs-keyword {
+    color: #268bd2;
+}
+
+.hljs-string {
+    color: #cc7a6f;
+}
+
+.highlight {
+    position: relative;
+    background: rgb(248,245,236);
+    position: relative;
+    margin-bottom: 14px;
+    border: none;
+    border-radius: 0;
+    overflow: auto;
+    padding: 30px 14px 14px;
+}
+
+    .highlight:after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        font-size: 12px;
+        font-weight: 700;
+        color: #c2c0bc;
+        background-color: #f1ede4 !important;
+        content: "Code";
+        padding: 3px 7px;
+    }
+
+.hljs pre, .hljs code {
+    font-family: 'source-code-pro', Menlo, Consolas, 'Courier New', monospace;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    word-wrap: initial !important;
+}
+
+.hll {
+    background-color: #f7ebc6;
+    border-left: 5px solid #f7d87c;
+    display: block;
+    margin-left: -14px;
+    margin-right: -14px;
+    padding-left: 9px;
+    position: relative;
+    z-index: 0;
+}
+
+.blog-comment-body code, .blog-comment-body kbd, .blog-comment-body pre, .blog-comment-body samp {
+    font-family: monospace,serif;
+    font-size: 1em;
+}
+
+.blog-comment-body code {
+    font-size: .8em;
+    line-height: 1.5;
+}
+
+.blog-comment-body pre {
+    margin: 1.5em 0;
+    overflow: auto;
+    border: 1px solid #e8e8e8;
+    background: #fafafa;
+    padding: 10px;
+}
+
+.blog-comment-body code, .blog-comment-body pre, .blog-comment-body tt {
+    font-family: "Oxygen Mono","YaHei Consolas Hybrid",Consolas,"Lucida Console","Bitstream Vera Sans Mono","Courier New",Courier,monospace,"宋体";
+    white-space: pre;
+}
+
+.blog-comment-body code, .blog-comment-body pre, .blog-comment-body tt {
+    word-wrap: break-word;
+    word-break: normal;
+}
+
+.blog-post-content code, .blog-post-content kbd, .blog-post-content pre, .blog-post-content samp {
+    font-family: monospace,serif;
+    font-size: 1em;
+}
+
+.blog-post-content code {
+    font-size: .8em;
+    line-height: 1.5;
+}
+
+.blog-post-content pre {
+    margin: 1.5em 0;
+    overflow: auto;
+    border: 1px solid #e8e8e8;
+    background: #fafafa;
+    padding: 10px;
+}
+
+.blog-post-content code, .blog-post-content pre, .blog-post-content tt {
+    font-family: "Oxygen Mono","YaHei Consolas Hybrid",Consolas,"Lucida Console","Bitstream Vera Sans Mono","Courier New",Courier,monospace,"宋体";
+    white-space: pre;
+}
+
+.blog-post-content code, .blog-post-content pre, .blog-post-content tt {
+    word-wrap: break-word;
+    word-break: normal;
+}
+
+
+.blog-subcomment-body code, .blog-subcomment-body kbd, .blog-subcomment-body pre, .blog-subcomment-body samp {
+    font-family: monospace,serif;
+    font-size: 1em;
+}
+
+.blog-subcomment-body code {
+    font-size: .8em;
+    line-height: 1.5;
+}
+
+.blog-subcomment-body pre {
+    margin: 1.5em 0;
+    overflow: auto;
+    border: 1px solid #e8e8e8;
+    background: #fafafa;
+    padding: 10px;
+}
+
+.blog-subcomment-body code, .blog-subcomment-body pre, .blog-subcomment-body tt {
+    font-family: "Oxygen Mono","YaHei Consolas Hybrid",Consolas,"Lucida Console","Bitstream Vera Sans Mono","Courier New",Courier,monospace,"宋体";
+    white-space: pre;
+}
+
+.blog-subcomment-body code, .blog-subcomment-body pre, .blog-subcomment-body tt {
+    word-wrap: break-word;
+    word-break: normal;
 }

@@ -51,6 +51,7 @@
     </div>
 
 <script src="~/scripts/vue.js"></script>
+<script src="~/scripts/pomelo.dragdrop.js"></script>
 <script src="~/scripts/simplemde.js"></script>
 <script>
     var app = new Vue({
@@ -76,7 +77,6 @@
                             editor[0].smde = smde;
                             smde.value(self.post.content);
                             var begin_pos, end_pos;
-                            /*
                             jQuery(this).parent().children().unbind().dragDropOrPaste(function () {
                                 begin_pos = smde.codemirror.getCursor();
                                 smde.codemirror.setSelection(begin_pos, begin_pos);
@@ -86,9 +86,8 @@
                             },
                                 function (result) {
                                     smde.codemirror.setSelection(begin_pos, end_pos);
-                                    smde.codemirror.replaceSelection('![' + result.FileName + '](/file/download/' + result.Id + ')');
+                                    smde.codemirror.replaceSelection('![' + result.fileName + '](/blob/download/' + result.id + ')');
                                 });
-                            */
                         }
                     });
                 });

@@ -448,3 +448,7 @@ a {
         .checkbox input:disabled {
             opacity: .5
         }
+
+.blog-post img {
+    max-width: 100%;
+}

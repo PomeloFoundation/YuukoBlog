@@ -86,6 +86,7 @@
 }
 <script src="~/scripts/vue.js"></script>
 <script src="~/scripts/simplemde.js"></script>
+<script src="~/scripts/pomelo.dragdrop.js"></script>
 <script>
     var postId = '@Model.Id';
     var authenticated = @User.Identity.IsAuthenticated.ToString().ToLower();
@@ -123,6 +124,8 @@
                 var self = this;
                 jQuery.getJSON('/comment/' + postId, {}, function (data) {
                     self.comments = data;
+                    Highlight();
+                    setTimeout(Highlight, 200);
                 });
             },
             postComment: function () {
@@ -189,7 +192,7 @@
             },
             function (result) {
                 smde.codemirror.setSelection(begin_pos, end_pos);
-                smde.codemirror.replaceSelection('![' + result.FileName + '](/file/download/' + result.Id + ')');
+                smde.codemirror.replaceSelection('![' + result.fileName + '](/blob/download/' + result.id + ')');
             });
         }
     });

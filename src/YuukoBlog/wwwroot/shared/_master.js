@@ -74,6 +74,10 @@
             window.localStorage.removeItem('token');
             this.token = null;
             Pomelo.Redirect('/');
+        },
+        async newPost() {
+            var post = (await Pomelo.CQ.Post('/api/post', {})).data;
+            Pomelo.Redirect('/post/' + post.url);
         }
     }
 });

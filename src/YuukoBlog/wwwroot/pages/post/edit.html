@@ -1,0 +1,44 @@
+﻿<div class="blog-post" v-if="post">
+    <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-control" v-model="post.title" />
+    </div>
+    <div class="form-group">
+        <label>URL</label>
+        <input type="text" class="form-control" v-model="post.url" />
+    </div>
+    <div class="form-group">
+        <label>Content</label>
+        <simple-mde v-model="post.content"></simple-mde>
+    </div>
+    <div class="form-group">
+        <label>Tags</label>
+        <input type="text" class="form-control" v-model="post.tagsText" />
+    </div>
+    <div class="form-group">
+        <label>Catalog</label>
+        <select class="form-control" v-model="post.catalogId">
+            <option :value="null">Uncatalogged</option>
+            <option v-for="catalog in $root.catalogs" v-bind:value="catalog.id">{{ catalog.title }}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Is Page?</label>
+        <div>
+            <div class="checkbox">
+                <input type="checkbox" v-model="post.isPage" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Is Pinned?</label>
+        <div>
+            <div class="checkbox">
+                <input type="checkbox" v-model="post.isPinned" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="button" v-on:click="update" class="btn btn-primary" value="Save" />
+    </div>
+</div>

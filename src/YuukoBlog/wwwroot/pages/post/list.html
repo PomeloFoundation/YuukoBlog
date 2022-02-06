@@ -5,7 +5,7 @@
         <render-markdown class="blog-post-content" v-bind:content="x.summary"></render-markdown>
         <div class="blog-post-tags">
             <a v-bind:href="'/catalog/' + x.catalog.url.toLowerCase()" v-if="x.catalogId">
-                <div class="blog-post-tags-item category">{{ x.Catalog.Url }}</div>
+                <div class="blog-post-tags-item category">{{ x.catalog.url }}</div>
             </a>
             <a v-bind:href="'/tag/' + t.tag" v-for="t in x.tags">
                 <div class="blog-post-tags-item">{{ t.tag }}</div>

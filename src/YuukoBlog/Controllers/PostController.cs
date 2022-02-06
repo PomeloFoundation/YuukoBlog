@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YuukoBlog.Models;
 using YuukoBlog.Models.ViewModels;
@@ -115,6 +116,92 @@ namespace YuukoBlog.Controllers
                 .Where(x => x.Title.Contains(id) || id.Contains(x.Title))
                 .OrderByDescending(x => x.IsPinned)
                 .ThenByDescending(x => x.Time), page, 10, cancellationToken);
+        }
+
+        [Authorize]
+        [HttpPatch("{id}")]
+        public async ValueTask<ApiResult> PatchPost(
+            [FromServices] BlogContext db,
+            [FromRoute] Guid id,
+            [FromBody] Post request,
+            CancellationToken cancellationToken = default)
+        {
+            var post = await db.Posts
+                .Include(x => x.Tags)
+                .Where(x => x.Id == id)
+                .SingleOrDefaultAsync(cancellationToken);
+
+            if (post == null)
+            {
+                return ApiResult(404, "The post is not found");
+            }
+
+            var summary = "";
+            var flag = false;
+            if (request.Content != null)
+            {
+                var tmp = request.Content.Split('\n');
+                if (tmp.Count() > 16)
+                {
+                    for (var i = 0; i < 16; i++)
+                    {
+                        if (tmp[i].IndexOf("```") == 0)
+                            flag = !flag;
+                        summary += tmp[i] + '\n';
+                    }
+                    if (flag)
+                        summary += "```\r\n";
+                    summary += $"\r\n[{"Read More"} »](/post/{request.Url})";
+                }
+                else
+                {
+                    summary = request.Content;
+                }
+            }
+
+            foreach (var t in post.Tags)
+            {
+                db.PostTags.Remove(t);
+            }
+
+            post.Url = request.Url;
+            post.Summary = summary;
+            post.Title = request.Title;
+            post.Content = request.Content;
+            post.CatalogId = request.CatalogId;
+            post.IsPage = request.IsPage;
+            if (!string.IsNullOrEmpty(request.TagsText))
+            {
+                var _tags = request.TagsText.Split(',');
+                foreach (var t in _tags)
+                {
+                    post.Tags.Add(new PostTag { PostId = post.Id, Tag = t.Trim(' ') });
+                }
+            }
+            await db.SaveChangesAsync(cancellationToken);
+            return ApiResult(200, "Succeeded");
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async ValueTask<ApiResult<Post>> Post(
+            [FromServices] BlogContext db, 
+            CancellationToken cancellationToken = default)
+        {
+            var post = new Post
+            {
+                Id = Guid.NewGuid(),
+                Url = Guid.NewGuid().ToString().Substring(0, 8),
+                Title = "Untitled Post",
+                Content = "",
+                Summary = "",
+                CatalogId = null,
+                IsPage = false,
+                Time = DateTime.Now
+            };
+            db.Posts.Add(post);
+            await db.SaveChangesAsync(cancellationToken);
+            return ApiResult(post);
         }
     }
 }

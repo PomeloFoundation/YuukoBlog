@@ -31,10 +31,8 @@ namespace YuukoBlog.Models
         [ForeignKey("Catalog")]
         public Guid? CatalogId { get; set; }
 
-        [JsonIgnore]
         public virtual Catalog Catalog { get; set; }
 
-        [JsonIgnore]
         public virtual ICollection<PostTag> Tags { get; set; } = new List<PostTag>();
 
         [NotMapped]

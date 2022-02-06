@@ -1,0 +1,31 @@
+﻿<div class="blog-post" id="admin-catalogs">
+    <table class="blog-table">
+        <thead>
+            <tr>
+                <th>URL</th>
+                <th>Title</th>
+                <th>Icon</th>
+                <th>Priority</th>
+                <th colspan="2">Control</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="catalog in catalogs">
+                <td><input type="text" class="form-control" v-model="catalog.url" /></td>
+                <td><input type="text" class="form-control" v-model="catalog.title" /></td>
+                <td><input type="text" class="form-control" v-model="catalog.icon" /></td>
+                <td><input type="text" class="form-control" v-model="catalog.priority" /></td>
+                <td><input type="button" class="btn btn-primary" v-on:click="update(catalog)" value="Save" /></td>
+                <td><input type="button" class="btn btn-danger" v-on:click="remove(catalog.id)" value="Delete" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" class="form-control" v-model="add.url" /></td>
+                <td><input type="text" class="form-control" v-model="add.title" /></td>
+                <td><input type="text" class="form-control" v-model="add.icon" /></td>
+                <td><input type="text" class="form-control" v-model="add.priority" /></td>
+                <td><input type="button" class="btn btn-primary" v-on:click="create" value="Add" /></td>
+                <td><input type="button" class="btn btn-info" v-on:click="reset" value="Reset" /></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

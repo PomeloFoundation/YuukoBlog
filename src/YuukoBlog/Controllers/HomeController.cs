@@ -6,6 +6,7 @@ using YuukoBlog.Models;
 
 namespace YuukoBlog.Controllers
 {
+    [NonController]
     public class HomeController : BaseController
     {
         [Route("{p:int?}")]

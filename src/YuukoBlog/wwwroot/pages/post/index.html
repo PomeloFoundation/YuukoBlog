@@ -1,0 +1,91 @@
+﻿<div class="blog-post" v-if="post">
+    <render-markdown class="blog-post-content no-margin" v-bind:content="post.content"></render-markdown>
+
+    <div v-if="$root.token">
+        <div class="blog-comment-title"><i class="fa fa-cog"></i> Management</div>
+        <div class="blog-comment-buttons">
+            <a class="blog-comment-button" v-bind:href="'/edit/' + id">Edit</a>
+            <a class="blog-comment-button red" v-on:click="deletePost">Delete</a>
+        </div>
+    </div>
+
+    <div class="blog-comment-title"><i class="fa fa-comments-o"></i> Comments</div>
+    <div class="blog-comments" id="blog-comments">
+        <div class="blog-comment" v-for="comment in comments">
+            <div class="blog-comment-left">
+                <img v-if="!comment.isGuest" src="/assets/img/default-avatar.jpg" class="blog-comment-avatar" />
+                <img v-else v-bind:src="comment.avatar" class="blog-comment-avatar" />
+            </div>
+            <div class="blog-comment-right">
+                <div class="blog-comment-right-container">
+                    <div class="blog-comment-header">
+                        <span class="blog-comment-master" v-if="!comment.isGuest">Master</span>
+                        {{ comment.isGuest ? comment.name : $root.info.name }}
+                        <span class="blog-comment-time">@{{ moment(new Date(comment.time)).format('YYYY-MM-DD hh:mm:ss') }}</span>
+                        <a class="blog-comment-action" v-on:click="reply(comment.id)">Reply</a>
+                        <a class="blog-comment-action" v-on:click="deleteComment(comment.id)" v-if="$root.token">Delete</a>
+                    </div>
+                    <render-markdown class="blog-comment-body" v-bind:content="comment.content"></render-markdown>
+                </div>
+                <!-- Sub-comments -->
+                <div class="blog-subcomment" v-for="sub in comment.comments">
+                    <div class="blog-subcomment-header">
+                        <img v-if="!sub.isGuest" src="/assets/img/default-avatar.jpg" class="blog-subcomment-avatar" />
+                        <img v-else v-bind:src="sub.avatar" class="blog-subcomment-avatar" />
+                        <span v-if="!sub.isGuest" class="blog-comment-master">Master</span>
+                        {{ sub.isGuest ? sub.name : $root.info.name }}
+                        <span class="blog-comment-time">@{{ moment(new Date(sub.time)).format('YYYY-MM-DD hh:mm:ss') }}</span>
+                        <a class="blog-comment-action" v-on:click="reply(comment.id)">Reply</a>
+                        <a class="blog-comment-action" v-on:click="deleteComment(sub.id)" v-if="$root.token">Delete</a>
+                    </div>
+                    <render-markdown class="blog-subcomment-body" v-bind:content="sub.content"></render-markdown>
+                </div>
+                <div class="blog-subcomment-editor-outer">
+                    <div v-if="newComment.parentId == comment.id">
+                        <div class="row blog-comment-input-row" v-if="!$root.token">
+                            <div class="col-md-6">
+                                <input class="form-control" v-model="newComment.name" placeholder="Name" />
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" v-model="newComment.email" id="txt-email" placeholder="Email" />
+                            </div>
+                        </div>
+                        <simple-mde v-model="newComment.content"></simple-mde>
+                        <div class="blog-comment-buttons">
+                            <a class="blog-comment-button" v-on:click="postComment">Post</a>
+                            <a class="blog-post-tags-item" v-on:click="reply(null)">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="blog-comment" v-show="!newComment.parentId">
+            <div class="blog-comment-left">
+                <img src="/assets/img/default-avatar.jpg" class="blog-comment-avatar" />
+            </div>
+            <div class="blog-comment-right">
+                <div class="blog-comment-right-container" id="root-reply">
+                    <div id="comment-editor" v-if="!newComment.parentId">
+                        <div class="row blog-comment-input-row" v-if="!$root.token">
+                            <div class="col-md-6">
+                                <input class="form-control" v-model="newComment.name" placeholder="Name" />
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" v-model="newComment.email" id="txt-email" placeholder="Email" />
+                            </div>
+                        </div>
+                        <simple-mde v-model="newComment.content"></simple-mde>
+                        <div class="blog-comment-buttons">
+                            <a class="blog-comment-button" v-on:click="postComment">Post</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div v-if="newComment.parentId">
+            <a v-on:click="reply(null)" class="blog-comment-add">+ Add Comment</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+{
+  "/": "/pages/post/list",
+  "/{page:[0-9]{1,}}": "/pages/post/list",
+  "/catalog/{catalog}": "/pages/post/list",
+  "/catalog/{catalog}/{page:[0-9]{1,}}": "/pages/post/list",
+  "/tag/{tag}": "/pages/post/list",
+  "/tag/{tag}/{page:[0-9]{1,}}": "/pages/post/list",
+  "/calendar/{year:[0-9]{4,4}}/{month:[0-9]{1,2}}": "/pages/post/list",
+  "/calendar/{year:[0-9]{4,4}}/{month:[0-9]{1,2}}/{page:[0-9]{1,}}": "/pages/post/list",
+  "/post/{id}": "/pages/post/index",
+  "/edit/{id}": "/pages/post/edit",
+  "/admin": "/pages/admin/index",
+  "/admin/login": "/pages/admin/login",
+  "/admin/post": "/pages/admin/post",
+  "/admin/catalog": "/pages/admin/catalog",
+  "/admin/link": "/pages/admin/link",
+  "/admin/roll": "/pages/admin/roll",
+  "/404": "/shared/_404"
+}

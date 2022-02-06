@@ -9,8 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Converters;
+using YuukoBlog.Authentication;
 using YuukoBlog.Models;
-using YuukoBlog.Utils.Authorization;
 
 namespace YuukoBlog
 {
@@ -27,11 +27,6 @@ namespace YuukoBlog
         {
             services.AddDbContext<BlogContext>(x => x.UseSqlite("Data source=blog.db"));
 
-            services.AddAuthentication(x =>
-            {
-                x.DefaultScheme = TokenAuthenticateHandler.Scheme;
-            }).AddPersonalAccessToken();
-
             services.AddSingleton(Configuration);
 
             services.AddDistributedMemoryCache();
@@ -44,7 +39,7 @@ namespace YuukoBlog
 
             services.AddHttpContextAccessor();
 
-            services.AddMvc()
+            services.AddControllers()
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
@@ -52,6 +47,9 @@ namespace YuukoBlog
                     options.SerializerSettings.Converters.Add(new StringEnumConverter());
                 })
                 .AddControllersAsServices();
+
+            services.AddAuthentication(x => x.DefaultScheme = TokenAuthenticateHandler.Scheme)
+                .AddPersonalAccessToken();
         }
 
         public async void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
@@ -68,6 +66,7 @@ namespace YuukoBlog
             {
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}");
             });
+            app.UsePueMiddleware();
 
             using (var scope = app.ApplicationServices.CreateScope())
             {

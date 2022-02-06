@@ -1,0 +1,467 @@
+a:hover {
+    color: inherit;
+}
+
+body {
+    background: #fafafa;
+}
+
+a {
+    cursor: pointer;
+}
+
+.blog-nav-item {
+    padding: 15px 20px;
+    display: inline-block;
+    border-radius: 0 0 10px 10px;
+    margin-right: 15px;
+    background: #fbfff8;
+    box-shadow: 5px 5px 0 #4c9f9188;
+    color: #188010;
+    transition: all 0.2s linear;
+}
+
+    .blog-nav-item.active, .blog-nav-item:hover {
+        background: #59ae7e;
+        box-shadow: 5px 5px 0 #00000033;
+        color: #fff;
+    }
+
+    .blog-nav-item.right {
+        float: right;
+    }
+
+.blog-banner {
+    padding: 60px 0;
+}
+
+.blog-banner-avatar {
+    width: 150px;
+    height: 150px;
+    box-shadow: 10px 10px #4c9f9166;
+    border-radius: 50%;
+    border: 8px solid #fff;
+    float: left;
+}
+
+.blog-banner-right {
+    float: left;
+    height: 150px;
+    padding-left: 35px;
+}
+
+.blog-banner-title {
+    margin-top: 20px;
+    font-size: 42px;
+    color: #fff;
+    text-shadow: 3px 3px 2px #4c9f9199;
+}
+
+.blog-banner-post-title {
+    margin-top: 5px;
+    font-size: 50px;
+    color: #fff;
+    text-shadow: 3px 3px 2px #4c9f9199;
+}
+
+.blog-banner-post-subtitle {
+    font-size: 20px;
+    color: #fff;
+    text-shadow: 3px 3px 2px #4c9f9199;
+}
+
+.blog-banner-subtitle {
+    font-size: 28px;
+    color: #fff;
+    text-shadow: 3px 3px 2px #4c9f9199;
+}
+
+.blog-main {
+    margin-top: 60px;
+}
+
+.blog-split {
+    height: 5px;
+    background: #3aaf5582
+}
+
+.page {
+    height: 320px;
+}
+
+.blog-title {
+    color: #188010;
+    font-weight: 300;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+    .blog-title a {
+        color: #188010;
+    }
+
+.blog-main-container {
+    padding: 30px 0;
+    font-weight: 300;
+}
+
+.blog-post {
+    margin-bottom: 50px;
+}
+
+.blog-post-info {
+    color: #bbb;
+    font-size: 18px;
+}
+
+.blog-post-content {
+    font-size: 20px!important;
+    color: #888;
+    margin-top: 10px;
+}
+
+    .blog-post-content.no-margin {
+        margin-top: 0;
+    }
+
+.blog-post-tags {
+    margin-top: 25px;
+}
+
+.blog-post-tags-item, .blog-comment-button {
+    color: #888;
+    display: inline-block;
+    font-size: 16px;
+    padding: 5px 10px;
+    background: #f0f0f0;
+    border-bottom: 5px solid #e0e0e0;
+    margin-bottom: 5px;
+}
+
+    .blog-post-tags-item.category, .blog-comment-button {
+        color: #188010;
+        background: #e7f3df;
+        border-color: #8acc85;
+    }
+
+        .blog-comment-button.red {
+            color: #801010;
+            background: #f3dfdf;
+            border-color: #cc8585;
+        }
+
+        .blog-sidebar-title-icon {
+            width: 38px;
+            height: 38px;
+            text-align: center;
+            border-radius: 50%;
+            border: 1px solid #188010;
+            display: inline-block;
+            margin-right: 5px;
+            font-size: 18px;
+        }
+
+.blog-sidebar-title {
+    font-size: 22px;
+    border-radius: 3px;
+    color: #188010;
+    line-height: 38px;
+}
+
+.blog-sidebar-list {
+    margin-left: 48px;
+    list-style: none;
+}
+
+.blog-sidebar-list li {
+    font-size: 18px;
+    color: #888;
+    line-height: 32px;
+}
+
+    .blog-sidebar-list li a {
+        color: #888;
+    }
+
+.blog-sidebar-section {
+    margin-bottom: 30px;
+}
+
+.blog-sidebar-tags-outer {
+    margin-top: 15px;
+    margin-left: 48px;
+}
+
+.blog-sidebar-tag {
+    padding: 5px 8px;
+    border: 1px solid #65a660;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 4px;
+    color: #65a660;
+}
+
+.blog-footer {
+    background: #eee;
+    padding: 45px 0;
+    font-size: 14px;
+}
+
+.blog-footer .container {
+    color: #188010;
+}
+
+.blog-footer-right {
+    float: right;
+}
+
+.blog-banner-subtitle a {
+    color: #fff;
+}
+
+.blog-main-container .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.blog-header {
+    margin-top: -320px;
+    position: absolute;
+    z-index: 999;
+    left: 0;
+    right: 0;
+}
+
+.blog-nav {
+    list-style: none;
+}
+
+.blog-nav-page a {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #f0f0f0;
+    color: #888;
+    text-align: center;
+    border-bottom: 5px solid #e0e0e0;
+}
+
+.blog-nav-page {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+    .blog-nav-page.active a {
+        color: #188010;
+        background: #e7f3df;
+        border-color: #8acc85;
+    }
+
+.blog-comment {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0 0 0;
+}
+
+    .blog-comment:first-child {
+        border-top: 1px solid #ddd;
+    }
+
+.blog-comment-title {
+    font-size: 18px;
+    color: #65a660;
+    padding-bottom: 5px;
+    margin-top: 25px;
+}
+
+.blog-comment-left {
+    float: left;
+    width: 60px;
+    height: 100%;
+}
+
+.blog-comment-right {
+    float: left;
+    width: calc(100% - 60px);
+    height: 100%;
+}
+
+.blog-comment-avatar, .blog-subcomment-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.blog-subcomment-avatar {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+.blog-comment-right-container {
+    padding: 15px;
+}
+
+.blog-comment-master {
+    background: #e7f3df;
+    padding: 5px 8px;
+}
+
+.blog-comment-header {
+    font-size: 14px;
+    margin-top: -15px;
+}
+
+.blog-subcomment-header {
+    font-size: 14px;
+    margin-top: -5px;
+}
+
+.blog-comment-time {
+    color: #999;
+}
+
+.blog-comment-body, .blog-subcomment-body {
+    margin-top: 15px;
+    line-height: 22px;
+    font-size: 16px;
+    color: #888;
+}
+
+    .blog-comment-body p, .blog-subcomment-body p {
+        margin-bottom: 8px;
+    }
+
+.blog-subcomment-body {
+    padding-left: 40px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.blog-subcomment {
+    padding-left: 15px;
+}
+
+.blog-comment-input-row {
+    margin-right: -15px!important;
+    margin-left: -15px!important;
+    margin-bottom: 10px;
+}
+
+.blog-comment .CodeMirror, .blog-comment .CodeMirror-scroll {
+    height: 120px;
+}
+
+.blog-comment-button {
+    margin-top: 15px;
+}
+
+.blog-subcomment-editor-outer {
+    padding-left: 15px;
+}
+
+.blog-comment-buttons {
+    margin-bottom: 15px;
+}
+
+.blog-comment-add {
+    font-size: 14px;
+    color: #188010;
+}
+
+.blog-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .blog-table tr {
+        border: 1px solid #ddd;
+    }
+
+    .blog-table td, .blog-table th {
+        padding: 5px 8px;
+        text-align: left;
+    }
+
+.form-group label {
+    margin-bottom: -5px;
+}
+
+.checkbox {
+    font-size: .875rem;
+    line-height: 1.4;
+    border: 0;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #888;
+    margin: 0 0 1rem;
+    padding: .48125rem 0
+}
+
+    .checkbox:hover {
+        color: #555
+    }
+
+    .checkbox input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: 1px solid #d0d0d0;
+        display: inline-block;
+        border-radius: 1px;
+        vertical-align: top;
+        width: 22px;
+        height: 22px;
+        margin: .1125rem .3125rem .1125rem 0;
+        position: relative;
+        outline: 0;
+        transition: background .1s linear;
+        background: none;
+        cursor: pointer
+    }
+
+        .checkbox input:after {
+            content: "";
+            width: 15px;
+            height: 10px;
+            position: absolute;
+            top: .1875rem;
+            left: .135rem;
+            border: 3px solid #fff;
+            border-top: none;
+            border-right: none;
+            background: transparent;
+            transform: rotate(-65deg) scale(.5);
+            opacity: 0
+        }
+
+        .checkbox input:enabled:hover {
+            border-color: #188010;
+        }
+
+        .checkbox input:checked {
+            background: #188010;
+            border-color: #188010;
+        }
+
+            .checkbox input:checked:after {
+                opacity: 1;
+                transform: rotate(-45deg)
+            }
+
+        .checkbox input:disabled {
+            opacity: .5
+        }
+
+.blog-post img {
+    max-width: 100%;
+}
+
+.blog-comment-action {
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #007bff;
+}

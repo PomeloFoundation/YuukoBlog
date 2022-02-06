@@ -11,7 +11,7 @@ namespace YuukoBlog.Models
         public string Display { get; set; }
 
         [MaxLength(128)]
-        public string URL { get; set; }
+        public string Url { get; set; }
 
         public int Priority { get; set; }
     }

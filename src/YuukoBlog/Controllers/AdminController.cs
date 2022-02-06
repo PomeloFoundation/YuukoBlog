@@ -1,68 +1,59 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Pomelo.Marked;
-using YuukoBlog.Filters;
+using YuukoBlog.Authentication;
 using YuukoBlog.Models;
+using YuukoBlog.Models.ViewModels;
 
 namespace YuukoBlog.Controllers
 {
-    public class AdminController : BaseController
+    [Route("api/[controller]")]
+    public class AdminController : ControllerBase
     {
-        [Authorize]
-        [HttpGet]
-        [Route("Admin/Index")]
-        public IActionResult Index() 
+        [HttpGet("session")]
+        public ApiResult<bool> GetSession()
         {
-            return View();
+            return ApiResult(User.Identity.IsAuthenticated);
         }
 
-        [Authorize]
-        [HttpPost]
-        [Route("Admin/Index")]
-        public IActionResult Index(Config config)
+        [HttpPost("session")]
+        public ApiResult<object> PostSession(
+            [FromServices] IConfiguration configuration,
+            [FromBody]LoginRequest request)
         {
-            Configuration["Account"] = config.Account;
-            if (string.IsNullOrEmpty(config.Password))
+            if (request.Username == configuration["Account"] && request.Password == configuration["Password"])
             {
-                config.Password = Configuration["Password"];
-            }
-            Configuration["Password"] = config.Password;
-            Configuration["Site"] = config.Site;
-            Configuration["Description"] = config.Description;
-            Configuration["Name"] = config.Name;
-            System.IO.File.WriteAllText("appsettings.json", JsonConvert.SerializeObject(config));
-            return RedirectToAction("Index", "Admin");
-        }
-
-        [GuestRequired]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        [GuestRequired]
-        [HttpPost]
-        public IActionResult Login(string Username, string Password)
-        {
-            var tmp = Configuration["Account"];
-            if (Username == Configuration["Account"] && Password == Configuration["Password"])
-            {
-                HttpContext.Session.SetString("Admin", "true");
-                return RedirectToAction("Index", "Admin");
+                TokenAuthenticateHandler.Token = Guid.NewGuid().ToString().Replace("-", "");
+                return ApiResult<object>(new 
+                {
+                    Token = TokenAuthenticateHandler.Token
+                });
             }
             else
             {
-                return View();
+                return ApiResult(400, "Username or password is incorrect.");
             }
         }
 
+        [HttpPost("site")]
+        public ApiResult PostSite(
+            [FromServices] IConfiguration configuration,
+            [FromBody] Config request)
+        {
+            if (string.IsNullOrEmpty(request.Account))
+            {
+                request.Account = configuration["Account"];
+            }
+
+            if (string.IsNullOrEmpty(request.Password))
+            {
+                request.Password = configuration["Password"];
+            }
+
+            System.IO.File.WriteAllText("appsettings.json", JsonConvert.SerializeObject(request));
+            return ApiResult(200, "Succeeded");
+        }
+
+        /*
         [Authorize]
         [HttpPost]
         [Route("Admin/Post/New")]
@@ -377,5 +368,6 @@ namespace YuukoBlog.Controllers
             await DB.SaveChangesAsync();
             return Content("Succeeded");
         }
+        */
     }
 }

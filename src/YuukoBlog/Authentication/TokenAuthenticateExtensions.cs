@@ -1,12 +1,9 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Antiforgery;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
-namespace YuukoBlog.Utils.Authorization
+namespace YuukoBlog.Authentication
 {
     [ExcludeFromCodeCoverage]
     public static class TokenAuthenticateExtensions
@@ -21,8 +18,6 @@ namespace YuukoBlog.Utils.Authorization
             string displayName,
             Action<TokenOptions> configureOptions)
         {
-            builder.Services.AddSingleton<IAntiforgeryAdditionalDataProvider, Antifogery>();
-
             builder
                 .Services
                 .TryAddEnumerable(

@@ -1,23 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Linq;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YuukoBlog.Models;
+using YuukoBlog.Models.ViewModels;
 
 namespace YuukoBlog.Controllers
 {
-    public class CommentController : BaseController
+    [Route("api/[controller]")]
+    public class CommentController : ControllerBase
     {
-        [HttpGet("/comment/{id}")]
-        public async ValueTask<IActionResult> Get(Guid id, CancellationToken cancellationToken = default)
+        [HttpGet("{url}")]
+        public async ValueTask<ApiResult<List<Comment>>> Get(
+            [FromServices] BlogContext db,
+            [FromRoute] string url, 
+            CancellationToken cancellationToken = default)
         {
-            var comments = await DB.Comments
+            var post = await db.Posts.SingleAsync(x => x.Url == url, cancellationToken);
+            var comments = await db.Comments
                 .Include(x => x.Comments)
-                .Where(x => x.PostId == id)
+                .Where(x => x.PostId == post.Id)
                 .Where(x => !x.ParentId.HasValue)
                 .OrderBy(x => x.Time)
                 .ToListAsync(cancellationToken);
@@ -36,31 +41,43 @@ namespace YuukoBlog.Controllers
                 }
             }
 
-            return Json(comments);
+            return ApiResult(comments);
         }
 
-        [HttpPost("/comment/{id}")]
-        public async ValueTask<IActionResult> Post(
-            Guid id,
-            string content,
-            string name = null,
-            string email = null,
-            Guid? parentId = null,
+        [HttpPost("{url}")]
+        public async ValueTask<ApiResult<Comment>> Post(
+            [FromServices] BlogContext db,
+            [FromRoute] string url,
+            [FromBody] PostCommentRequest request,
             CancellationToken cancellationToken = default)
         {
+            var post = await db.Posts.SingleAsync(x => x.Url == url, cancellationToken);
             var comment = new Comment
             {
-                Content = content,
-                Name = User.Identity.IsAuthenticated ? null : name,
-                Email = User.Identity.IsAuthenticated ? null : email,
-                Avatar = User.Identity.IsAuthenticated ? null : GetAvatarUrl(email),
-                ParentId = parentId,
-                PostId = id,
+                Content = request.Content,
+                Name = User.Identity.IsAuthenticated ? null : request.Name,
+                Email = User.Identity.IsAuthenticated ? null : request.Email,
+                Avatar = User.Identity.IsAuthenticated ? null : GetAvatarUrl(request.Email),
+                ParentId = request.ParentId,
+                PostId = post.Id,
                 IsGuest = !User.Identity.IsAuthenticated
             };
-            DB.Comments.Add(comment);
-            await DB.SaveChangesAsync(cancellationToken);
-            return Content("Succeeded");
+            db.Comments.Add(comment);
+            await db.SaveChangesAsync(cancellationToken);
+            return ApiResult(comment);
+        }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async ValueTask<ApiResult> Post(
+            [FromServices] BlogContext db,
+            [FromRoute] Guid id,
+            CancellationToken cancellationToken = default)
+        {
+            var comment = await db.Comments.SingleAsync(x => x.Id == id, cancellationToken);
+            db.Comments.Remove(comment);
+            await db.SaveChangesAsync(cancellationToken);
+            return ApiResult(200, "Comment deleted");
         }
 
         private static string GetAvatarUrl(string email)
@@ -69,7 +86,7 @@ namespace YuukoBlog.Controllers
             {
                 var bytes = Encoding.UTF8.GetBytes(email.Trim().ToLower());
                 var hash = BitConverter.ToString(md5.ComputeHash(bytes)).Replace("-", string.Empty).ToLower();
-                return $"//www.gravatar.com/avatar/{hash}?d=identicon";
+                return $"//cn.gravatar.org/avatar/{hash}?d=identicon";
             }
         }
     }

@@ -1,0 +1,29 @@
+﻿<div class="blog-post">
+    <p>
+        Site name: <br />
+        <input type="text" v-model="$root.info.site" />
+    </p>
+    <p>
+        Description: <br />
+        <input type="text" v-model="$root.info.description" />
+    </p>
+    <p>
+        Name: <br />
+        <input type="text" v-model="$root.info.name" />
+    </p>
+    <p>
+        Avatar URL: <br />
+        <input type="text" v-model="$root.info.avatarUrl" />
+    </p>
+    <p>
+        User Name: <br />
+        <input type="text" v-model="account" />
+    </p>
+    <p>
+        Password: <br />
+        <input type="password" v-model="password" />
+    </p>
+    <p>
+        <input class="btn btn-primary" value="Save" v-on:click="save" />
+    </p>
+</div>

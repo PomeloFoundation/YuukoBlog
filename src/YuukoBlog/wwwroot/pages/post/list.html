@@ -1,0 +1,22 @@
+﻿<div class="blog-post">
+    <template v-if="posts" v-for="x in posts.data">
+        <h3 class="blog-title"><a v-bind:href="'/post/' + x.url">{{ x.title }}</a></h3>
+        <div class="blog-post-info"><i class="fa fa-clock-o"></i> {{ new Date(x.time) }}</div>
+        <render-markdown class="blog-post-content" v-bind:content="x.summary"></render-markdown>
+        <div class="blog-post-tags">
+            <a v-bind:href="'/catalog/' + x.catalog.url.toLowerCase()" v-if="x.catalogId">
+                <div class="blog-post-tags-item category">{{ x.Catalog.Url }}</div>
+            </a>
+            <a v-bind:href="'/tag/' + t.tag" v-for="t in x.tags">
+                <div class="blog-post-tags-item">{{ t.tag }}</div>
+            </a>
+        </div>
+    </template>
+    <div>
+        <ul class="blog-nav" v-if="posts">
+            <li class="blog-nav-page"><a v-bind:href="generatePageLink(1)">«</a></li>
+            <li class="blog-nav-page" v-for="x in paging" v-bind:class="{ active: posts && posts.currentPage == x }"><a v-bind:href="generatePageLink(x)">{{ x }}</a></li>
+            <li class="blog-nav-page"><a v-bind:href="generatePageLink(posts.totalPages)">»</a></li>
+        </ul>
+    </div>
+</div>

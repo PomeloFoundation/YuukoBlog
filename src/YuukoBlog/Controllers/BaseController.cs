@@ -197,7 +197,7 @@ namespace YuukoBlog.Controllers
                 .Select(x => new BlogRollViewModel
                 {
                     Display = x.Display,
-                    URL = x.URL
+                    Url = x.Url
                 })
                 .ToList();
             ViewBag.Rolls = rolls;

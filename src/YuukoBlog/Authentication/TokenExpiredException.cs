@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace YuukoBlog.Utils.Authorization
+namespace YuukoBlog.Authentication
 {
     [ExcludeFromCodeCoverage]
     public class TokenExpiredException : Exception

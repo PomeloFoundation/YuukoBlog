@@ -1,0 +1,28 @@
+﻿<div class="blog-post" id="admin-rolls">
+    <table class="blog-table">
+        <thead>
+            <tr>
+                <th>Display</th>
+                <th>URL</th>
+                <th>Priority</th>
+                <th colspan="2">Control</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="roll in rolls">
+                <td><input type="text" class="form-control" v-model="roll.display" /></td>
+                <td><input type="text" class="form-control" v-model="roll.url" /></td>
+                <td><input type="text" class="form-control" v-model="roll.priority" /></td>
+                <td><input type="button" class="btn btn-primary" v-on:click="update(roll)" value="Save" /></td>
+                <td><input type="button" class="btn btn-danger" v-on:click="remove(roll.id)" value="Delete" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" class="form-control" v-model="add.display" /></td>
+                <td><input type="text" class="form-control" v-model="add.url" /></td>
+                <td><input type="text" class="form-control" v-model="add.priority" /></td>
+                <td><input type="button" class="btn btn-primary" v-on:click="create" value="Add" /></td>
+                <td><input type="button" class="btn btn-info" v-on:click="reset" value="Reset" /></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

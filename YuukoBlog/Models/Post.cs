@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using YuukoBlog.Utils;
 using Newtonsoft.Json;
 
 namespace YuukoBlog.Models
 {
-    public class Post : IConvertible<PostViewModel>
+    public class Post
     {
         public Guid Id { get; set; }
 
@@ -40,20 +39,5 @@ namespace YuukoBlog.Models
 
         [JsonIgnore]
         public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
-
-        PostViewModel IConvertible<PostViewModel>.ToType()
-        {
-            return new PostViewModel
-            {
-                Id = Id,
-                Summary = Summary,
-                Catalog = Catalog,
-                CatalogId = CatalogId,
-                Tags = Tags.ToList(),
-                Time = Time,
-                Title = Title,
-                Url = Url
-            };
-        }
     }
 }

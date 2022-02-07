@@ -1,20 +1,13 @@
-﻿using System;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Pomelo.Marked;
-using YuukoBlog.Filters;
 using YuukoBlog.Models;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace YuukoBlog.Controllers
 {
-    public class BlobController : BaseController
+    public class BlobController : Controller
     {
         [HttpPost]
-        public async ValueTask<IActionResult> Upload()
+        public async ValueTask<IActionResult> Upload([FromServices] BlogContext db)
         {
             var file = HttpContext.Request.Form.Files["file"];
             if (file != null)
@@ -29,8 +22,8 @@ namespace YuukoBlog.Controllers
                         FileName = file.FileName,
                         Bytes = ReadBytes(stream, (int)file.Length)
                     };
-                    DB.Blobs.Add(f);
-                    await DB.SaveChangesAsync();
+                    db.Blobs.Add(f);
+                    await db.SaveChangesAsync();
                     return Json(f);
                 }
             }
@@ -49,17 +42,17 @@ namespace YuukoBlog.Controllers
                     FileName = "File",
                     Bytes = bytes
                 };
-                DB.Blobs.Add(f);
-                await DB.SaveChangesAsync();
+                db.Blobs.Add(f);
+                await db.SaveChangesAsync();
                 return Json(f);
             }
         }
 
         [HttpGet("[controller]/[action]/{id}")]
-        public async ValueTask<IActionResult> Download(Guid id)
+        public async ValueTask<IActionResult> Download([FromServices] BlogContext db, Guid id)
         {
             HttpContext.Response.Headers["Cache-Control"] = $"max-age={ 60 * 24 }";
-            var blob = await DB.Blobs.SingleOrDefaultAsync(x => x.Id == id);
+            var blob = await db.Blobs.SingleOrDefaultAsync(x => x.Id == id);
             if (blob == null)
             {
                 return NotFound();

@@ -16368,6 +16368,7 @@ var Pomelo = (function (exports, options) {
 
     function LoadScript(url) {
         if (_httpCached(url)) {
+            eval(_cache[url]);
             return Promise.resolve();
         }
 

@@ -9,7 +9,7 @@
     </div>
     <div class="form-group">
         <label>Content</label>
-        <simple-mde v-model="post.content"></simple-mde>
+        <simple-mde v-model="post.content" height="300"></simple-mde>
     </div>
     <div class="form-group">
         <label>Tags</label>
@@ -39,6 +39,9 @@
         </div>
     </div>
     <div class="form-group">
-        <input type="button" v-on:click="update" class="btn btn-primary" value="Save" />
+        <div class="blog-comment-buttons">
+            <a class="blog-comment-button" v-on:click="update">Save</a>
+            <a class="blog-post-tags-item" style="margin-left: 8px" v-on:click="back">Cancel</a>
+        </div>
     </div>
 </div>

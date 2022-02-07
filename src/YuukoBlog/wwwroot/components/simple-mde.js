@@ -12,7 +12,7 @@ var replaceInnerText = '![Upload](Uploading...)';
 var replaceText = '\r\n' + replaceInnerText + '\r\n';
 
 Component('simple-mde', {
-    props: ['modelValue'],
+    props: ['modelValue', 'height'],
     modules: [
         '/assets/js/jquery.js',
         '/assets/js/simplemde.js',
@@ -48,7 +48,6 @@ Component('simple-mde', {
         });
 
         await sleep(500);
-        console.log(jQuery('#' + id).length);
         var begin_pos, end_pos;
         jQuery('#' + id).parent().children().dragDropOrPaste(function () {
             begin_pos = editor.codemirror.getCursor();

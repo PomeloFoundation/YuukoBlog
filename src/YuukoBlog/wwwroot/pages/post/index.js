@@ -35,14 +35,23 @@ Page({
             }
         };
     },
+    created() {
+        this.$root.isPost = true;
+    },
     async mounted() {
         window.test = this;
         this.views.post = (await Pomelo.CQ.CreateView('/api/post/' + this.id));
         var self = this;
         this.views.post.fetch(function (result) {
             self.post = result.data;
+            if (self.post.catalogId) {
+                self.$root.catalog = self.post.catalog.url;
+            }
         });
         this.loadComments();
+    },
+    unmounted: function () {
+        this.$root.isPost = false;
     },
     methods: {
         moment(str) {
@@ -59,7 +68,7 @@ Page({
         },
         async deletePost() {
             if (confirm("Are you sure you want to remove this post?")) {
-                await Pomelo.CQ.Delete('/api/post/' + this.id);
+                await Pomelo.CQ.Delete('/api/post/' + this.post.id);
                 Pomelo.Redirect('/');
             }
         },
@@ -93,13 +102,14 @@ Page({
                 await Pomelo.CQ.Post('/api/comment/' + this.id, this.newComment);
             } catch (ex) {
             }
-            this.view.refresh();
-            this.newComment = {
-                name: null,
-                email: null,
-                content: '',
-                parentId: null
-            };
+            this.views.comment.refresh();
+            this.newComment.name = null;
+            this.newComment.email = null;
+            this.newComment.content = '';
+            var tmp = this.newComment.parentId;
+            this.newComment.parentId = null;
+            await yield();
+            this.newComment.parentId = tmp;
         }
     }
 });

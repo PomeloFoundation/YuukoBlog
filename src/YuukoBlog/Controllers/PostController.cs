@@ -39,7 +39,10 @@ namespace YuukoBlog.Controllers
             [FromRoute] string url,
             CancellationToken cancellationToken = default)
         {
-            var post = await db.Posts.SingleOrDefaultAsync(x => x.Url == url, cancellationToken);
+            var post = await db.Posts
+                .Include(x => x.Catalog)
+                .Include(x => x.Tags)
+                .SingleOrDefaultAsync(x => x.Url == url, cancellationToken);
             if (post == null)
             {
                 return ApiResult<Post>(404, "Post not found");
@@ -119,11 +122,27 @@ namespace YuukoBlog.Controllers
         }
 
         [Authorize]
+        [HttpDelete("{id:Guid}")]
+        public async ValueTask<ApiResult> DeletePost(
+            [FromServices] BlogContext db,
+            [FromRoute] Guid id,
+            CancellationToken cancellationToken = default)
+        {
+            var post = await db.Posts
+                .Where(x => x.Id == id)
+                .SingleOrDefaultAsync(cancellationToken);
+
+            db.Posts.Remove(post);
+            await db.SaveChangesAsync(cancellationToken);
+            return ApiResult(200, "The post has been deleted");
+        }
+
+        [Authorize]
         [HttpPatch("{id}")]
         public async ValueTask<ApiResult> PatchPost(
             [FromServices] BlogContext db,
             [FromRoute] Guid id,
-            [FromBody] Post request,
+            [FromBody] PatchPostRequest request,
             CancellationToken cancellationToken = default)
         {
             var post = await db.Posts
@@ -173,6 +192,7 @@ namespace YuukoBlog.Controllers
             if (!string.IsNullOrEmpty(request.TagsText))
             {
                 var _tags = request.TagsText.Split(',');
+                post.Tags.Clear();
                 foreach (var t in _tags)
                 {
                     post.Tags.Add(new PostTag { PostId = post.Id, Tag = t.Trim(' ') });

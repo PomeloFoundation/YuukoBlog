@@ -5,7 +5,7 @@
         <div class="blog-comment-title"><i class="fa fa-cog"></i> Management</div>
         <div class="blog-comment-buttons">
             <a class="blog-comment-button" v-bind:href="'/edit/' + id">Edit</a>
-            <a class="blog-comment-button red" v-on:click="deletePost">Delete</a>
+            <a class="blog-comment-button red" v-on:click="deletePost" style="margin-left: 8px;">Delete</a>
         </div>
     </div>
 
@@ -19,7 +19,7 @@
             <div class="blog-comment-right">
                 <div class="blog-comment-right-container">
                     <div class="blog-comment-header">
-                        <span class="blog-comment-master" v-if="!comment.isGuest">Master</span>
+                        <span class="blog-comment-master" v-if="!comment.isGuest">Author</span>
                         {{ comment.isGuest ? comment.name : $root.info.name }}
                         <span class="blog-comment-time">@{{ moment(new Date(comment.time)).format('YYYY-MM-DD hh:mm:ss') }}</span>
                         <a class="blog-comment-action" v-on:click="reply(comment.id)">Reply</a>
@@ -32,7 +32,7 @@
                     <div class="blog-subcomment-header">
                         <img v-if="!sub.isGuest" src="/assets/img/default-avatar.jpg" class="blog-subcomment-avatar" />
                         <img v-else v-bind:src="sub.avatar" class="blog-subcomment-avatar" />
-                        <span v-if="!sub.isGuest" class="blog-comment-master">Master</span>
+                        <span v-if="!sub.isGuest" class="blog-comment-master">Author</span>
                         {{ sub.isGuest ? sub.name : $root.info.name }}
                         <span class="blog-comment-time">@{{ moment(new Date(sub.time)).format('YYYY-MM-DD hh:mm:ss') }}</span>
                         <a class="blog-comment-action" v-on:click="reply(comment.id)">Reply</a>

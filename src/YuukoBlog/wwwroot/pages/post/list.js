@@ -1,7 +1,21 @@
-﻿Page({
+﻿function sleep(time) {
+    return new Promise(function (res, rej) {
+        setTimeout(function () { res(null); }, time);
+    });
+}
+
+function yield() {
+    return sleep(0);
+}
+
+Page({
     layout: '/shared/_master',
     components: [
         '/components/render-markdown'
+    ],
+    modules: [
+        '/assets/js/jquery.js',
+        '/assets/js/highlight.js'
     ],
     data() {
         return {
@@ -29,7 +43,10 @@
         } else {
             this.posts = await Pomelo.CQ.Get('/api/post/page/' + this.page);
         }
+        await yield();
         this.updatePagination();
+        await yield();
+        Highlight();
     },
     methods: {
         generatePageLink(page) {

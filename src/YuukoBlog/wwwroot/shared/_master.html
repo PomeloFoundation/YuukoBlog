@@ -66,7 +66,7 @@
             </div>
         </a>
         <div class="blog-banner">
-            <template v-if="isPage && $containers[0].active">
+            <template v-if="isPost && $containers[0].active">
                 <div class="blog-banner-post-title">{{ $containers[0].active.post.title }}</div>
                 <div class="blog-banner-post-subtitle"><i class="fa fa-clock-o"></i> {{ new Date($containers[0].active.post.time) }}</div>
             </template>
@@ -91,12 +91,20 @@
                 <render-body></render-body>
             </div>
             <div class="col-md-4">
-                <div class="blog-sidebar-section" v-if="isPage">
+                <div class="blog-sidebar-section" v-if="isPost">
                     <div class="blog-sidebar-title">
                         <div class="blog-sidebar-title-icon">
                             <i class="fa fa-file-text-o"></i>
                         </div>
                         Post
+                    </div>
+                    <div class="blog-sidebar-list">
+                        <a v-bind:href="'/catalog/' + $containers[0].active.post.catalog.url.toLowerCase()" v-if="$containers[0].active.post.catalogId">
+                            <div class="blog-post-tags-item category">{{ $containers[0].active.post.catalog.url }}</div>
+                        </a>
+                        <a v-bind:href="'/tag/' + t.tag" v-for="t in $containers[0].active.post.tags" v-if="$containers[0].active.post.tags">
+                            <div class="blog-post-tags-item">{{ t.tag }}</div>
+                        </a>
                     </div>
                 </div>
                 <div class="blog-sidebar-section">
@@ -129,10 +137,10 @@
                         Tags
                     </div>
                     <div class="blog-sidebar-tags-outer">
-                        <a v-for="tag in tags" class="blog-sidebar-tag" v-bind:href="'/tag/' + encodeURIComponent(tag.title) + '/'">{{ tag.title }} ({{ tag.count }})</a>
+                        <a v-for="tag in tags" class="blog-sidebar-tag" v-bind:href="'/tag/' + encodeURIComponent(tag.title)">{{ tag.title }} ({{ tag.count }})</a>
                     </div>
                 </div>
-                <div class="blog-sidebar-section" v-if="!isPage">
+                <div class="blog-sidebar-section" v-if="!isPost">
                     <div class="blog-sidebar-title">
                         <div class="blog-sidebar-title-icon">
                             <i class="fa fa-star-o"></i>

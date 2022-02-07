@@ -1,5 +1,5 @@
 ﻿<div class="blog-post">
-    <template v-if="posts" v-for="x in posts.data">
+    <div class="blog-post-outer" v-if="posts" v-for="x in posts.data">
         <h3 class="blog-title"><a v-bind:href="'/post/' + x.url">{{ x.title }}</a></h3>
         <div class="blog-post-info"><i class="fa fa-clock-o"></i> {{ new Date(x.time) }}</div>
         <render-markdown class="blog-post-content" v-bind:content="x.summary"></render-markdown>
@@ -11,7 +11,7 @@
                 <div class="blog-post-tags-item">{{ t.tag }}</div>
             </a>
         </div>
-    </template>
+    </div>
     <div>
         <ul class="blog-nav" v-if="posts">
             <li class="blog-nav-page"><a v-bind:href="generatePageLink(1)">«</a></li>

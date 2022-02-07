@@ -7,7 +7,7 @@
             loading: true,
             id: null,
             catalog: null,
-            isPage: false,
+            isPost: false,
             isAdmin: false,
             catalogs: [],
             calendars: [],
@@ -77,7 +77,7 @@
         },
         async newPost() {
             var post = (await Pomelo.CQ.Post('/api/post', {})).data;
-            Pomelo.Redirect('/post/' + post.url);
+            Pomelo.Redirect('/edit/' + post.url);
         }
     }
 });

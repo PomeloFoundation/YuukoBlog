@@ -12,7 +12,6 @@ namespace YuukoBlog.Controllers
         [HttpGet("page/{page:int?}")]
         public async ValueTask<PagedApiResult<Post>> Get(
             [FromServices] BlogContext db,
-            [FromQuery] string catalog = null,
             int page = 1,
             CancellationToken cancellationToken = default)
         {
@@ -20,11 +19,6 @@ namespace YuukoBlog.Controllers
                 .Include(x => x.Catalog)
                 .Include(x => x.Tags)
                 .Where(x => !x.IsPage);
-
-            if (!string.IsNullOrEmpty(catalog))
-            {
-                query = query.Where(x => x.Catalog.Url == catalog);
-            }
 
             query = query
                 .OrderByDescending(x => x.IsPinned)

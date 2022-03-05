@@ -48,7 +48,14 @@ Page({
         await yield();
         Highlight();
     },
+    async mounted() {
+        await sleep(200);
+        this.$root.title = '';
+    },
     methods: {
+        moment(str) {
+            return this.$root.moment(str);
+        },
         generatePageLink(page) {
             if (this.catalog) {
                 return '/catalog/' + this.catalog + '/' + page;

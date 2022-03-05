@@ -38,6 +38,7 @@ Page({
         var self = this;
         this.views.post.fetch(function (result) {
             self.post = result.data;
+            self.$root.title = self.post.title;
             if (self.post.catalogId) {
                 self.$root.catalog = self.post.catalog.url;
             }
@@ -46,6 +47,7 @@ Page({
     },
     unmounted() {
         this.$root.isPost = false;
+        this.$root.title = null;
     },
     methods: {
         moment(str) {

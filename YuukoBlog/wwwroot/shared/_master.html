@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>Yuko</title>
+    <title></title>
     <link rel='stylesheet' id='elementor-post-151-css'
           href='/assets/css/base.css'
           type='text/css' media='all' />
@@ -66,9 +66,9 @@
             </div>
         </a>
         <div class="blog-banner">
-            <template v-if="isPost && $containers[0].active">
+            <template v-if="isPost && $containers[0].active && $containers[0].active.post">
                 <div class="blog-banner-post-title">{{ $containers[0].active.post.title }}</div>
-                <div class="blog-banner-post-subtitle"><i class="fa fa-clock-o"></i> {{ new Date($containers[0].active.post.time) }}</div>
+                <div class="blog-banner-post-subtitle"><i class="fa fa-clock-o"></i> {{ moment(new Date($containers[0].active.post.time)).format('ddd MMMM Do YYYY hh:mm') }}</div>
             </template>
             <template v-else>
                 <img v-bind:src="info.avatarUrl" class="blog-banner-avatar" />
@@ -96,11 +96,11 @@
                         <div class="blog-sidebar-title-icon">
                             <i class="fa fa-file-text-o"></i>
                         </div>
-                        Post
+                        POST
                     </div>
-                    <div class="blog-sidebar-list">
+                    <div class="blog-sidebar-list" v-if="$containers[0].active.post">
                         <a v-bind:href="'/catalog/' + $containers[0].active.post.catalog.url.toLowerCase()" v-if="$containers[0].active.post.catalogId">
-                            <div class="blog-post-tags-item category">{{ $containers[0].active.post.catalog.url }}</div>
+                            <div class="blog-post-tags-item category">{{ $containers[0].active.post.catalog.title }}</div>
                         </a>
                         <a v-bind:href="'/tag/' + t.tag" v-for="t in $containers[0].active.post.tags" v-if="$containers[0].active.post.tags">
                             <div class="blog-post-tags-item">{{ t.tag }}</div>
@@ -112,7 +112,7 @@
                         <div class="blog-sidebar-title-icon">
                             <i class="fa fa-book"></i>
                         </div>
-                        Category
+                        CATALOGS
                     </div>
                     <ul class="blog-sidebar-list">
                         <li v-for="catalog in catalogs"><a v-bind:href="'/catalog/' + catalog.url.toLocaleLowerCase()">{{ catalog.title }} ({{ catalog.count }})</a></li>
@@ -123,10 +123,10 @@
                         <div class="blog-sidebar-title-icon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        Calendar
+                        CALENDAR
                     </div>
                     <ul class="blog-sidebar-list">
-                        <li v-for="calendar in calendars"><a v-bind:href="'/' + calendar.year + '/' + calendar.month">{{ moment(new Date(calendar.year + '-' + calendar.month + '-1')).format('YYYY MMM') }} ({{ calendar.count }})</a></li>
+                        <li v-for="calendar in calendars"><a v-bind:href="'/calendar/' + calendar.year + '/' + calendar.month">{{ moment(new Date(calendar.year + '-' + calendar.month + '-1')).format('YYYY MMM') }} ({{ calendar.count }})</a></li>
                     </ul>
                 </div>
                 <div class="blog-sidebar-section">
@@ -134,7 +134,7 @@
                         <div class="blog-sidebar-title-icon">
                             <i class="fa fa-tags"></i>
                         </div>
-                        Tags
+                        TAGS
                     </div>
                     <div class="blog-sidebar-tags-outer">
                         <a v-for="tag in tags" class="blog-sidebar-tag" v-bind:href="'/tag/' + encodeURIComponent(tag.title)">{{ tag.title }} ({{ tag.count }})</a>
@@ -145,7 +145,7 @@
                         <div class="blog-sidebar-title-icon">
                             <i class="fa fa-star-o"></i>
                         </div>
-                        Blog Rolls
+                        BLOG ROLLS
                     </div>
                     <ul class="blog-sidebar-list">
                         <li v-for="roll in rolls"><a v-bind:href="roll.url" static-link target="_blank">{{ roll.display }}</a></li>
@@ -156,7 +156,7 @@
                         <div class="blog-sidebar-title-icon">
                             <i class="fa fa-cog"></i>
                         </div>
-                        Settings
+                        SETTINGS
                     </div>
                     <ul class="blog-sidebar-list">
                         <li><a href="/admin">General</a></li>

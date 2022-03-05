@@ -1,5 +1,5 @@
 ﻿Component('render-markdown', {
-    props: ['content'],
+    props: ['modelValue'],
     modules: [
         '/assets/js/marked.js'
     ],
@@ -9,6 +9,6 @@
         }
     },
     created: function () {
-        this.rendered = marked.parse(this.$props.content);
+        this.rendered = marked.parse(this.$props.modelValue);
     }
 });

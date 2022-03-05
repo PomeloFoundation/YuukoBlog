@@ -1,5 +1,5 @@
 ﻿<div class="blog-post" v-if="post">
-    <render-markdown class="blog-post-content no-margin" v-bind:content="post.content"></render-markdown>
+    <render-markdown class="blog-post-content no-margin" v-model="post.content"></render-markdown>
 
     <div v-if="$root.token">
         <div class="blog-comment-title"><i class="fa fa-cog"></i> Management</div>

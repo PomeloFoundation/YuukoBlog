@@ -1,11 +1,11 @@
 ﻿<div class="blog-post">
     <div class="blog-post-outer" v-if="posts" v-for="x in posts.data">
         <h3 class="blog-title"><a v-bind:href="'/post/' + x.url">{{ x.title }}</a></h3>
-        <div class="blog-post-info"><i class="fa fa-clock-o"></i> {{ new Date(x.time) }}</div>
-        <render-markdown class="blog-post-content" v-bind:content="x.summary"></render-markdown>
+        <div class="blog-post-info"><i class="fa fa-clock-o"></i> {{ moment(new Date(x.time)).format('ddd MMM Do YYYY hh:mm') }}</div>
+        <render-markdown class="blog-post-content" v-model="x.summary"></render-markdown>
         <div class="blog-post-tags">
             <a v-bind:href="'/catalog/' + x.catalog.url.toLowerCase()" v-if="x.catalogId">
-                <div class="blog-post-tags-item category">{{ x.catalog.url }}</div>
+                <div class="blog-post-tags-item category">{{ x.catalog.title }}</div>
             </a>
             <a v-bind:href="'/tag/' + t.tag" v-for="t in x.tags">
                 <div class="blog-post-tags-item">{{ t.tag }}</div>

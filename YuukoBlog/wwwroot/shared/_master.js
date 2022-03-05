@@ -23,7 +23,8 @@
                 calendar: null,
                 tag: null,
                 link: null
-            }
+            },
+            title: null
         };
     },
     async created() {
@@ -78,6 +79,22 @@
         async newPost() {
             var post = (await Pomelo.CQ.Post('/api/post', {})).data;
             Pomelo.Redirect('/edit/' + post.url);
+        },
+        setTitle(title) {
+            document.querySelector('title').innerText = title;
+        }
+    },
+    watch: {
+        title: function () {
+            if (!this.info) {
+                return;
+            }
+
+            var t = this.info.description;
+            if (this.title) {
+                t = this.title + ' - ' + this.info.description;
+            }
+            this.setTitle(t);
         }
     }
 });

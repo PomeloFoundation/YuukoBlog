@@ -1,7 +1,6 @@
-﻿Layout({
-    modules: [
-        '/assets/js/moment.js'
-    ],
+﻿var moment = require('/assets/js/moment.js');
+
+Layout({
     data() {
         return {
             loading: true,

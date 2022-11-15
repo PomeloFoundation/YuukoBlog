@@ -17,15 +17,15 @@ a {
     color: #fff;
     transition: all 0.2s linear;
     border-top: 3px solid rgba(255,255,255,0);
-    text-shadow: 2px 2px 2px #4c9f9199;
+    text-shadow: 2px 2px 2px #4c829f99;
 }
 
     .blog-nav-item.active, .blog-nav-item:hover {
-        border-top: 3px solid #f3ffec;
+        border-top: 3px solid #ecf9ff;
     }
 
     .blog-nav-item.active {
-        border-top: 3px solid #f3ffec;
+        border-top: 3px solid #ecf9ff;
     }
 
     .blog-nav-item.right {
@@ -39,7 +39,7 @@ a {
 .blog-banner-avatar {
     width: 150px;
     height: 150px;
-    box-shadow: 10px 10px #4c9f9166;
+    box-shadow: 10px 10px #4c829f99;
     border-radius: 50%;
     border: 8px solid #fff;
     float: left;
@@ -55,7 +55,7 @@ a {
     margin-top: 20px;
     font-size: 42px;
     color: #fff;
-    text-shadow: 3px 3px 2px #4c9f9199;
+    text-shadow: 3px 3px 2px #4c829f99;
 }
 
 .blog-banner-post-title {
@@ -74,7 +74,6 @@ a {
 .blog-banner-subtitle {
     font-size: 28px;
     color: #fff;
-    text-shadow: 3px 3px 2px #4c9f9199;
 }
 
 .blog-main {
@@ -91,14 +90,14 @@ a {
 }
 
 .blog-title {
-    color: #4bac44;
+    color: #6296cf;
     font-weight: 300;
     font-size: 28px;
     margin-bottom: 10px;
 }
 
     .blog-title a {
-        color: #4bac44;
+        color: #6296cf;
     }
 
 .blog-main-container {
@@ -140,9 +139,9 @@ a {
 }
 
     .blog-post-tags-item.category, .blog-comment-button {
-        color: #4bac44;
-        background: #e7f3df;
-        border-color: #8acc85;
+        color: #6296cf;
+        background: #dfecf3;
+        border-color: #85adcc;
     }
 
         .blog-comment-button.red {
@@ -161,7 +160,7 @@ a {
 .blog-sidebar-title {
     font-size: 22px;
     border-radius: 3px;
-    color: #4bac44;
+    color: #6296cf;
     line-height: 38px;
 }
 
@@ -191,11 +190,11 @@ a {
 
 .blog-sidebar-tag {
     padding: 5px 8px;
-    border: 1px solid #65a660;
+    border: 1px solid #608ba6;
     border-radius: 3px;
     display: inline-block;
     margin-bottom: 4px;
-    color: #65a660;
+    color: #608ba6;
 }
 
 .blog-footer {
@@ -205,7 +204,7 @@ a {
 }
 
 .blog-footer .container {
-    color: #4bac44;
+    color: #6296cf;
 }
 
 .blog-footer-right {
@@ -248,9 +247,9 @@ a {
 }
 
     .blog-nav-page.active a {
-        color: #4bac44;
-        background: #e7f3df;
-        border-color: #8acc85;
+        color: #6296cf;
+        background: #dfecf3;
+        border-color: #85adcc;
     }
 
 .blog-comment {
@@ -264,7 +263,7 @@ a {
 
 .blog-comment-title {
     font-size: 18px;
-    color: #65a660;
+    color: #608ba6;
     padding-bottom: 5px;
     margin-top: 25px;
 }
@@ -298,7 +297,7 @@ a {
 }
 
 .blog-comment-master {
-    background: #8acc85;
+    background: #85adcc;
     padding: 3px 5px;
     text-align: center;
     color: #fff;
@@ -363,7 +362,7 @@ a {
 
 .blog-comment-add {
     font-size: 14px;
-    color: #4bac44;
+    color: #6296cf;
 }
 
 .blog-table {
@@ -438,12 +437,12 @@ a {
         }
 
         .checkbox input:enabled:hover {
-            border-color: #4bac44;
+            border-color: #4493ac;
         }
 
         .checkbox input:checked {
-            background: #4bac44;
-            border-color: #4bac44;
+            background: #6296cf;
+            border-color: #6296cf;
         }
 
             .checkbox input:checked:after {
@@ -527,7 +526,32 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .blog-post-content > p > code {
-    color: #4bac44;
-    border: 1px solid #4bac44;
+    color: #6296cf;
+    border: 1px solid #6296cf;
     padding: 3px;
 }
+
+.blog-sidebar-section {
+    background: #fff;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.blog-banner-subtitle a {
+    display: inline-block;
+    background: #fff;
+    color: #8DAED5;
+    margin-right: 8px;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 20px;
+    transition: all .2s linear;
+}
+
+    .blog-banner-subtitle a:hover {
+        color: #4d84c4;
+        box-shadow: 0 0 8px rgba(255,255,255,.65);
+    }

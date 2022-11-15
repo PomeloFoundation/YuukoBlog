@@ -1,8 +1,7 @@
-﻿Component('render-markdown', {
+﻿var marked = require('/assets/js/marked.js');
+
+Component('render-markdown', {
     props: ['modelValue'],
-    modules: [
-        '/assets/js/marked.js'
-    ],
     data() {
         return {
             rendered: null

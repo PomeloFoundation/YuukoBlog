@@ -96,7 +96,7 @@
                         POST
                     </div>
                     <div class="blog-sidebar-list" v-if="$containers[0].active.post">
-                        <a v-bind:href="'/catalog/' + $containers[0].active.post.catalog.url.toLowerCase()" v-if="$containers[0].active.post.catalogId">
+                        <a v-if="$containers[0].active.post.catalog" v-bind:href="'/catalog/' + $containers[0].active.post.catalog.url.toLowerCase()" v-if="$containers[0].active.post.catalogId">
                             <div class="blog-post-tags-item category">{{ $containers[0].active.post.catalog.title }}</div>
                         </a>
                         <a v-bind:href="'/tag/' + t.tag" v-for="t in $containers[0].active.post.tags" v-if="$containers[0].active.post.tags">
